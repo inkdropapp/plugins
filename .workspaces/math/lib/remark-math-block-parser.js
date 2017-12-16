@@ -9,6 +9,7 @@
 'use strict';
 
 /* Dependencies. */
+
 var trim = require('trim-trailing-lines');
 
 /* Expose. */
@@ -100,11 +101,7 @@ function fencedCode(eat, value, silent) {
   while (index < length) {
     character = value.charAt(index);
 
-    if (
-      character === C_NEWLINE ||
-      character === C_TILDE ||
-      character === C_TICK
-    ) {
+    if (character === C_NEWLINE || character === C_TILDE || character === C_TICK) {
       break;
     }
 
