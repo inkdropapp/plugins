@@ -7,7 +7,7 @@
   "repository": "https://github.com/inkdropapp/inkdrop-insert-date",
   "license": "MIT",
   "engines": {
-    "inkdrop": "4.x"
+    "inkdrop": "5.x"
   },
   "dependencies": {
     "moment": "^2.24.0"
