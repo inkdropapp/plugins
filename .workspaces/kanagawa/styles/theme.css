@@ -253,6 +253,16 @@
   --note-status-completed: hsl(var(--kanagawa-dragonGreen2));
   --note-status-dropped: hsl(var(--kanagawa-dragonRed));
 
+  /*-------------------
+    Task Progress View
+  --------------------*/
+  --task-progress-view-border-color: hsl(var(--kanagawa-dragonBlack0) / 30%);
+  --task-progress-view-background-color: hsl(
+    var(--kanagawa-dragonBlack0) / 30%
+  );
+  --task-progress-view-foreground-color: hsl(var(--kanagawa-dragonWhite) / 60%);
+  --task-progress-view-completed-color: hsl(var(--kanagawa-dragonGreen2));
+
   /*===================================================================
     Derived tone aliases — dragon-ink remap.
 
