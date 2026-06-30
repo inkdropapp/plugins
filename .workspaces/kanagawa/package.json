@@ -1,13 +1,15 @@
 {
-  "name": "kanagawa-dragon-ui",
+  "name": "kanagawa-dragon",
   "version": "1.0.0",
-  "theme": "ui",
+  "theme": true,
   "themeAppearance": "dark",
   "type": "module",
-  "description": "Kanagawa Dragon UI Theme for Inkdrop",
+  "description": "Kanagawa Dragon Theme for Inkdrop",
   "styleSheets": [
     "palette.css",
-    "theme.css"
+    "ui.css",
+    "syntax.css",
+    "preview.css"
   ],
   "scripts": {
     "prepublishOnly": "./node_modules/.bin/generate-palette"
@@ -19,11 +21,11 @@
     "kanagawa",
     "dark"
   ],
-  "repository": "https://github.com/inkdropapp/kanagawa-dragon-ui",
+  "repository": "https://github.com/inkdropapp/kanagawa-dragon",
   "author": "Takuya Matsuyama<t@inkdrop.app>",
   "license": "MIT",
   "devDependencies": {
-    "@inkdropapp/theme-dev-helpers": "^0.5.2"
+    "@inkdropapp/theme-dev-helpers": "^0.6.0"
   },
   "engines": {
     "inkdrop": "^6.0.0"

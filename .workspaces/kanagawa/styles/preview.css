@@ -1,0 +1,58 @@
+@layer theme.preview {
+  /*
+   * Kanagawa Dragon — Markdown preview theme for Inkdrop v6.
+   *
+   * Mirrors the rendered look of kanagawa-dragon-syntax so the preview pane matches
+   * the editor: headings dragonYellow, strong dragonRed, emphasis dragonGreen2, links
+   * dragonBlue2, ==marks== underlined roninYellow. Colors come from palette.css
+   * (--kanagawa-* HSL triplets); surfaces use the dragon inks.
+   */
+
+  :root {
+    /* Raised surfaces for code blocks, tables and images */
+    --kanagawa-preview-surface: hsl(var(--kanagawa-dragonBlack4) / 60%);
+    --kanagawa-preview-surface-subtle: hsl(var(--kanagawa-dragonBlack2) / 50%);
+
+    /* Links */
+    --mde-preview-link-color: hsl(var(--kanagawa-dragonBlue2));
+
+    /* Code blocks */
+    --mde-preview-codeblock-background-color: var(
+      --kanagawa-preview-surface-subtle
+    );
+    --mde-preview-codeblock-meta-background-color: var(
+      --kanagawa-preview-surface
+    );
+    --mde-preview-inline-code-text-color: hsl(var(--kanagawa-oldWhite));
+    --mde-preview-inline-code-border-width: 1px;
+    --mde-preview-inline-code-border-color: hsl(
+      var(--kanagawa-dragonBlack6) / 50%
+    );
+    --mde-preview-inline-code-background-color: hsl(
+      var(--kanagawa-dragonBlack4) / 50%
+    );
+
+    /* Tables */
+    --mde-preview-table-head-text-color: hsl(var(--kanagawa-dragonYellow));
+    --mde-preview-table-head-background-color: var(--kanagawa-preview-surface);
+    --mde-preview-table-row-background-color: var(--kanagawa-preview-surface);
+    --mde-preview-table-row-stripe-background-color: var(
+      --kanagawa-preview-surface-subtle
+    );
+
+    /* Images */
+    --mde-preview-image-background-color: var(--kanagawa-preview-surface);
+
+    /* Mark (==highlight==) */
+    --mde-preview-inline-mark-text-color: hsl(var(--kanagawa-dragonWhite));
+    --mde-preview-inline-mark-background-color: hsl(
+      var(--kanagawa-dragonYellow) / 22%
+    );
+    --mde-preview-inline-mark-underline-color: hsl(var(--kanagawa-roninYellow));
+
+    /* Prose */
+    --mde-preview-heading-color: hsl(var(--kanagawa-dragonYellow));
+    --mde-preview-strong-color: hsl(var(--kanagawa-dragonRed));
+    --mde-preview-em-color: hsl(var(--kanagawa-dragonGreen2));
+  }
+}
