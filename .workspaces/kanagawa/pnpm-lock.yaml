@@ -9,8 +9,8 @@ importers:
   .:
     devDependencies:
       '@inkdropapp/theme-dev-helpers':
-        specifier: ^0.6.0
-        version: 0.6.0
+        specifier: ^0.6.1
+        version: 0.6.1
 
 packages:
 
@@ -26,11 +26,11 @@ packages:
   '@inkdropapp/base-ui-theme@0.7.6':
     resolution: {integrity: sha512-64TnsgSbF81b3X7eZ3qltW7doG7znnjrDOU2Nv7UWoDL9G+B0CFWR9JDdtOOGOKIYccY0mXfq2F0QfWOxf74uA==}
 
-  '@inkdropapp/css@0.8.1':
-    resolution: {integrity: sha512-0NdZHFhVnPR2+zOI9mCLMVeCiiBE+ktl5t4ihNtOLzGbk9PFlHpJotFif2ggJd8GgfYE7aaMX04Yky37piyLKQ==}
+  '@inkdropapp/css@0.9.0':
+    resolution: {integrity: sha512-6gaOvCS1vSH3lxhq5mvUo4uywEfp7rcnlmjG8haoUYgQoeN6lRew7Dz64XvGOs7PtbNw5Yydi6zX8VW7c2B6IQ==}
 
-  '@inkdropapp/theme-dev-helpers@0.6.0':
-    resolution: {integrity: sha512-E351epwc/lmbEvvhYtbQWVjJPLDW+XirdOFCF6l4a+n692/fQIf8WFYEXCS1evKbcLFR48KZSugNBH4NpJquBw==}
+  '@inkdropapp/theme-dev-helpers@0.6.1':
+    resolution: {integrity: sha512-cfRHNacGvgN0O7SmijhD/9klkaN34mcSOhR4dDfnLF9Q4QAc8Pt80kYoRI7nwzqp3xloDXab9VVz5u7PtAiB1w==}
     engines: {node: '>=24'}
     hasBin: true
 
@@ -229,8 +229,8 @@ packages:
     resolution: {integrity: sha512-QRbvDIbx6YklUe6RxeTeleMR0yv3cYH6PsPZHcnVn7xv7zO1BHN8r0XETu8n6Ye3Q+ahtSarc3WgtNWmehIBfA==}
     engines: {node: '>=18'}
 
-  inkdrop-model@2.11.5:
-    resolution: {integrity: sha512-kVbCZwcRXDieUh3E+usmbbH6uU8Wbqnes5UXAUW/BIv3SSuzbfQRafFq/qi68vbBXezN0cgN6Gz2AWOfxN07nw==}
+  inkdrop-model@2.11.6:
+    resolution: {integrity: sha512-T168KxkJU+ZDVrixRy4ll3zzykiA7JAiDrb48wRPdyoz5lf+gj9AMa02v5BzdEr6AiCKrLQlqdKb5e5YOmvQTA==}
 
   lightningcss-android-arm64@1.32.0:
     resolution: {integrity: sha512-YK7/ClTt4kAK0vo6w3X+Pnm0D2cf2vPHbhOXdoNti1Ga0al1P4TBZhwjATvjNwLEBCnKvjJc2jQgHXH0NEwlAg==}
@@ -329,8 +329,8 @@ packages:
     resolution: {integrity: sha512-QP88BAKvMam/3NxH6vj2o21R6MjxZUAd6nlwAS/pnGvN9IVLocLHxGYIzFhg6fUQ+5th6P4dv4eW9jX3DSIj7A==}
     engines: {node: '>=12'}
 
-  postcss@8.5.15:
-    resolution: {integrity: sha512-FfR8sjd4em2T6fb3I2MwAJU7HWVMr9zba+enmQeeWFfCbm+UOC/0X4DS8XtpUTMwWMGbjKYP7xjfNekzyGmB3A==}
+  postcss@8.5.16:
+    resolution: {integrity: sha512-vuwillviilfKZsg0VGj5R/YwwcHx4SLsIOI/7K6mQkWx+l5cUHTjj5g0AasTBcyXsbfTgrwsUNmVUb5xVwyPwg==}
     engines: {node: ^10 || ^12 || >=14}
 
   puppeteer-core@25.2.1:
@@ -347,15 +347,15 @@ packages:
     peerDependencies:
       react: ^19.2.7
 
-  react-router-dom@7.18.0:
-    resolution: {integrity: sha512-Fi0yY6kgtKae/Th2xibdWK0KSdYZ4B53Gyf6wRtomOKWgpNm7H7+DyfDhncdz9FKbpS+1jmDhg3F4WoGJ+yFOA==}
+  react-router-dom@7.18.1:
+    resolution: {integrity: sha512-KaZh+X/6UtEp28x51AUYZDMg9NGoz2ja3dNHa+ta/tk40vCzKhQ/RypCWBMLbmDr6//E24Vv5uPsrqXFozdkAg==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       react: '>=18'
       react-dom: '>=18'
 
-  react-router@7.18.0:
-    resolution: {integrity: sha512-pTTGt8J+ji1NOmYnjzT+bAJy/1zD+Jp4ziO6cL7T3ZLvXKtusO7BpFqlRXitqpcPVqllsIXFHRMt+2/k3Xn6HQ==}
+  react-router@7.18.1:
+    resolution: {integrity: sha512-GDLgg3i3uM0aeJO3Fm+TCS+sDQ7gu12T6x0qdTEzcwqEfleci7JwugVNIF3U//0FWKnJT7ptG+20B2jfDqnZAg==}
     engines: {node: '>=20.0.0'}
     peerDependencies:
       react: '>=18'
@@ -406,8 +406,8 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
-  vite@8.1.0:
-    resolution: {integrity: sha512-BuJcQK/56NQTWDGn4ABea3q4SSBdNPWwNZKTkkUpcMPnLoquSYH8llRtSUIgoL1KSCpHt5eghLShn50mH36y7Q==}
+  vite@8.1.1:
+    resolution: {integrity: sha512-X/05/cT+VITy2AeDc1der6smvGWWREtL4hPbPTaVbjSBuuWkmNOjR6HP3NzqcQA2nF6VHGUPaFRJyft/2AE9Kg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -503,22 +503,22 @@ snapshots:
 
   '@inkdropapp/base-ui-theme@0.7.6': {}
 
-  '@inkdropapp/css@0.8.1':
+  '@inkdropapp/css@0.9.0':
     optionalDependencies:
-      inkdrop-model: 2.11.5
+      inkdrop-model: 2.11.6
 
-  '@inkdropapp/theme-dev-helpers@0.6.0':
+  '@inkdropapp/theme-dev-helpers@0.6.1':
     dependencies:
       '@inkdropapp/base-ui-theme': 0.7.6
-      '@inkdropapp/css': 0.8.1
-      '@vitejs/plugin-react': 6.0.3(vite@8.1.0)
+      '@inkdropapp/css': 0.9.0
+      '@vitejs/plugin-react': 6.0.3(vite@8.1.1)
       commander: 15.0.0
       puppeteer: 25.2.1
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
-      react-router-dom: 7.18.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      react-router-dom: 7.18.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
       typescript: 6.0.3
-      vite: 8.1.0
+      vite: 8.1.1
     transitivePeerDependencies:
       - '@rolldown/plugin-babel'
       - '@types/node'
@@ -608,10 +608,10 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
-  '@vitejs/plugin-react@6.0.3(vite@8.1.0)':
+  '@vitejs/plugin-react@6.0.3(vite@8.1.1)':
     dependencies:
       '@rolldown/pluginutils': 1.0.1
-      vite: 8.1.0
+      vite: 8.1.1
 
   ansi-regex@6.2.2: {}
 
@@ -652,7 +652,7 @@ snapshots:
 
   get-east-asian-width@1.6.0: {}
 
-  inkdrop-model@2.11.5:
+  inkdrop-model@2.11.6:
     optional: true
 
   lightningcss-android-arm64@1.32.0:
@@ -716,7 +716,7 @@ snapshots:
 
   picomatch@4.0.4: {}
 
-  postcss@8.5.15:
+  postcss@8.5.16:
     dependencies:
       nanoid: 3.3.15
       picocolors: 1.1.1
@@ -753,13 +753,13 @@ snapshots:
       react: 19.2.7
       scheduler: 0.27.0
 
-  react-router-dom@7.18.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+  react-router-dom@7.18.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
     dependencies:
       react: 19.2.7
       react-dom: 19.2.7(react@19.2.7)
-      react-router: 7.18.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
+      react-router: 7.18.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7)
 
-  react-router@7.18.0(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
+  react-router@7.18.1(react-dom@19.2.7(react@19.2.7))(react@19.2.7):
     dependencies:
       cookie: 1.1.1
       react: 19.2.7
@@ -818,11 +818,11 @@ snapshots:
 
   typescript@6.0.3: {}
 
-  vite@8.1.0:
+  vite@8.1.1:
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.4
-      postcss: 8.5.15
+      postcss: 8.5.16
       rolldown: 1.1.3
       tinyglobby: 0.2.17
     optionalDependencies:
