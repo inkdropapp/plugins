@@ -116,8 +116,11 @@
 
     --editor-fold-placeholder-border-radius: 0.2em;
     --editor-fold-placeholder-color: hsl(var(--kanagawa-dragonBlack0));
-    --editor-fold-placeholder-border: 1px solid hsl(var(--kanagawa-dragonBlack6));
-    --editor-fold-placeholder-background-color: hsl(var(--kanagawa-dragonBlack6));
+    --editor-fold-placeholder-border: 1px solid
+      hsl(var(--kanagawa-dragonBlack6));
+    --editor-fold-placeholder-background-color: hsl(
+      var(--kanagawa-dragonBlack6)
+    );
 
     --editor-image-widget-backdrop-background-color: hsl(
       var(--kanagawa-dragonBlack5) / 40%
@@ -259,7 +262,7 @@
     --syntax-heading-5-font-weight: var(--syntax-heading-font-weight);
     --syntax-heading-6-color: var(--syntax-heading-color);
     --syntax-heading-6-font-weight: var(--syntax-heading-font-weight);
-    --syntax-content-separator-color: hsl(var(--kanagawa-dragonBlack6));
+    --syntax-content-separator-color: hsl(var(--kanagawa-autumnRed));
     --syntax-list-color: hsl(var(--kanagawa-dragonTeal));
     --syntax-quote-color: hsl(var(--kanagawa-oldWhite));
     --syntax-quote-font-style: italic;
