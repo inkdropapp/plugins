@@ -1,8 +1,6 @@
+import type { EmbeddedComponentProps, EmbeddingProvider } from '@inkdropapp/types'
 import { useRef, useState } from 'react'
-import type {
-  EmbeddedComponentProps,
-  EmbeddingProvider
-} from '@inkdropapp/types'
+
 import { isVimeoURL, extractVideoIdFromURL, getEmbedURL } from './utils.js'
 
 export const PROVIDER_ID = 'embed:vimeo'

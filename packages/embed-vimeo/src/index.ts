@@ -1,7 +1,8 @@
-import { markdownRenderer } from 'inkdrop'
 import type { Extension } from '@codemirror/state'
-import { vimeoProvider, PROVIDER_ID } from './vimeo.js'
+import { markdownRenderer } from 'inkdrop'
+
 import { vimeoLinkFormatExtension } from './link-format.js'
+import { vimeoProvider, PROVIDER_ID } from './vimeo.js'
 
 class InkdropPlugin {
   private extension: Extension | null = null
