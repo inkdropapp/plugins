@@ -4,7 +4,7 @@
   "description": "A plugin to quickly insert the current date and time",
   "keywords": [],
   "license": "MIT",
-  "repository": "https://github.com/inkdropapp/inkdrop-insert-date",
+  "repository": "https://github.com/inkdropapp/insert-date",
   "main": "./lib/index",
   "scripts": {
     "dev": "tsdown --watch",
