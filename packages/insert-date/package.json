@@ -1,15 +1,29 @@
 {
   "name": "insert-date",
-  "main": "./lib/insert-date",
   "version": "0.2.1",
   "description": "A plugin to quickly insert the current date and time",
   "keywords": [],
-  "repository": "https://github.com/inkdropapp/inkdrop-insert-date",
   "license": "MIT",
-  "engines": {
-    "inkdrop": "5.x"
+  "repository": "https://github.com/inkdropapp/inkdrop-insert-date",
+  "main": "./lib/index",
+  "scripts": {
+    "dev": "tsdown --watch",
+    "build": "tsdown",
+    "format": "oxfmt",
+    "lint": "oxlint",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
   },
-  "dependencies": {
-    "moment": "^2.24.0"
+  "dependencies": {},
+  "devDependencies": {
+    "@inkdropapp/types": "^0.0.9",
+    "date-fns": "^4.4.0",
+    "oxfmt": "^0.58.0",
+    "oxlint": "^1.73.0",
+    "tsdown": "^0.22.3",
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "inkdrop": "^6.0.0"
   }
 }

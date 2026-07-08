@@ -1,6 +1,6 @@
 {
   "context-menu": {
-    ".CodeMirror": [
+    ".cm-editor": [
       {
         "label": "Insert date",
         "command": "insert-date:run"
