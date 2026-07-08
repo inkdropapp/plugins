@@ -10,6 +10,3 @@ export const LOCALE_NAMES = ['en', 'ja', 'de', 'fr', 'ko'] as const
 export type LocaleName = (typeof LOCALE_NAMES)[number]
 
 export const DEFAULT_LOCALE: LocaleName = 'en'
-
-/** Full localized date plus short time — the closest date-fns equivalent to Moment's `LLLL`. */
-export const DEFAULT_FORMAT = 'PPPPp'
