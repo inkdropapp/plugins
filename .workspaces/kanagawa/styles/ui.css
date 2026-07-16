@@ -212,6 +212,7 @@
     --note-list-bar-background: hsl(var(--kanagawa-dragonBlack2));
     --note-list-bar-border-right: 1px solid
       hsl(var(--kanagawa-dragonBlack4) / 75%);
+    --note-list-bar-section-header-background: hsl(var(--kanagawa-dragonBlack4));
     --note-list-view-item-header-color: hsl(var(--kanagawa-dragonWhite));
     --note-list-view-item-color: hsl(var(--kanagawa-oldWhite) / 70%);
     --note-list-view-item-separator-border: 1px solid
