@@ -289,4 +289,8 @@
     --syntax-invalid-color: hsl(var(--kanagawa-dragonBlack6));
     --syntax-invalid-border-bottom: 1px dotted hsl(var(--kanagawa-samuraiRed));
   }
+
+  :root:has(body.acrylic-window) {
+    --editor-background-color: transparent;
+  }
 }
