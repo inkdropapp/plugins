@@ -16,6 +16,11 @@
     /* Links */
     --mde-preview-link-color: hsl(var(--kanagawa-crystalBlue));
 
+    /* Lists */
+    --mde-preview-list-marker-color: hsl(var(--kanagawa-springBlue));
+    --mde-preview-list-marker-2-color: hsl(var(--kanagawa-surimiOrange));
+    --mde-preview-list-marker-3-color: hsl(var(--kanagawa-springGreen));
+
     /* Code blocks */
     --mde-preview-codeblock-background-color: var(
       --kanagawa-preview-surface-subtle

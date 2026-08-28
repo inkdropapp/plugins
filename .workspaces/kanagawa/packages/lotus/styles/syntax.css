@@ -149,6 +149,8 @@
     --md-blockquote-border-color: hsl(var(--kanagawa-lotusGray3));
 
     --md-list-mark-color: hsl(var(--kanagawa-lotusTeal2));
+    --md-list-mark-2-color: hsl(var(--kanagawa-lotusYellow3));
+    --md-list-mark-3-color: hsl(var(--kanagawa-lotusGreen2));
     --md-task-marker-font-weight: bold;
 
     /* Comments — lotusGray3, italic */
