@@ -1,6 +1,6 @@
 import path from 'path'
 
-import type { Environment, IInkdropPlugin } from '@inkdropapp/types'
+import type { CommandEvent, Environment, IInkdropPlugin } from '@inkdropapp/types'
 import { useModal, logger } from 'inkdrop'
 import { useEffect, useCallback, useState } from 'react'
 
@@ -8,6 +8,16 @@ import { getEnv, setEnv } from './env.js'
 import { ImportHTMLWizardDialog } from './import-wizard-dialog.js'
 import type { WizardStep } from './import-wizard-dialog.js'
 import { openImportDialog, importHTMLFromMultipleFiles } from './importer.js'
+
+/**
+ * The notebook a sidebar context-menu command targets: an explicit `detail.bookId` when
+ * dispatched programmatically, else the last notebook that was right-clicked — the store never
+ * clears it, so a programmatic dispatch should pass `bookId`. `null` (no notebook right-clicked
+ * yet) falls back to the regular wizard, which asks for a destination.
+ */
+function getContextMenuBookId(e: CommandEvent): string | null {
+  return e.detail?.bookId ?? getEnv().store.getState().bookList.bookForContextMenu?._id ?? null
+}
 
 const ImportHTMLPlugin = () => {
   const [step, setStep] = useState<WizardStep>('notebook')
@@ -18,43 +28,70 @@ const ImportHTMLPlugin = () => {
   const [importError, setImportError] = useState<Error | null>(null)
   const wizardDialog = useModal()
 
-  const showDialog = useCallback(async () => {
-    const { filePaths: pickedPaths } = await openImportDialog()
-    if (!(pickedPaths instanceof Array) || pickedPaths.length === 0) return
-    logger.debug('[import-html] Picked files:', pickedPaths)
+  const importFiles = useCallback(
+    async (paths: string[], destBookId: string) => {
+      setStep('progress')
+      setStatus('Importing files..')
+      try {
+        await importHTMLFromMultipleFiles(paths, destBookId, filePath => {
+          setProcessingFilePath(filePath)
+          setStatus(`Importing file.. ${path.basename(filePath)}`)
+        })
+        getEnv().notifications.addSuccess('Import HTML files', {
+          detail: `Successfully imported ${paths.length} HTML files!`,
+          dismissable: true
+        })
+        wizardDialog.close()
+      } catch (e) {
+        setImportError(e instanceof Error ? e : new Error(String(e)))
+      }
+    },
+    [wizardDialog]
+  )
 
-    setFilePaths(pickedPaths)
-    setSelectedBookId(null)
-    setImportError(null)
-    setStep('notebook')
-    wizardDialog.show()
-  }, [wizardDialog])
+  // With a destination already known (from a notebook's context menu), the notebook step —
+  // the wizard's only step before importing — is skipped.
+  const startWizard = useCallback(
+    async (destBookId: string | null = null) => {
+      const { filePaths: pickedPaths } = await openImportDialog()
+      if (!(pickedPaths instanceof Array) || pickedPaths.length === 0) return
+      logger.debug('[import-html] Picked files:', pickedPaths)
+
+      setFilePaths(pickedPaths)
+      setSelectedBookId(destBookId)
+      setImportError(null)
+      setStep('notebook')
+      wizardDialog.show()
+      if (destBookId) await importFiles(pickedPaths, destBookId)
+    },
+    [wizardDialog, importFiles]
+  )
+
+  const showDialog = useCallback(() => startWizard(), [startWizard])
+  const showDialogForNotebook = useCallback(
+    (e: CommandEvent) => startWizard(getContextMenuBookId(e)),
+    [startWizard]
+  )
 
   const handleImport = useCallback(async () => {
     if (!selectedBookId) return
-    setStep('progress')
-    setStatus('Importing files..')
-    try {
-      await importHTMLFromMultipleFiles(filePaths, selectedBookId, filePath => {
-        setProcessingFilePath(filePath)
-        setStatus(`Importing file.. ${path.basename(filePath)}`)
-      })
-      getEnv().notifications.addSuccess('Import HTML files', {
-        detail: `Successfully imported ${filePaths.length} HTML files!`,
-        dismissable: true
-      })
-      wizardDialog.close()
-    } catch (e) {
-      setImportError(e instanceof Error ? e : new Error(String(e)))
-    }
-  }, [filePaths, selectedBookId, wizardDialog])
+    await importFiles(filePaths, selectedBookId)
+  }, [filePaths, selectedBookId, importFiles])
 
   useEffect(() => {
     const sub = getEnv().commands.add(document.body, {
-      'import-html:import-from-file': showDialog
+      'import-html:import-from-file': {
+        description: 'Import notes from HTML files',
+        didDispatch: showDialog
+      },
+      'import-html:import-from-file-into-notebook': {
+        description: 'Import notes from HTML files into the selected notebook',
+        hiddenInCommandPalette: true,
+        didDispatch: showDialogForNotebook
+      }
     })
     return () => sub.dispose()
-  }, [showDialog])
+  }, [showDialog, showDialogForNotebook])
 
   return (
     <ImportHTMLWizardDialog
