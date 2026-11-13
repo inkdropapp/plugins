@@ -1,4 +1,0 @@
-allowBuilds:
-  puppeteer: true
-minimumReleaseAgeExclude:
-  - "@inkdropapp/*"

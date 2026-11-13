@@ -4,25 +4,29 @@
   "description": "Add math syntax support to the editor and the preview",
   "keywords": [],
   "license": "MIT",
-  "repository": "https://github.com/inkdropapp/inkdrop-math",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inkdropapp/plugins.git",
+    "directory": "packages/math"
+  },
   "main": "./lib/index",
   "scripts": {
     "dev": "pnpm generate-css && tsdown --watch",
     "build": "pnpm generate-css && tsdown",
     "generate-css": "node scripts/generate-katex-css.mjs",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "pnpm -w typecheck && pnpm -w lint && pnpm -w build"
+    "prepublishOnly": "pnpm --filter math... run typecheck && pnpm --filter math... run build"
   },
   "dependencies": {
     "katex": "0.19.0"
   },
   "devDependencies": {
-    "@inkdropapp/math": "workspace:*",
-    "@inkdropapp/types": "^0.0.12",
-    "@types/node": "^26.5.0",
-    "@types/react": "^19.2.18",
-    "tsdown": "^0.23.0",
-    "typescript": "^7.0.2"
+    "@inkdropapp/math": "workspace:^",
+    "@inkdropapp/types": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
   },
   "engines": {
     "inkdrop": "6.x"

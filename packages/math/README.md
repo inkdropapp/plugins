@@ -27,7 +27,7 @@ or
 
 It will be rendered as:
 
-![block example](https://github.com/inkdropapp/inkdrop-math/raw/master/docs/images/example-01.png)
+![block example](https://github.com/inkdropapp/plugins/raw/main/packages/math/docs/images/example-01.png)
 
 Inline example:
 
@@ -35,7 +35,7 @@ Inline example:
 
 It will produce:
 
-![inline example](https://github.com/inkdropapp/inkdrop-math/raw/master/docs/images/example-02.png)
+![inline example](https://github.com/inkdropapp/plugins/raw/main/packages/math/docs/images/example-02.png)
 
 ### Equation numbers
 
@@ -61,7 +61,7 @@ You can use `{equation}` to have automatic equation numbers. For example:
 
 It will produce:
 
-![equation numbers example](https://github.com/inkdropapp/inkdrop-math/raw/master/docs/images/example-03.png)
+![equation numbers example](https://github.com/inkdropapp/plugins/raw/main/packages/math/docs/images/example-03.png)
 
 ## Changelog
 

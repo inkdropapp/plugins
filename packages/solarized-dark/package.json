@@ -1,30 +1,34 @@
 {
   "name": "solarized-dark",
   "version": "2.2.1",
-  "theme": true,
-  "themeAppearance": "dark",
-  "type": "module",
   "description": "Solarized Dark Theme for Inkdrop",
+  "keywords": [
+    "inkdrop",
+    "markdown"
+  ],
+  "license": "MIT",
+  "author": "Takuya Matsuyama<t@inkdrop.app>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inkdropapp/plugins.git",
+    "directory": "packages/solarized-dark"
+  },
+  "type": "module",
+  "scripts": {
+    "prepublishOnly": "./node_modules/.bin/generate-palette"
+  },
+  "devDependencies": {
+    "@inkdropapp/theme-dev-helpers": "workspace:^"
+  },
+  "engines": {
+    "inkdrop": "^6.0.0"
+  },
   "styleSheets": [
     "tokens.css",
     "ui.css",
     "syntax.css",
     "preview.css"
   ],
-  "scripts": {
-    "prepublishOnly": "./node_modules/.bin/generate-palette"
-  },
-  "keywords": [
-    "inkdrop",
-    "markdown"
-  ],
-  "repository": "https://github.com/inkdropapp/solarized-dark",
-  "author": "Takuya Matsuyama<t@inkdrop.app>",
-  "license": "MIT",
-  "devDependencies": {
-    "@inkdropapp/theme-dev-helpers": "^0.7.0"
-  },
-  "engines": {
-    "inkdrop": "^6.0.0"
-  }
+  "theme": true,
+  "themeAppearance": "dark"
 }

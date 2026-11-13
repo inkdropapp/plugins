@@ -7,24 +7,28 @@
     "mermaid"
   ],
   "license": "MIT",
-  "repository": "https://github.com/inkdropapp/mermaid",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inkdropapp/plugins.git",
+    "directory": "packages/mermaid"
+  },
   "main": "./lib/index",
   "scripts": {
     "dev": "pnpm copy-styles && tsdown --watch",
     "build": "pnpm copy-styles && tsdown",
     "copy-styles": "node ./scripts/copy-styles.mjs",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "pnpm -w build"
+    "prepublishOnly": "pnpm --filter mermaid... run build"
   },
   "devDependencies": {
-    "@inkdropapp/mermaid": "workspace:*",
-    "@inkdropapp/types": "^0.1.1",
-    "@types/node": "^26.6.5",
-    "@types/react": "^19.3.0",
-    "katex": "0.19.0",
-    "pele": "1.9.0",
-    "tsdown": "^0.23.1",
-    "typescript": "^7.0.2"
+    "@inkdropapp/mermaid": "workspace:^",
+    "@inkdropapp/types": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "katex": "catalog:",
+    "pele": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
   },
   "engines": {
     "inkdrop": "^6.0.0"

@@ -1,0 +1,3 @@
+lib
+# Generated from katex at build time (scripts/generate-katex-css.mjs)
+styles/katex.css

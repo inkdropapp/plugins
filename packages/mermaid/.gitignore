@@ -1,0 +1,3 @@
+lib
+# Copied from @inkdropapp/mermaid at build time (scripts/copy-styles.mjs)
+styles/mermaid.css

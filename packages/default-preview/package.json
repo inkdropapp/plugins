@@ -1,21 +1,24 @@
 {
   "name": "default-preview",
-  "description": "GitHub-style Markdown preview theme",
   "version": "2.0.0",
-  "theme": "preview",
-  "scripts": {},
-  "repository": "https://github.com/inkdropapp/default-preview",
+  "description": "GitHub-style Markdown preview theme",
   "license": "MIT",
-  "styleSheets": [
-    "index.css"
-  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inkdropapp/plugins.git",
+    "directory": "packages/default-preview"
+  },
   "scripts": {
     "prepublishOnly": "./node_modules/.bin/generate-palette"
   },
   "devDependencies": {
-    "@inkdropapp/theme-dev-helpers": "^0.5.2"
+    "@inkdropapp/theme-dev-helpers": "workspace:^"
   },
   "engines": {
     "inkdrop": "^6.x"
-  }
+  },
+  "styleSheets": [
+    "index.css"
+  ],
+  "theme": "preview"
 }

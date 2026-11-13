@@ -1,0 +1,23 @@
+{
+  "name": "inkdrop-plugins",
+  "private": true,
+  "description": "Official Inkdrop plugins and themes",
+  "license": "MIT",
+  "scripts": {
+    "prepare": "pnpm --filter './libs/*' run build",
+    "build": "pnpm --recursive --if-present run build",
+    "test": "pnpm --recursive --if-present run test",
+    "typecheck": "pnpm --recursive --if-present run typecheck",
+    "lint": "oxlint",
+    "format": "oxfmt",
+    "format:check": "oxfmt --check"
+  },
+  "devDependencies": {
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:"
+  },
+  "engines": {
+    "node": ">=24.21.0"
+  },
+  "packageManager": "pnpm@12.18.0"
+}

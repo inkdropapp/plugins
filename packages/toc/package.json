@@ -8,7 +8,11 @@
     "toc"
   ],
   "license": "MIT",
-  "repository": "https://github.com/inkdropapp/toc.git",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inkdropapp/plugins.git",
+    "directory": "packages/toc"
+  },
   "main": "./lib/index.js",
   "scripts": {
     "dev": "tsdown --watch",
@@ -19,12 +23,12 @@
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@inkdropapp/types": "^0.1.1",
-    "oxfmt": "^0.71.0",
-    "oxlint": "^1.86.0",
+    "@inkdropapp/types": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
     "remark-toc": "^9.0.0",
-    "tsdown": "^0.23.0",
-    "typescript": "^7.0.2"
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
   },
   "engines": {
     "inkdrop": "^6.0.0"

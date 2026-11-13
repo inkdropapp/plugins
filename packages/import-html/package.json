@@ -4,7 +4,11 @@
   "description": "A plugin for importing notes from HTML files",
   "keywords": [],
   "license": "MIT",
-  "repository": "https://github.com/inkdropapp/inkdrop-import-html",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inkdropapp/plugins.git",
+    "directory": "packages/import-html"
+  },
   "main": "./lib/index.js",
   "scripts": {
     "dev": "tsc --watch",
@@ -15,12 +19,12 @@
     "prepublishOnly": "pnpm run lint && pnpm run build"
   },
   "devDependencies": {
-    "@inkdropapp/types": "^0.0.9",
-    "@types/node": "^26.1.1",
-    "@types/react": "^19.2.17",
-    "oxfmt": "0.58.0",
-    "oxlint": "1.73.0",
-    "typescript": "^7.0.2"
+    "@inkdropapp/types": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
+    "typescript": "catalog:"
   },
   "engines": {
     "inkdrop": "^6.x"

@@ -1,31 +1,35 @@
 {
   "name": "embed-youtube",
-  "main": "./lib/index.js",
   "version": "1.0.0",
   "description": "Embed YouTube videos in Inkdrop notes",
   "keywords": [
-    "youtube",
     "embed",
-    "video"
+    "video",
+    "youtube"
   ],
-  "repository": "https://github.com/inkdropapp/embed-youtube",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inkdropapp/plugins.git",
+    "directory": "packages/embed-youtube"
+  },
+  "main": "./lib/index.js",
   "scripts": {
     "lint": "eslint .",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "npm run lint && npm run build"
   },
+  "devDependencies": {
+    "@codemirror/state": "catalog:",
+    "@inkdropapp/types": "catalog:",
+    "@types/react": "catalog:",
+    "eslint": "^10.6.0",
+    "eslint-config-prettier": "catalog:",
+    "prettier": "catalog:",
+    "typescript": "^6.0.3"
+  },
   "engines": {
     "inkdrop": "^6.x"
-  },
-  "devDependencies": {
-    "@codemirror/state": "^6.7.0",
-    "@inkdropapp/types": "^0.0.9",
-    "@types/react": "^19.2.17",
-    "eslint": "^10.6.0",
-    "eslint-config-prettier": "^10.1.8",
-    "prettier": "^3.9.4",
-    "typescript": "^6.0.3"
   }
 }

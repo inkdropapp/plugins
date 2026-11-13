@@ -1,4 +1,4 @@
-import type { Dialog as DialogComponent } from '@inkdropapp/types'
+import type { Dialog as DialogClass } from '@inkdropapp/types'
 import { logger, useModal } from 'inkdrop'
 import { useEffect } from 'react'
 
@@ -18,7 +18,7 @@ export type LayoutExampleDialogCommands = {
  * component driven by the `useModal` hook's visibility state.
  */
 export function LayoutExampleMessageDialog() {
-  const Dialog = getEnv().components.classes.Dialog as DialogComponent
+  const Dialog = getEnv().components.getComponentClass('Dialog') as DialogClass
   const modal = useModal()
   const { show, close } = modal
   const { visible } = modal.state

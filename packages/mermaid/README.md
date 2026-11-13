@@ -2,7 +2,7 @@
 
 A plugin for drawing flowcharts and diagrams with [Mermaid](https://mermaid.js.org/) syntax in Markdown code blocks. Diagrams are drawn by [Pele](https://pele.run/), a fast, small engine for Mermaid syntax, and follow your Inkdrop theme.
 
-![Mermaid diagrams in Inkdrop](https://github.com/inkdropapp/mermaid/raw/master/docs/images/example-01.png)
+![Mermaid diagrams in Inkdrop](https://github.com/inkdropapp/plugins/raw/main/packages/mermaid/docs/images/example-01.png)
 
 ## Install
 

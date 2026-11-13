@@ -10,7 +10,8 @@
   "author": "Takuya Matsuyama<t@inkdrop.app>",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/inkdropapp/theme-dev-helpers.git"
+    "url": "https://github.com/inkdropapp/plugins.git",
+    "directory": "libs/theme-dev-helpers"
   },
   "bin": {
     "dev-server": "./bin/dev-server",
@@ -31,7 +32,7 @@
     "lint": "oxlint",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "prepare": "pnpm run build"
+    "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
     "@inkdropapp/base-ui-theme": "^0.7.8",
@@ -39,19 +40,19 @@
     "@vitejs/plugin-react": "^6.1.2",
     "commander": "^15.0.0",
     "puppeteer": "^25.13.0",
-    "react": "^19.3.0",
+    "react": "catalog:",
     "react-dom": "^19.3.0",
     "react-router-dom": "^7.18.4",
-    "typescript": "^7.0.2",
+    "typescript": "catalog:",
     "vite": "^8.3.4"
   },
   "devDependencies": {
-    "@types/node": "^26.6.5",
-    "@types/react": "^19.3.0",
-    "@types/react-dom": "^19.3.0",
-    "oxfmt": "0.72.0",
-    "oxlint": "1.87.0",
-    "tsdown": "^0.23.0",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
+    "tsdown": "catalog:",
     "vitest": "^5.0.3"
   },
   "engines": {

@@ -11,7 +11,7 @@ It allows you to draw flowcharts and diagrams using [mermaid.js](https://mermaid
 
 It will be rendered as:
 
-![](https://github.com/inkdropapp/inkdrop-mermaid/raw/master/docs/images/example-01.png)
+![](https://github.com/inkdropapp/plugins/raw/main/packages/mermaid/docs/images/example-01.png)
 
     ```mermaid
     sequenceDiagram
@@ -29,4 +29,4 @@ It will be rendered as:
 
 It will be rendered as:
 
-![](https://github.com/inkdropapp/inkdrop-mermaid/raw/master/docs/images/example-02.png)
+![](https://github.com/inkdropapp/plugins/raw/main/packages/mermaid/docs/images/example-02.png)

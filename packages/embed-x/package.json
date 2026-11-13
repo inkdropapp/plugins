@@ -9,7 +9,11 @@
     "x"
   ],
   "license": "MIT",
-  "repository": "https://github.com/inkdropapp/embed-x",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inkdropapp/plugins.git",
+    "directory": "packages/embed-x"
+  },
   "main": "./lib/index.js",
   "scripts": {
     "lint": "oxlint",
@@ -19,11 +23,11 @@
     "prepublishOnly": "npm run lint && npm run build"
   },
   "devDependencies": {
-    "@codemirror/state": "^6.7.0",
-    "@inkdropapp/types": "^0.0.9",
-    "@types/react": "^19.2.17",
-    "oxfmt": "0.57.0",
-    "oxlint": "1.72.0",
+    "@codemirror/state": "catalog:",
+    "@inkdropapp/types": "catalog:",
+    "@types/react": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
     "typescript": "^6.0.3"
   },
   "engines": {

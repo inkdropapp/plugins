@@ -4,13 +4,17 @@
   "description": "Developer tools for Inkdrop",
   "keywords": [],
   "license": "MIT",
-  "repository": "https://github.com/inkdropapp/inkdrop-dev-tools",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inkdropapp/plugins.git",
+    "directory": "packages/dev-tools"
+  },
   "main": "./lib/dev-tools",
   "dependencies": {
     "chokidar": "^5.0.0"
   },
   "devDependencies": {
-    "oxfmt": "^0.54.0"
+    "oxfmt": "catalog:"
   },
   "engines": {
     "inkdrop": "6.x"

@@ -11,8 +11,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/inkdropapp/mermaid.git",
-    "directory": "packages/mermaid"
+    "url": "https://github.com/inkdropapp/plugins.git",
+    "directory": "libs/mermaid"
   },
   "files": [
     "dist",
@@ -46,15 +46,15 @@
     "prepublishOnly": "pnpm build"
   },
   "dependencies": {
-    "pele": "1.9.0"
+    "pele": "catalog:"
   },
   "devDependencies": {
     "@inkdropapp/css": "^0.10.1",
-    "@types/react": "^19.3.0",
+    "@types/react": "catalog:",
     "playwright": "^1.64.1",
-    "react": "^19.3.1",
-    "tsdown": "^0.23.1",
-    "typescript": "^7.0.2"
+    "react": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
     "react": ">=18"

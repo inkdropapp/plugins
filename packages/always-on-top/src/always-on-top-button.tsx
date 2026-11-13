@@ -13,6 +13,7 @@ export const AlwaysOnTopButton = () => {
   if (!AppHeaderButton) return null
 
   return (
+    // oxlint-disable-next-line react/static-components -- a lookup in Inkdrop's component registry, not a component created in render
     <AppHeaderButton
       title={TITLE}
       command="always-on-top:toggle"

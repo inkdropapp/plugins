@@ -1,6 +1,0 @@
-allowBuilds:
-  esbuild: true
-  puppeteer: true
-minimumReleaseAgeExclude:
-  - '@inkdropapp/base-ui-theme'
-  - '@inkdropapp/css'

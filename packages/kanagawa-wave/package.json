@@ -1,37 +1,37 @@
 {
   "name": "kanagawa-wave",
   "version": "0.2.1",
-  "theme": true,
-  "themeAppearance": "dark",
-  "type": "module",
   "description": "Kanagawa Wave Theme for Inkdrop",
+  "keywords": [
+    "dark",
+    "inkdrop",
+    "kanagawa",
+    "markdown",
+    "theme"
+  ],
+  "license": "MIT",
+  "author": "Takuya Matsuyama<t@inkdrop.app>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inkdropapp/plugins.git",
+    "directory": "packages/kanagawa-wave"
+  },
+  "type": "module",
+  "scripts": {
+    "prepublishOnly": "generate-palette"
+  },
+  "devDependencies": {
+    "@inkdropapp/theme-dev-helpers": "workspace:^"
+  },
+  "engines": {
+    "inkdrop": "^6.0.0"
+  },
   "styleSheets": [
     "palette.css",
     "ui.css",
     "syntax.css",
     "preview.css"
   ],
-  "scripts": {
-    "prepublishOnly": "generate-palette"
-  },
-  "keywords": [
-    "inkdrop",
-    "markdown",
-    "theme",
-    "kanagawa",
-    "dark"
-  ],
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/inkdropapp/kanagawa.git",
-    "directory": "packages/wave"
-  },
-  "author": "Takuya Matsuyama<t@inkdrop.app>",
-  "license": "MIT",
-  "devDependencies": {
-    "@inkdropapp/theme-dev-helpers": "^0.7.1"
-  },
-  "engines": {
-    "inkdrop": "^6.0.0"
-  }
+  "theme": true,
+  "themeAppearance": "dark"
 }

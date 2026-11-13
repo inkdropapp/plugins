@@ -12,8 +12,8 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/inkdropapp/inkdrop-math.git",
-    "directory": "packages/math"
+    "url": "https://github.com/inkdropapp/plugins.git",
+    "directory": "libs/math"
   },
   "files": [
     "dist",
@@ -49,14 +49,14 @@
     "prepublishOnly": "pnpm build"
   },
   "devDependencies": {
-    "@types/react": "^19.2.18",
-    "katex": "0.19.0",
-    "react": "^19.2.8",
-    "tsdown": "^0.23.0",
-    "typescript": "^7.0.2"
+    "@types/react": "catalog:",
+    "katex": "catalog:",
+    "react": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
   },
   "peerDependencies": {
-    "katex": "^0.19.0",
+    "katex": "catalog:",
     "react": ">=18"
   }
 }

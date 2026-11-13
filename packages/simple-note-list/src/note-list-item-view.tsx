@@ -1,7 +1,7 @@
+import type { NoteSearchHighlights } from '@inkdropapp/types'
 import classNames from 'classnames'
 import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
-import type { NoteSearchHighlights } from '@inkdropapp/types'
 import type { Note, TemplateBookId } from 'inkdrop-model'
 import type React from 'react'
 import { useCallback } from 'react'
@@ -24,6 +24,9 @@ interface SimpleNoteListItemViewProps {
   onTagListItemClick?: (e: React.MouseEvent, tagId: string) => void
 }
 
+// The components below come from Inkdrop's component registry, looked up on each render so
+// other plugins can replace them; they are not created in render.
+/* oxlint-disable react/static-components */
 export default function SimpleNoteListItemView(props: SimpleNoteListItemViewProps) {
   const StreamlineIcon = inkdrop.components.getComponentClass('StreamlineIcon')!
   const NoteStatusIcon = inkdrop.components.getComponentClass('NoteStatusIcon')!

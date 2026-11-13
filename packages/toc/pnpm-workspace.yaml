@@ -1,3 +1,0 @@
-minimumReleaseAgeExclude:
-  - '@inkdropapp/*'
-  - inkdrop-model@3.0.0

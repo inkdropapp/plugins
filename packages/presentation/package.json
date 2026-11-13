@@ -9,7 +9,11 @@
     "slides"
   ],
   "license": "MIT",
-  "repository": "https://github.com/inkdropapp/presentation",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inkdropapp/plugins.git",
+    "directory": "packages/presentation"
+  },
   "main": "./lib/index",
   "scripts": {
     "dev": "tsdown --watch",
@@ -21,15 +25,15 @@
   },
   "devDependencies": {
     "@inkdropapp/protocol-utils": "^0.5.2",
-    "@inkdropapp/types": "^0.1.1",
+    "@inkdropapp/types": "catalog:",
     "@marp-team/marp-core": "^4.4.0",
-    "@types/node": "^26.6.5",
-    "@types/react": "^19.3.0",
-    "@types/react-dom": "^19.3.0",
-    "oxfmt": "^0.72.0",
-    "oxlint": "^1.87.0",
-    "tsdown": "^0.23.1",
-    "typescript": "^7.0.2"
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
   },
   "engines": {
     "inkdrop": "^6.1.3"

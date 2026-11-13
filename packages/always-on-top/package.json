@@ -4,7 +4,11 @@
   "description": "Set the window always on top of other windows",
   "keywords": [],
   "license": "MIT",
-  "repository": "https://github.com/inkdropapp/inkdrop-always-on-top",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inkdropapp/plugins.git",
+    "directory": "packages/always-on-top"
+  },
   "main": "./lib/index",
   "scripts": {
     "dev": "tsdown --watch",
@@ -16,10 +20,10 @@
   },
   "dependencies": {},
   "devDependencies": {
-    "@inkdropapp/types": "^0.0.9",
-    "@types/react": "^19.2.17",
-    "oxfmt": "^0.58.0",
-    "oxlint": "^1.73.0",
+    "@inkdropapp/types": "catalog:",
+    "@types/react": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
     "tsdown": "^0.22.3",
     "typescript": "^6.0.3"
   },

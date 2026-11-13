@@ -9,7 +9,11 @@
     "themes"
   ],
   "license": "MIT",
-  "repository": "https://github.com/inkdropapp/telescope-themes",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/inkdropapp/plugins.git",
+    "directory": "packages/telescope-themes"
+  },
   "main": "./lib/index",
   "scripts": {
     "dev": "tsdown --watch",
@@ -20,13 +24,13 @@
     "prepublishOnly": "npm run build"
   },
   "devDependencies": {
-    "@inkdropapp/types": "^0.0.12",
-    "@types/node": "^26.2.0",
-    "@types/react": "^19.2.18",
-    "oxfmt": "0.64.0",
-    "oxlint": "1.79.0",
+    "@inkdropapp/types": "catalog:",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
     "tsdown": "^0.22.14",
-    "typescript": "^7.0.2"
+    "typescript": "catalog:"
   },
   "engines": {
     "inkdrop": "^6.0.0"

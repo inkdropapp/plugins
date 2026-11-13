@@ -1,5 +1,0 @@
-allowBuilds:
-  puppeteer: true
-minimumReleaseAgeExclude:
-  - '@inkdropapp/css@'
-  - '@inkdropapp/theme-dev-helpers'
