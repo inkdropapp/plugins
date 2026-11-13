@@ -1,0 +1,89 @@
+name: Publish libraries
+
+# Publishes the npm libraries in libs/ (@inkdropapp/math, @inkdropapp/mermaid,
+# @inkdropapp/theme-dev-helpers). Plugins and themes are published to the Inkdrop
+# registry by hand with `ipm publish packages/<name>`; their tags (e.g. vim@3.2.4)
+# don't match this filter.
+on:
+  push:
+    # `**` because scoped package names contain a slash: @inkdropapp/math@0.2.1
+    tags: ['@inkdropapp/**']
+
+permissions:
+  contents: read
+  id-token: write # npm trusted publishing (OIDC)
+
+concurrency:
+  group: publish-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    # Each library's npm trusted publisher is bound to this workflow and this environment.
+    environment: npm
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6.1.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          cache: pnpm
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Resolve the library from the tag
+        id: package
+        env:
+          TAG: ${{ github.ref_name }}
+        run: |
+          name="${TAG%@*}"
+          version="${TAG##*@}"
+          package="$(pnpm ls -r --depth -1 --json | jq -c --arg name "$name" 'map(select(.name == $name)) | first')"
+          if [ "$package" = "null" ]; then
+            echo "::error::Tag $TAG names $name, which is not a package in this workspace"
+            exit 1
+          fi
+          dir="$(jq -r .path <<<"$package")"
+          case "$dir" in
+            "$GITHUB_WORKSPACE"/libs/*) ;;
+            *)
+              echo "::error::$name is not in libs/; plugins and themes are published with ipm"
+              exit 1
+              ;;
+          esac
+          if [ "$(jq -r '.private // false' <<<"$package")" = "true" ]; then
+            echo "::error::$name is private and is not published"
+            exit 1
+          fi
+          actual="$(jq -r .version <<<"$package")"
+          if [ "$actual" != "$version" ]; then
+            echo "::error::Tag $TAG does not match the version of $name in package.json ($actual)"
+            exit 1
+          fi
+          echo "dir=$dir" >> "$GITHUB_OUTPUT"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build and check the library
+        # `pnpm pack` does not run prepublishOnly, where the libraries build.
+        working-directory: ${{ steps.package.outputs.dir }}
+        run: pnpm run --if-present prepublishOnly
+
+      - name: Pack
+        # pnpm replaces `workspace:` and `catalog:` ranges with real versions; npm would not.
+        working-directory: ${{ steps.package.outputs.dir }}
+        run: pnpm pack --pack-destination "$RUNNER_TEMP/pack"
+
+      - name: Publish
+        # The token setup-node configures must be empty, or npm uses it instead of OIDC.
+        working-directory: ${{ runner.temp }}/pack
+        run: npm publish ./*.tgz
+        env:
+          NODE_AUTH_TOKEN: ''

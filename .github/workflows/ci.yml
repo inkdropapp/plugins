@@ -1,0 +1,108 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          # pnpm compares against the base commit to find the changed projects.
+          fetch-depth: 0
+
+      - name: Install pnpm
+        uses: pnpm/action-setup@v6.1.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v7.1.0
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        # Also builds libs/* (root prepare), which the plugins import.
+        run: pnpm install --frozen-lockfile
+
+      - name: Find the base commit
+        id: base
+        env:
+          PULL_REQUEST_BASE: ${{ github.event.pull_request.base.sha }}
+          PUSH_BEFORE: ${{ github.event.before }}
+        run: |
+          base="${PULL_REQUEST_BASE:-$PUSH_BEFORE}"
+          # A new branch has no previous commit, and a force push can drop it.
+          if ! git cat-file -e "$base^{commit}" 2>/dev/null; then
+            base="$(git rev-parse HEAD^)"
+          fi
+          echo "sha=$base" >> "$GITHUB_OUTPUT"
+
+      - name: Typecheck the changed projects and their dependents
+        env:
+          BASE: ${{ steps.base.outputs.sha }}
+        run: pnpm --filter "...[$BASE]" --filter '!inkdrop-plugins' run --if-present typecheck
+
+      - name: Build the changed projects and their dependents
+        env:
+          BASE: ${{ steps.base.outputs.sha }}
+        run: pnpm --filter "...[$BASE]" --filter '!inkdrop-plugins' run --if-present build
+
+      - name: Test the changed projects and their dependents
+        env:
+          BASE: ${{ steps.base.outputs.sha }}
+        run: pnpm --filter "...[$BASE]" --filter '!inkdrop-plugins' run --if-present test
+
+  gitleaks:
+    name: Scan new commits for secrets
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Find the base commit
+        id: base
+        env:
+          PULL_REQUEST_BASE: ${{ github.event.pull_request.base.sha }}
+          PUSH_BEFORE: ${{ github.event.before }}
+        run: |
+          base="${PULL_REQUEST_BASE:-$PUSH_BEFORE}"
+          if ! git cat-file -e "$base^{commit}" 2>/dev/null; then
+            base="$(git rev-parse HEAD^)"
+          fi
+          echo "sha=$base" >> "$GITHUB_OUTPUT"
+
+      - name: Gitleaks
+        env:
+          BASE: ${{ steps.base.outputs.sha }}
+        # Only the new commits: the imported history is already public in the old repos.
+        run: docker run --rm -v "$PWD:/repo" -w /repo ghcr.io/gitleaks/gitleaks:v8.30.1 git /repo --redact --verbose --log-opts="$BASE..HEAD"
+
+  actions-lock:
+    name: Verify the actions lockfile
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: Verify
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh extension install github/gh-actions-lock --pin v0.4.1
+          gh actions-lock --verify
