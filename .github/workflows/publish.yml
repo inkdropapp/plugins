@@ -1,7 +1,7 @@
-name: Publish libraries
+name: Publish npm packages
 
-# Publishes the npm libraries in libs/ (@inkdropapp/math, @inkdropapp/mermaid,
-# @inkdropapp/theme-dev-helpers). Plugins and themes are published to the Inkdrop
+# Publishes the npm packages in libs/ (@inkdropapp/math, @inkdropapp/mermaid,
+# @inkdropapp/theme-dev-helpers) and tools/ (@inkdropapp/ipm-cli). Plugins and themes are published to the Inkdrop
 # registry by hand with `ipm publish packages/<name>`; their tags (e.g. vim@3.2.4)
 # don't match this filter.
 on:
@@ -21,7 +21,7 @@ jobs:
   publish:
     runs-on: ubuntu-latest
     timeout-minutes: 20
-    # Each library's npm trusted publisher is bound to this workflow and this environment.
+    # Each package's npm trusted publisher is bound to this workflow and this environment.
     environment: npm
     steps:
       - name: Checkout
@@ -37,7 +37,7 @@ jobs:
           cache: pnpm
           registry-url: 'https://registry.npmjs.org'
 
-      - name: Resolve the library from the tag
+      - name: Resolve the package from the tag
         id: package
         env:
           TAG: ${{ github.ref_name }}
@@ -51,9 +51,9 @@ jobs:
           fi
           dir="$(jq -r .path <<<"$package")"
           case "$dir" in
-            "$GITHUB_WORKSPACE"/libs/*) ;;
+            "$GITHUB_WORKSPACE"/libs/* | "$GITHUB_WORKSPACE"/tools/*) ;;
             *)
-              echo "::error::$name is not in libs/; plugins and themes are published with ipm"
+              echo "::error::$name is not in libs/ or tools/; plugins and themes are published with ipm"
               exit 1
               ;;
           esac
@@ -71,8 +71,8 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      - name: Build and check the library
-        # `pnpm pack` does not run prepublishOnly, where the libraries build.
+      - name: Build and check the package
+        # `pnpm pack` does not run prepublishOnly, where the packages build.
         working-directory: ${{ steps.package.outputs.dir }}
         run: pnpm run --if-present prepublishOnly
 

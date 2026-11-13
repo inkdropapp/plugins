@@ -4,9 +4,10 @@ The official plugins and themes for [Inkdrop](https://www.inkdrop.app/), in one 
 
 - `packages/<name>`: plugins and themes, published to the Inkdrop plugin registry. The folder is
   the registry name, so `packages/vim` is the [`vim`](https://my.inkdrop.app/plugins/vim) plugin.
-- `libs/<name>`: npm packages: `@inkdropapp/math`, `@inkdropapp/mermaid` and
-  `@inkdropapp/theme-dev-helpers`, which the plugins build on, and `@inkdropapp/ipm-cli`, the `ipm`
-  command for installing and publishing plugins.
+- `libs/<name>`: npm libraries the plugins build on: `@inkdropapp/math`, `@inkdropapp/mermaid`
+  and `@inkdropapp/theme-dev-helpers`.
+- `tools/<name>`: developer tools published to npm: `@inkdropapp/ipm-cli`, the `ipm` command for
+  creating, installing and publishing plugins.
 
 Seven of these plugins ship with the desktop app: `default-dark`, `default-light`,
 `export-as-html`, `export-as-markdown`, `export-print`, `import-html` and `import-markdown`.

@@ -5,7 +5,7 @@
   "keywords": [
     "Inkdrop"
   ],
-  "homepage": "https://github.com/inkdropapp/plugins/tree/main/libs/ipm-cli#readme",
+  "homepage": "https://github.com/inkdropapp/plugins/tree/main/tools/ipm-cli#readme",
   "bugs": {
     "url": "https://github.com/inkdropapp/plugins/issues"
   },
@@ -14,7 +14,7 @@
   "repository": {
     "type": "git",
     "url": "https://github.com/inkdropapp/plugins.git",
-    "directory": "libs/ipm-cli"
+    "directory": "tools/ipm-cli"
   },
   "bin": {
     "ipm": "./bin/cli.js"

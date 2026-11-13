@@ -5,10 +5,11 @@ One public pnpm workspace holding the official Inkdrop plugins and themes.
 ## Layout
 
 - `packages/<name>`: a plugin or theme. The folder is its name in the Inkdrop plugin registry.
-- `libs/<name>`: npm packages (`@inkdropapp/math`, `@inkdropapp/mermaid`,
-  `@inkdropapp/theme-dev-helpers`, and `@inkdropapp/ipm-cli`, the `ipm` command). The folder is the
-  npm name without `@inkdropapp/`.
-- `.github/workflows/`: CI and the npm publish workflow for `libs/`.
+- `libs/<name>`: npm libraries (`@inkdropapp/math`, `@inkdropapp/mermaid`,
+  `@inkdropapp/theme-dev-helpers`). The folder is the npm name without `@inkdropapp/`.
+- `tools/<name>`: developer tools published to npm (`@inkdropapp/ipm-cli`, the `ipm` command). Same
+  naming and publishing as `libs/`, but nothing in the workspace imports them.
+- `.github/workflows/`: CI and the npm publish workflow for `libs/` and `tools/`.
 
 The desktop app (`inkdropapp/inkdrop`, private) bundles seven of these plugins through a git
 submodule at `apps/desktop/plugins`.
@@ -52,7 +53,7 @@ Never bump a `version` unless asked.
 - **Plugins and themes** go to the Inkdrop registry by hand, from the repo root:
   `ipm publish packages/<name>` (it runs the plugin's `prepublishOnly` first), then tag the
   commit `<name>@<version>` and push the tag.
-- **Libraries** are published by `.github/workflows/publish.yml` when a tag
+- **Libraries and tools** (`libs/`, `tools/`) are published by `.github/workflows/publish.yml` when a tag
   `@inkdropapp/<name>@<version>` is pushed. It checks the tag against `package.json`, runs
   `prepublishOnly`, packs with pnpm and publishes through npm trusted publishing. Never run
   `npm publish` locally.

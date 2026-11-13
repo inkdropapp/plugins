@@ -15,6 +15,6 @@
     "**/dist/**",
     "**/palette.json",
     "pnpm-lock.yaml",
-    "libs/ipm-cli/templates/**"
+    "tools/ipm-cli/templates/**"
   ]
 }
