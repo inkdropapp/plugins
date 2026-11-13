@@ -1,0 +1,31 @@
+{
+  "menu": [
+    {
+      "label": "File",
+      "submenu": [
+        {
+          "label": "Import",
+          "submenu": [
+            {
+              "label": "from HTML files..",
+              "command": "import-html:import-from-file"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "context-menu": {
+    ".sidebar-menu .sidebar-menu-book-list-item, .sidebar-workspace-menu .sidebar-menu-book-list-item": [
+      {
+        "label": "Import",
+        "submenu": [
+          {
+            "label": "from HTML files..",
+            "command": "import-html:import-from-file-into-notebook"
+          }
+        ]
+      }
+    ]
+  }
+}
