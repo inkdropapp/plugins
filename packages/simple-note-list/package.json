@@ -1,0 +1,31 @@
+{
+  "name": "simple-note-list",
+  "version": "0.6.1",
+  "description": "Thinner note list item view",
+  "keywords": [],
+  "license": "MIT",
+  "repository": "https://github.com/inkdropapp/inkdrop-simple-note-list",
+  "main": "./lib/index.js",
+  "scripts": {
+    "dev": "tsdown --watch",
+    "build": "tsdown",
+    "format": "oxfmt",
+    "lint": "oxlint",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@inkdropapp/types": "^0.1.1",
+    "@types/react": "^19.3.0",
+    "classnames": "^2.5.1",
+    "dayjs": "^1.11.23",
+    "inkdrop-model": "^3.0.1",
+    "oxfmt": "^0.72.0",
+    "oxlint": "^1.87.0",
+    "tsdown": "^0.23.1",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "inkdrop": "^6.2.0"
+  }
+}
