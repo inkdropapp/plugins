@@ -1,0 +1,51 @@
+{
+  "name": "telescope-themes",
+  "version": "0.1.0",
+  "description": "Switch between installed themes from Telescope, with a light/dark toggle command",
+  "keywords": [
+    "dark-mode",
+    "telescope",
+    "theme",
+    "themes"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/inkdropapp/telescope-themes",
+  "main": "./lib/index",
+  "scripts": {
+    "dev": "tsdown --watch",
+    "build": "tsdown",
+    "format": "oxfmt",
+    "lint": "oxlint",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@inkdropapp/types": "^0.0.12",
+    "@types/node": "^26.2.0",
+    "@types/react": "^19.2.18",
+    "oxfmt": "0.64.0",
+    "oxlint": "1.79.0",
+    "tsdown": "^0.22.14",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "inkdrop": "^6.0.0"
+  },
+  "configSchema": {
+    "lightTheme": {
+      "title": "Light theme",
+      "description": "Theme activated when toggling from a dark theme. Updated automatically when you pick a light theme.",
+      "type": "string",
+      "default": "default-light"
+    },
+    "darkTheme": {
+      "title": "Dark theme",
+      "description": "Theme activated when toggling from a light theme. Updated automatically when you pick a dark theme.",
+      "type": "string",
+      "default": "default-dark"
+    }
+  },
+  "styleSheets": [
+    "telescope-themes.css"
+  ]
+}
