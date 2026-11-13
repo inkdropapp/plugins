@@ -1,0 +1,32 @@
+{
+  "name": "toc",
+  "version": "3.2.1",
+  "description": "Generates table of contents from headings",
+  "keywords": [
+    "inkdrop",
+    "markdown",
+    "toc"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/inkdropapp/toc.git",
+  "main": "./lib/index.js",
+  "scripts": {
+    "dev": "tsdown --watch",
+    "build": "tsdown",
+    "format": "oxfmt",
+    "lint": "oxlint",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@inkdropapp/types": "^0.1.1",
+    "oxfmt": "^0.71.0",
+    "oxlint": "^1.86.0",
+    "remark-toc": "^9.0.0",
+    "tsdown": "^0.23.0",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "inkdrop": "^6.0.0"
+  }
+}
