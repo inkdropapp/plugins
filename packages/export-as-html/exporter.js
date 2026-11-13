@@ -20,7 +20,7 @@ async function exportMultipleNotesAsHtml(env, noteIds) {
     const destDir = res[0]
 
     try {
-      for (let noteId of noteIds) {
+      for (const noteId of noteIds) {
         const note = await Note.loadWithId(noteId)
         if (note) {
           const fileName = exportUtils.sanitizeFileName(note.title, {
@@ -114,13 +114,10 @@ async function exportNotesInBook(env, bookId) {
     const [pathToSave] = pathArrayToSave
     try {
       await exportBook(env, pathToSave, book, { createBookDir: false })
-      env.notifications.addInfo(
-        `Finished exporting notes in "${book.name}"`,
-        {
-          detail: 'Directory: ' + pathToSave,
-          dismissable: true
-        }
-      )
+      env.notifications.addInfo(`Finished exporting notes in "${book.name}"`, {
+        detail: 'Directory: ' + pathToSave,
+        dismissable: true
+      })
     } catch (e) {
       logger.error('Failed to export:', e)
       env.notifications.addError('Failed to export', {
@@ -147,7 +144,7 @@ async function exportBook(env, parentDir, book, opts = {}) {
   )
   const notes = rows.map(row => row.doc)
 
-  !fs.existsSync(pathToSave) && fs.mkdirSync(pathToSave)
+  if (!fs.existsSync(pathToSave)) fs.mkdirSync(pathToSave)
   for (let i = 0; i < notes.length; ++i) {
     await exportUtils.exportNoteAsHtml(notes[i], pathToSave)
   }

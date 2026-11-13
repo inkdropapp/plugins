@@ -1,5 +1,5 @@
 import type { EmbeddedComponentProps, EmbeddingProvider } from '@inkdropapp/types'
-import { useRef, useState } from 'react'
+import { useId, useRef } from 'react'
 
 import { isVimeoURL, extractVideoIdFromURL, getEmbedURL } from './utils.js'
 
@@ -8,7 +8,7 @@ export const PROVIDER_ID = 'embed:vimeo'
 const Vimeo: React.FC<EmbeddedComponentProps> = props => {
   const { href } = props
   const contentFrame = useRef<HTMLIFrameElement>(null)
-  const [frameId] = useState('vimeo-' + Math.random())
+  const frameId = 'vimeo-' + useId()
   const videoId = href ? extractVideoIdFromURL(href) : null
 
   if (videoId) {

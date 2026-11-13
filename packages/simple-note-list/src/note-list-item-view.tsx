@@ -4,7 +4,7 @@ import dayjs from 'dayjs'
 import relativeTime from 'dayjs/plugin/relativeTime'
 import type { Note, TemplateBookId } from 'inkdrop-model'
 import type React from 'react'
-import { useCallback } from 'react'
+import { useCallback, useState } from 'react'
 
 dayjs.extend(relativeTime)
 
@@ -78,10 +78,11 @@ export default function SimpleNoteListItemView(props: SimpleNoteListItemViewProp
   })
   const timestamp = listSortKey === 'createdAt' ? createdAt : updatedAt
   const fmt = dayjs(timestamp)
+  // Read the clock once per mount: render must stay pure, and the 37-day cutoff
+  // doesn't need to move while the item stays on screen.
+  const [mountedAt] = useState(() => Date.now())
   const date =
-    updatedAt >= +new Date() - 1000 * 60 * 60 * 24 * 37
-      ? fmt.fromNow(true)
-      : fmt.format('YYYY-MM-DD')
+    updatedAt >= mountedAt - 1000 * 60 * 60 * 24 * 37 ? fmt.fromNow(true) : fmt.format('YYYY-MM-DD')
   const taskState = status ? `task-${status}` : ''
   const isTask = typeof numOfTasks === 'number' && numOfTasks > 0
 

@@ -12,7 +12,11 @@ module.exports = {
 async function exportAsPDFCommand(env, e) {
   const { noteListBar, editingNote } = env.store.getState()
   const { actionTargetNoteIds } = noteListBar
-  const noteIds = e.detail?.noteId ? [e.detail.noteId] : (actionTargetNoteIds.length > 0 ? actionTargetNoteIds : [editingNote?._id])
+  const noteIds = e.detail?.noteId
+    ? [e.detail.noteId]
+    : actionTargetNoteIds.length > 0
+      ? actionTargetNoteIds
+      : [editingNote?._id]
   if (noteIds && noteIds.length > 1) {
     await exportMultipleNotesAsPDF(env, noteIds)
     env.notifications.addInfo('Exporting notes completed', {
@@ -50,7 +54,7 @@ async function exportMultipleNotesAsPDF(env, noteIds) {
   if (res instanceof Array && res.length > 0) {
     const destDir = res[0]
 
-    for (let noteId of noteIds) {
+    for (const noteId of noteIds) {
       const note = await Note.loadWithId(noteId)
       if (note) {
         const pathToSave = path.join(destDir, `${note.title}.pdf`)
