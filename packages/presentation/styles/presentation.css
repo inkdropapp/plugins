@@ -1,0 +1,139 @@
+/* Full-window presentation chrome — Inkdrop's Modal stretched over the whole
+   window. The slides themselves render inside a shadow root (see
+   src/marp-slides.tsx); everything here is the shell around them. */
+
+/* While presenting, hide the app behind the modal; the modal itself carries
+   the editor pane's background, which stays translucent on acrylic windows.
+   The modal is only in the DOM while open. */
+body:has(.modal-container.presentation-viewer)
+  :is(.sidebar-layout, .note-list-bar-layout, .editor-layout) {
+  opacity: 0 !important;
+}
+
+.modal-container.presentation-viewer {
+  /* Same background as `.editor-layout`. `!important` overrides the Modal's
+     animated inline backdrop tint. */
+  background: var(--editor-background) !important;
+
+  /* `presentation.transparentBackground`: the window background (e.g. the
+     acrylic style) shows straight through. */
+  &.transparent {
+    background: transparent !important;
+  }
+
+  .modal-content {
+    width: 100vw;
+    height: 100vh;
+    max-width: 100vw;
+    max-height: 100vh;
+    border-radius: 0;
+
+    .presentation-stage {
+      /* Containing block for the absolutely positioned controls. */
+      position: relative;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+
+      /* Top-edge strip; the close button sits at its right end (clear of the
+         macOS traffic lights on the left). */
+      > .presentation-topbar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 2;
+        display: flex;
+        justify-content: flex-end;
+        padding: 1em;
+        /* Lets the window be dragged by its top edge, like a title bar. The
+           close button opts out via Inkdrop's `no-drag` button class. */
+        -webkit-app-region: drag;
+        user-select: none;
+
+        > .ui.button.close-button {
+          opacity: 0;
+          transition: opacity 0.15s;
+        }
+      }
+
+      /* Revealed while the pointer is over the presentation, like the ‹ ›
+         buttons. (Hovering the drag strip itself can't be detected: drag
+         regions don't deliver pointer events to the page.) */
+      &:hover > .presentation-topbar > .ui.button.close-button,
+      > .presentation-topbar > .ui.button.close-button:focus-visible {
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.presentation-slides {
+  position: absolute;
+  inset: 0;
+  outline: none;
+
+  .presentation-slides-host {
+    position: absolute;
+    inset: 0;
+  }
+
+  > .ui.button.presentation-nav {
+    position: absolute;
+    top: 50%;
+    z-index: 1;
+    translate: 0 -50%;
+    opacity: 0;
+    transition: opacity 0.15s;
+
+    &.prev {
+      left: 1em;
+    }
+    &.next {
+      right: 1em;
+    }
+  }
+
+  &:hover > .ui.button.presentation-nav,
+  > .ui.button.presentation-nav:focus-visible {
+    opacity: 1;
+  }
+
+  .presentation-counter {
+    position: absolute;
+    bottom: 0.75em;
+    left: 50%;
+    z-index: 1;
+    translate: -50% 0;
+    padding: 0.2em 0.6em;
+    border-radius: 999px;
+    background-color: rgb(0 0 0 / 50%);
+    color: #fff;
+    font-size: 0.85em;
+    font-variant-numeric: tabular-nums;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s;
+  }
+
+  &:hover > .presentation-counter {
+    opacity: 1;
+  }
+
+  /* Always-visible progress along the bottom edge. */
+  .presentation-progress {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 1;
+    height: 3px;
+    pointer-events: none;
+
+    .presentation-progress-bar {
+      height: 100%;
+      background-color: var(--primary-color);
+      transition: width 0.2s ease-out;
+    }
+  }
+}
