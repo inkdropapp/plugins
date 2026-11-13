@@ -1,0 +1,21 @@
+{
+  "name": "default-preview",
+  "description": "GitHub-style Markdown preview theme",
+  "version": "2.0.0",
+  "theme": "preview",
+  "scripts": {},
+  "repository": "https://github.com/inkdropapp/default-preview",
+  "license": "MIT",
+  "styleSheets": [
+    "index.css"
+  ],
+  "scripts": {
+    "prepublishOnly": "./node_modules/.bin/generate-palette"
+  },
+  "devDependencies": {
+    "@inkdropapp/theme-dev-helpers": "^0.5.2"
+  },
+  "engines": {
+    "inkdrop": "^6.x"
+  }
+}
