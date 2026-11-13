@@ -1,0 +1,26 @@
+{
+  "context-menu": {
+    ".cm-editor": [
+      {
+        "label": "Toggle Always On Top",
+        "command": "always-on-top:toggle"
+      }
+    ]
+  },
+  "menu": [
+    {
+      "label": "Plugins",
+      "submenu": [
+        {
+          "label": "Always on Top",
+          "submenu": [
+            {
+              "label": "Toggle Always On Top",
+              "command": "always-on-top:toggle"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
