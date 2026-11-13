@@ -1,0 +1,31 @@
+{
+  "name": "gruvbox",
+  "version": "1.1.1",
+  "theme": true,
+  "themeAppearance": "dark",
+  "description": "Retro groove color scheme for Inkdrop, based on morhetz/gruvbox",
+  "styleSheets": [
+    "tokens.css",
+    "ui.css",
+    "syntax.css",
+    "preview.css"
+  ],
+  "keywords": [
+    "inkdrop",
+    "theme",
+    "dark",
+    "gruvbox"
+  ],
+  "repository": "https://github.com/inkdropapp/gruvbox",
+  "author": "Takuya Matsuyama <t@inkdrop.app>",
+  "license": "MIT",
+  "scripts": {
+    "prepublishOnly": "generate-palette"
+  },
+  "devDependencies": {
+    "@inkdropapp/theme-dev-helpers": "^0.7.0"
+  },
+  "engines": {
+    "inkdrop": "^6.0.0"
+  }
+}
