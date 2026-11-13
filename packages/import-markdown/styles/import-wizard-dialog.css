@@ -1,0 +1,20 @@
+.modal-container.import-markdown-wizard-dialog {
+  &.import-markdown-wizard-dialog--notebook {
+    align-items: flex-start;
+    padding-top: 3em;
+  }
+
+  ul.import-markdown-notebook-preview-list {
+    list-style: none;
+
+    ul {
+      list-style: none;
+    }
+  }
+
+  .actions {
+    button {
+      min-width: 10em;
+    }
+  }
+}

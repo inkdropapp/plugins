@@ -1,0 +1,264 @@
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.openImportDialog = openImportDialog;
+exports.openImportFolderDialog = openImportFolderDialog;
+exports.previewImport = previewImport;
+exports.importMarkdownFromMultipleFilesAndDirectories = importMarkdownFromMultipleFilesAndDirectories;
+exports.importMarkdownFromMultipleFiles = importMarkdownFromMultipleFiles;
+exports.importMarkdownFromFile = importMarkdownFromFile;
+const fs_1 = __importDefault(require("fs"));
+const fs_2 = require("fs");
+const path_1 = __importDefault(require("path"));
+const inkdrop_1 = require("inkdrop");
+const inkdrop_model_1 = require("inkdrop-model");
+const env_js_1 = require("./env.js");
+const { Book } = inkdrop_1.models;
+const isMacOS = process.platform === 'darwin';
+/**
+ * Opens the picker for files to import.
+ *
+ * Only macOS can offer files and folders in a single dialog: on Windows and Linux Electron
+ * shows a directory-only selector when `openFile` and `openDirectory` are combined, so those
+ * platforms get a files-only dialog here and reach folders through `openImportFolderDialog`.
+ */
+function openImportDialog() {
+    const properties = isMacOS
+        ? ['openFile', 'openDirectory', 'multiSelections']
+        : ['openFile', 'multiSelections'];
+    return (0, env_js_1.getEnv)().dialog.showOpenDialog({
+        title: 'Open Markdown file',
+        properties,
+        filters: [
+            { name: 'Markdown Files', extensions: ['md', 'txt'] },
+            { name: 'All Files', extensions: ['*'] }
+        ]
+    });
+}
+/**
+ * Opens the picker for folders to import, so Windows and Linux users can bring in a folder
+ * tree — their file dialog cannot select folders at all (see `openImportDialog`).
+ *
+ * No `filters` here: they only apply to files, and a folder dialog showing a file-type
+ * dropdown reads as if folders were the wrong choice.
+ */
+function openImportFolderDialog() {
+    return (0, env_js_1.getEnv)().dialog.showOpenDialog({
+        title: 'Open Markdown folder',
+        properties: ['openDirectory', 'multiSelections']
+    });
+}
+const IMAGE_EXTENSIONS = new Set(['.png', '.jpg', '.jpeg', '.gif', '.svg']);
+function classifyFile(filePath) {
+    const ext = path_1.default.extname(filePath).toLowerCase();
+    if (ext === '.md')
+        return 'md';
+    if (IMAGE_EXTENSIONS.has(ext))
+        return 'image';
+    return null;
+}
+/**
+ * Lists a directory's direct markdown files and its subdirectories, as absolute paths, in a
+ * single pass.
+ *
+ * Deliberately not `glob`: a glob pattern has to be written with `/` and treats `\` as an escape
+ * character, so `path.join(dir, '*.md')` matches nothing at all on Windows, and any directory
+ * whose name contains glob magic (`[`, `{`, `(`, `!`) fails the same way on every platform.
+ */
+async function readMarkdownFilesAndSubdirectories(dirPath) {
+    const entries = await fs_2.promises.readdir(dirPath, { withFileTypes: true });
+    const toPath = (entry) => path_1.default.join(dirPath, entry.name);
+    return {
+        markdownFiles: entries
+            .filter(entry => entry.isFile() && classifyFile(entry.name) === 'md')
+            .map(toPath),
+        subdirectories: entries.filter(entry => entry.isDirectory()).map(toPath)
+    };
+}
+/**
+ * Whether a directory holds any markdown file at any depth. A directory without one does not
+ * become a notebook: e.g. Notion exports a page's images into a sibling folder named after the
+ * page, which would otherwise import as an empty notebook. Its images aren't lost — they are
+ * imported through the markdown files that reference them.
+ */
+async function containsMarkdownFiles(dirPath) {
+    const { markdownFiles, subdirectories } = await readMarkdownFilesAndSubdirectories(dirPath);
+    if (markdownFiles.length > 0)
+        return true;
+    for (const subdirectory of subdirectories) {
+        if (await containsMarkdownFiles(subdirectory))
+            return true;
+    }
+    return false;
+}
+function emptyTotals() {
+    return { mdFileCount: 0, imageCount: 0, imageSize: 0, totalSize: 0, oversizedFiles: [] };
+}
+function mergeTotals(a, b) {
+    return {
+        mdFileCount: a.mdFileCount + b.mdFileCount,
+        imageCount: a.imageCount + b.imageCount,
+        imageSize: a.imageSize + b.imageSize,
+        totalSize: a.totalSize + b.totalSize,
+        oversizedFiles: [...a.oversizedFiles, ...b.oversizedFiles]
+    };
+}
+/**
+ * Classifies a single file's contribution to the running md/image counts and sizes.
+ * Files that are neither markdown nor an image (e.g. `.enex`, `.DS_Store`) are never imported,
+ * so they're ignored entirely here — including skipping the oversized-size check.
+ */
+function totalsForFile(filePath, size) {
+    const kind = classifyFile(filePath);
+    const oversizedFiles = kind && size > inkdrop_model_1.maxAttachmentFileSize ? [filePath] : [];
+    if (kind === 'md')
+        return { ...emptyTotals(), mdFileCount: 1, totalSize: size, oversizedFiles };
+    if (kind === 'image') {
+        return { ...emptyTotals(), imageCount: 1, imageSize: size, totalSize: size, oversizedFiles };
+    }
+    return emptyTotals();
+}
+/**
+ * Recursively scans a directory, building both its notebook-preview node and the aggregate
+ * md/image counts and sizes for everything under it, in a single filesystem pass per directory.
+ * `node.fileCount` stays direct-children-only (matching the notebook that will actually be
+ * created for this folder); the returned totals are recursive, for the caller to bubble up.
+ */
+async function scanDirectory(dirPath) {
+    const entries = await fs_2.promises.readdir(dirPath, { withFileTypes: true });
+    const directTotals = entries
+        .filter(entry => entry.isFile())
+        .reduce((totals, entry) => {
+        const entryPath = path_1.default.join(dirPath, entry.name);
+        return mergeTotals(totals, totalsForFile(entryPath, fs_1.default.statSync(entryPath).size));
+    }, emptyTotals());
+    const children = [];
+    let totals = directTotals;
+    for (const entry of entries.filter(e => e.isDirectory())) {
+        const child = await scanDirectory(path_1.default.join(dirPath, entry.name));
+        children.push(child.node);
+        totals = mergeTotals(totals, child.totals);
+    }
+    return {
+        node: {
+            name: path_1.default.basename(dirPath),
+            isNotebook: totals.mdFileCount > 0,
+            fileCount: directTotals.mdFileCount,
+            imageCount: directTotals.imageCount,
+            imageSize: directTotals.imageSize,
+            children
+        },
+        totals
+    };
+}
+/**
+ * Previews the notebook structure, per-type file counts, and sizes that
+ * `importMarkdownFromMultipleFilesAndDirectories` will produce, without touching the database.
+ *
+ * Mirrors that function's `shouldCreateNotebook` branching exactly: a single top-level folder
+ * pick does not become its own notebook (its direct files + subfolders land under the
+ * destination notebook), while every other folder — nested, or part of a multi-item pick —
+ * becomes its own notebook — unless it holds no markdown file at any depth (see
+ * `containsMarkdownFiles`), in which case it is skipped. Keep this in sync if that branching
+ * changes.
+ */
+async function previewImport(filePaths) {
+    const notebooks = [];
+    let directFileCount = 0;
+    let totals = emptyTotals();
+    const isSingleFolderPick = filePaths.length === 1 && fs_1.default.statSync(filePaths[0]).isDirectory();
+    for (const fp of filePaths) {
+        const stats = fs_1.default.statSync(fp);
+        if (stats.isDirectory()) {
+            if (isSingleFolderPick) {
+                const entries = await fs_2.promises.readdir(fp, { withFileTypes: true });
+                for (const entry of entries) {
+                    const entryPath = path_1.default.join(fp, entry.name);
+                    if (entry.isFile()) {
+                        const fileTotals = totalsForFile(entryPath, fs_1.default.statSync(entryPath).size);
+                        directFileCount += fileTotals.mdFileCount;
+                        totals = mergeTotals(totals, fileTotals);
+                    }
+                    else if (entry.isDirectory()) {
+                        const child = await scanDirectory(entryPath);
+                        notebooks.push(child.node);
+                        totals = mergeTotals(totals, child.totals);
+                    }
+                }
+            }
+            else {
+                const child = await scanDirectory(fp);
+                notebooks.push(child.node);
+                totals = mergeTotals(totals, child.totals);
+            }
+        }
+        else if (stats.isFile()) {
+            // A loose top-level file pick always gets imported directly regardless of extension
+            // (matches importMarkdownFromMultipleFilesAndDirectories's unconditional file branch).
+            directFileCount += 1;
+            totals = mergeTotals(totals, {
+                mdFileCount: 1,
+                imageCount: 0,
+                imageSize: 0,
+                totalSize: stats.size,
+                oversizedFiles: stats.size > inkdrop_model_1.maxAttachmentFileSize ? [fp] : []
+            });
+        }
+    }
+    const baseDir = filePaths.length > 0 ? path_1.default.dirname(filePaths[0]) : '';
+    return {
+        directFileCount,
+        notebooks,
+        ...totals,
+        oversizedFiles: totals.oversizedFiles.map(fp => path_1.default.relative(baseDir, fp))
+    };
+}
+async function importMarkdownFromMultipleFilesAndDirectories(filePaths, destBookId, progressCallback, { root = false }) {
+    inkdrop_1.logger.debug('Importing markdown files:', filePaths, { destBookId, root });
+    for (const fp of filePaths) {
+        const stats = fs_1.default.statSync(fp);
+        const isDirectory = stats.isDirectory();
+        if (!root || !isDirectory)
+            progressCallback(fp, { isDirectory });
+        if (isDirectory && !(await containsMarkdownFiles(fp))) {
+            inkdrop_1.logger.debug('Skipping a directory without markdown files:', fp);
+        }
+        else if (isDirectory) {
+            const folderName = path_1.default.basename(fp);
+            const shouldCreateNotebook = !root || filePaths.length > 1;
+            let bookId = destBookId;
+            if (shouldCreateNotebook) {
+                const book = new Book({
+                    name: folderName,
+                    parentBookId: destBookId
+                });
+                await book.save();
+                bookId = book._id;
+            }
+            const { markdownFiles, subdirectories } = await readMarkdownFilesAndSubdirectories(fp);
+            await importMarkdownFromMultipleFilesAndDirectories(markdownFiles, bookId, progressCallback, {
+                root: false
+            });
+            inkdrop_1.logger.debug('Subdirectories:', subdirectories);
+            await importMarkdownFromMultipleFilesAndDirectories(subdirectories, bookId, progressCallback, {
+                root: false
+            });
+        }
+        else if (stats.isFile() && destBookId !== null) {
+            await importMarkdownFromMultipleFiles([fp], destBookId);
+        }
+        else {
+            inkdrop_1.logger.debug('Skipping:', fp, { destBookId, root });
+        }
+    }
+}
+async function importMarkdownFromMultipleFiles(files, destBookId) {
+    for (let i = 0; i < files.length; ++i) {
+        await importMarkdownFromFile(files[i], destBookId);
+    }
+}
+async function importMarkdownFromFile(fn, destBookId) {
+    return inkdrop_1.importUtils.importMarkdownFile(fn, destBookId);
+}
