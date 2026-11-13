@@ -1,9 +1,0 @@
-.DS_Store
-npm-debug.log
-node_modules
-original
-lib
-dist
-
-# Copied from @inkdropapp/mermaid at build time (scripts/copy-styles.mjs)
-packages/plugin/styles/mermaid.css
