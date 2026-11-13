@@ -1,0 +1,22 @@
+{
+  "menu": [
+    {
+      "label": "Plugins",
+      "submenu": [
+        {
+          "label": "dev-tools",
+          "submenu": [
+            {
+              "label": "Start hot reloading themes",
+              "command": "dev-tools:watch-themes"
+            },
+            {
+              "label": "Stop hot reloading themes",
+              "command": "dev-tools:unwatch-themes"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
