@@ -1,0 +1,38 @@
+{
+  "menu": [
+    {
+      "label": "File",
+      "submenu": [
+        {
+          "label": "Export",
+          "submenu": [
+            { "label": "As HTML..", "command": "export-as-html:selections" },
+            { "label": "Copy As HTML", "command": "export-as-html:copy" },
+            {
+              "label": "Copy As Simple HTML",
+              "command": "export-as-html:copy-simple"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "context-menu": {
+    ".note-list-bar .note-list-item-view, .editor-header-more .menu": [
+      { "label": "Export As HTML..", "command": "export-as-html:selections" }
+    ],
+    ".note-list-bar:not(.multiple-selection) .note-list-item-view, .editor-header-more .menu": [
+      { "label": "Copy As HTML", "command": "export-as-html:copy" },
+      {
+        "label": "Copy As Simple HTML",
+        "command": "export-as-html:copy-simple"
+      }
+    ],
+    ".sidebar-menu .sidebar-menu-book-list-item, .sidebar-book-filter-menu .sidebar-menu-book-list-item": [
+      {
+        "label": "Export",
+        "submenu": [{ "label": "As HTML..", "command": "export-as-html:notebook" }]
+      }
+    ]
+  }
+}
