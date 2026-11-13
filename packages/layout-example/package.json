@@ -1,0 +1,29 @@
+{
+  "name": "layout-example",
+  "version": "1.0.0",
+  "description": "A plugin demonstrating how to extend the UI",
+  "keywords": [],
+  "license": "MIT",
+  "repository": "https://github.com/inkdropapp/layout-example-plugin",
+  "main": "./lib/index.js",
+  "scripts": {
+    "dev": "tsdown --watch",
+    "build": "tsdown",
+    "format": "oxfmt",
+    "lint": "oxlint",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@inkdropapp/types": "^0.0.11",
+    "@types/react": "^19.2.18",
+    "inkdrop-model": "^2.13.1",
+    "oxfmt": "^0.64.0",
+    "oxlint": "^1.79.0",
+    "tsdown": "^0.22.14",
+    "typescript": "^7.0.2"
+  },
+  "engines": {
+    "inkdrop": "^6.0.0"
+  }
+}
