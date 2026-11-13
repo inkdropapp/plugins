@@ -1,0 +1,38 @@
+{
+  "menu": [
+    {
+      "label": "File",
+      "submenu": [
+        {
+          "label": "Export",
+          "submenu": [
+            { "label": "All Notes..", "command": "export-as-markdown:all" },
+            {
+              "label": "As Markdown..",
+              "command": "export-as-markdown:selections"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "context-menu": {
+    ".note-list-item-view, .editor-header-more .menu": [
+      {
+        "label": "Export As Markdown..",
+        "command": "export-as-markdown:selections"
+      }
+    ],
+    ".sidebar-menu .sidebar-menu-book-list-item, .sidebar-book-filter-menu .sidebar-menu-book-list-item": [
+      {
+        "label": "Export",
+        "submenu": [
+          {
+            "label": "As Markdown..",
+            "command": "export-as-markdown:notebook"
+          }
+        ]
+      }
+    ]
+  }
+}
