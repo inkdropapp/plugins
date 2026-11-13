@@ -1,0 +1,16 @@
+#!/usr/bin/env node
+
+import { dirname, join } from 'path';
+import { fileURLToPath } from 'url';
+import { exec } from 'child_process';
+import { createServer } from 'vite'
+
+const scriptPath = fileURLToPath(import.meta.url);
+const scriptDir = dirname(scriptPath);
+
+const server = await createServer({
+  root: join(scriptDir, "..")
+})
+await server.listen()
+
+server.printUrls()

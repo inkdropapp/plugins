@@ -1,0 +1,176 @@
+import puppeteer from 'puppeteer'
+import { writeFile } from 'fs/promises'
+import path from 'path'
+import { pathToFileURL } from 'url'
+import { Command } from 'commander'
+import packageJson from '../package.json' with { type: 'json' }
+import {
+  buildPreviewHTML,
+  buildProbeGroups,
+  deriveAppearance,
+  findColorMixCalls,
+  formatSRGBColor,
+  mapThemeVariables,
+  replaceColorMix,
+  resolveLightDark,
+  type ThemeVariableManifest
+} from './palette.ts'
+
+const program = new Command()
+
+program
+  .name('generate-palette')
+  .description('CLI tool for extracting CSS variables from a theme package for Inkdrop')
+  .version(packageJson.version)
+  .option(
+    '-a, --appearance <light/dark>',
+    'Force the UI appearance ("light" or "dark"); defaults to the theme\'s declared appearance'
+  )
+  .option('-o, --output <path>', 'Output file path (default: ./palette.json)', './palette.json')
+  .parse(process.argv)
+
+const options = program.opts()
+const outputPath = options.output as string
+const appearance = options.appearance as 'light' | 'dark' | undefined
+
+const baseStyleSheetSpecifiers = [
+  '@inkdropapp/css/reset.css',
+  '@inkdropapp/css/tokens.css',
+  '@inkdropapp/css/utilities.css',
+  '@inkdropapp/css/ui.css',
+  '@inkdropapp/css/tags.css',
+  '@inkdropapp/css/status.css',
+  '@inkdropapp/css/task-progress.css',
+  '@inkdropapp/css/syntax.css',
+  '@inkdropapp/css/markdown.css',
+  '@inkdropapp/css/mermaid.css',
+  '@inkdropapp/base-ui-theme/styles/theme.css'
+]
+
+/**
+ * Reads every `--*` custom property off an element's computed style. This runs
+ * in the page context (it is handed to `page.$eval`), so it must not reference
+ * any Node-side scope.
+ *
+ * @param element - The element to read the computed custom properties from.
+ * @returns A record of `--custom-property -> computed value`.
+ */
+function readCustomProperties(element: Element): Record<string, string> {
+  const computedStyles = element.computedStyleMap()
+  const variables: Record<string, string> = {}
+  for (const [prop, val] of computedStyles) {
+    if (prop.startsWith('--')) {
+      variables[prop] = val.toString()
+    }
+  }
+  return variables
+}
+
+/**
+ * Lets the browser evaluate each `color-mix()` call, returning its computed
+ * colour in sRGB (`color(srgb …)`). Wrapping the call in relative colour syntax
+ * converts mixes in any colour space to sRGB. Invalid calls are omitted. This
+ * runs in the page context (it is handed to `page.evaluate`), so it must not
+ * reference any Node-side scope.
+ *
+ * @param calls - `color-mix(…)` expressions with `var()` and `light-dark()`
+ *   already resolved.
+ * @returns A record of `color-mix(…) -> computed sRGB colour`.
+ */
+function computeColorMixes(calls: string[]): Record<string, string> {
+  const probe = document.createElement('div')
+  document.body.appendChild(probe)
+  const computed: Record<string, string> = {}
+  for (const call of calls) {
+    if (!CSS.supports('color', call)) continue
+    probe.style.color = `rgb(from ${call} r g b / alpha)`
+    computed[call] = getComputedStyle(probe).color
+  }
+  probe.remove()
+  return computed
+}
+
+async function extractPalette(outputPath: string) {
+  const themePackageJson = (
+    await import(pathToFileURL(path.join(process.cwd(), 'package.json')).toString(), {
+      with: { type: 'json' }
+    })
+  ).default
+  const themeVariableManifest: ThemeVariableManifest = (
+    await import(`@inkdropapp/css/variables.json`, { with: { type: 'json' } })
+  ).default
+  const probeGroups = buildProbeGroups(themeVariableManifest)
+
+  const browser = await puppeteer.launch({ args: ['--no-sandbox'] })
+  const page = await browser.newPage()
+
+  page
+    .on('console', (message) => {
+      if (message.type() === 'error') {
+        console.error(`${message.type().substr(0, 3).toUpperCase()} ${message.text()}`)
+      }
+    })
+    .on('pageerror', (error) => console.error(error instanceof Error ? error.message : error))
+
+  const resolvedAppearance = appearance ?? deriveAppearance(themePackageJson)
+  const baseUrl = pathToFileURL(process.cwd()).toString() + '/'
+  const baseStyleSheetURLs = baseStyleSheetSpecifiers.map((spec) => import.meta.resolve(spec))
+  const content = buildPreviewHTML(
+    themePackageJson,
+    baseUrl,
+    baseStyleSheetURLs,
+    resolvedAppearance
+  )
+  await page.goto(baseUrl)
+  await page.setContent(content)
+
+  const groupedVariables = await Promise.all(
+    probeGroups.map(async ({ probeSelector, variableNames }) => {
+      const computed = await page.$eval(probeSelector, readCustomProperties)
+      return mapThemeVariables(variableNames, computed)
+    })
+  )
+  const themeCSSVariables: Record<string, string> = Object.assign({}, ...groupedVariables)
+  const resolvedVariables = Object.fromEntries(
+    Object.entries(themeCSSVariables).map(([name, value]) => [
+      name,
+      typeof value === 'string' ? resolveLightDark(value, resolvedAppearance) : value
+    ])
+  )
+
+  // Inkdrop mobile can't evaluate color-mix() either, so mix in the browser.
+  const colorMixCalls = [
+    ...new Set(Object.values(resolvedVariables).flatMap((value) => findColorMixCalls(value ?? '')))
+  ]
+  const computedMixes = await page.evaluate(computeColorMixes, colorMixCalls)
+  const mixedColors: Record<string, string> = {}
+  for (const call of colorMixCalls) {
+    const formatted = computedMixes[call] && formatSRGBColor(computedMixes[call])
+    if (formatted) mixedColors[call] = formatted
+    else console.warn(`Could not resolve ${call}; leaving it as is`)
+  }
+  const mixedVariables = Object.fromEntries(
+    Object.entries(resolvedVariables).map(([name, value]) => [
+      name,
+      typeof value === 'string' ? replaceColorMix(value, mixedColors) : value
+    ])
+  )
+
+  // Metadata keys don't start with `--`, so they can't collide with variables.
+  const palette = {
+    themeDevHelpersVersion: packageJson.version,
+    name: themePackageJson.name,
+    themeAppearance: themePackageJson.themeAppearance,
+    ...mixedVariables
+  }
+  const outputFilePath = path.resolve(outputPath)
+  await writeFile(outputFilePath, JSON.stringify(palette, null, 2))
+  await browser.close()
+}
+
+extractPalette(outputPath)
+  .then(() => console.log('Palette extraction complete!'))
+  .catch((err) => {
+    console.error('Error extracting palette:', err)
+    process.exitCode = 1
+  })
