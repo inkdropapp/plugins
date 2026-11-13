@@ -1,0 +1,29 @@
+{
+  "name": "embed-gist",
+  "version": "1.0.0",
+  "description": "Embed GitHub Gists in Inkdrop notes",
+  "keywords": [
+    "embed",
+    "gist",
+    "github"
+  ],
+  "license": "MIT",
+  "repository": "https://github.com/inkdropapp/embed-gist",
+  "main": "./lib/index.js",
+  "scripts": {
+    "lint": "oxlint",
+    "build": "tsc",
+    "format": "oxfmt",
+    "prepublishOnly": "npm run lint && npm run build"
+  },
+  "devDependencies": {
+    "@inkdropapp/types": "^0.0.9",
+    "@types/react": "^19.2.17",
+    "oxfmt": "0.57.0",
+    "oxlint": "1.72.0",
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "inkdrop": "^6.x"
+  }
+}
