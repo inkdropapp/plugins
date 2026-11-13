@@ -9,13 +9,12 @@
   },
   "main": "lib/index.js",
   "scripts": {
-    "lint": "eslint lib"
+    "lint": "oxlint",
+    "format": "oxfmt"
   },
   "devDependencies": {
-    "eslint": "^9.29.0",
-    "eslint-config-prettier": "catalog:",
-    "eslint-plugin-react": "^7.37.5",
-    "prettier": "catalog:"
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:"
   },
   "engines": {
     "inkdrop": "^6.x"

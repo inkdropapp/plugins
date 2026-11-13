@@ -24,7 +24,11 @@ module.exports = {
     const { exportMultipleNotes, exportSingleNote } = require('./exporter')
     const { noteListBar, editingNote } = this.env.store.getState()
     const { actionTargetNoteIds } = noteListBar
-    const noteIds = e.detail?.noteId ? [e.detail.noteId] : (actionTargetNoteIds.length > 0 ? actionTargetNoteIds : [editingNote?._id])
+    const noteIds = e.detail?.noteId
+      ? [e.detail.noteId]
+      : actionTargetNoteIds.length > 0
+        ? actionTargetNoteIds
+        : [editingNote?._id]
     if (noteIds && noteIds.length > 1) {
       await exportMultipleNotes(this.env, noteIds)
       this.env.notifications.addInfo('Exporting notes completed', {

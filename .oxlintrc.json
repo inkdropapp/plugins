@@ -19,5 +19,10 @@
       }
     ]
   },
-  "ignorePatterns": ["**/lib/**", "**/dist/**", "**/node_modules/**"]
+  "ignorePatterns": [
+    "**/lib/**",
+    "!packages/export-as-markdown/lib/**",
+    "**/dist/**",
+    "**/node_modules/**"
+  ]
 }

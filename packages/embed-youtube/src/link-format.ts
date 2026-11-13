@@ -1,6 +1,7 @@
-import { editor } from 'inkdrop'
 import type { Extension } from '@codemirror/state'
 import type { LinkFormatItem, LinkFormatsConfig } from '@inkdropapp/types'
+import { editor } from 'inkdrop'
+
 import { isYouTubeURL, extractVideoIdFromURL, getEmbedURL } from './utils.js'
 
 function getYouTubeIframe(videoId: string): string {

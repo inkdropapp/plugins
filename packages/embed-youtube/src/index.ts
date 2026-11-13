@@ -1,7 +1,8 @@
-import { markdownRenderer } from 'inkdrop'
 import type { Extension } from '@codemirror/state'
-import { youtubeProvider, PROVIDER_ID } from './youtube.js'
+import { markdownRenderer } from 'inkdrop'
+
 import { youtubeLinkFormatExtension } from './link-format.js'
+import { youtubeProvider, PROVIDER_ID } from './youtube.js'
 
 class InkdropPlugin {
   private extension: Extension | null = null

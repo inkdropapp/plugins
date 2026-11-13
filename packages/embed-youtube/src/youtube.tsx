@@ -1,8 +1,6 @@
-import { useRef, useState } from 'react'
-import type {
-  EmbeddedComponentProps,
-  EmbeddingProvider
-} from '@inkdropapp/types'
+import type { EmbeddedComponentProps, EmbeddingProvider } from '@inkdropapp/types'
+import { useId, useRef } from 'react'
+
 import { isYouTubeURL, extractVideoIdFromURL, getEmbedURL } from './utils.js'
 
 export const PROVIDER_ID = 'embed:youtube'
@@ -10,7 +8,8 @@ export const PROVIDER_ID = 'embed:youtube'
 const YouTube: React.FC<EmbeddedComponentProps> = props => {
   const { href } = props
   const contentFrame = useRef<HTMLIFrameElement>(null)
-  const [frameId] = useState('youtube-' + Math.random())
+  // The id goes into the embed URL unencoded, so drop useId()'s punctuation (`:r1:`, `«r1»`).
+  const frameId = 'youtube-' + useId().replace(/[^\w-]/g, '')
   const videoId = href ? extractVideoIdFromURL(href) : null
 
   if (videoId) {

@@ -15,18 +15,18 @@
   },
   "main": "./lib/index.js",
   "scripts": {
-    "lint": "eslint .",
+    "lint": "oxlint",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run lint && npm run build"
+    "prepublishOnly": "npm run lint && npm run build",
+    "format": "oxfmt"
   },
   "devDependencies": {
     "@codemirror/state": "catalog:",
     "@inkdropapp/types": "catalog:",
     "@types/react": "catalog:",
-    "eslint": "^10.6.0",
-    "eslint-config-prettier": "catalog:",
-    "prettier": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
     "typescript": "^6.0.3"
   },
   "engines": {

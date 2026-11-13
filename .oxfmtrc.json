@@ -9,5 +9,11 @@
   "trailingComma": "none",
   "sortImports": true,
   "sortPackageJson": true,
-  "ignorePatterns": ["**/lib/**", "**/dist/**", "**/palette.json", "pnpm-lock.yaml"]
+  "ignorePatterns": [
+    "**/lib/**",
+    "!packages/export-as-markdown/lib/**",
+    "**/dist/**",
+    "**/palette.json",
+    "pnpm-lock.yaml"
+  ]
 }
