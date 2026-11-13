@@ -5,41 +5,31 @@
   :root {
     /* Nord surfaces — elevated panels sit on nord1/nord2 */
     --nord-preview-surface: hsl(var(--hsl-neutral-700) / 80%); /* nord2 */
-    --nord-preview-surface-subtle: hsl(
-      var(--hsl-neutral-800) / 40%
-    ); /* nord1 */
+    --nord-preview-surface-subtle: hsl(var(--hsl-neutral-800) / 40%); /* nord1 */
 
     /* Links — nord8 */
     --mde-preview-link-color: var(--color-cyan-400);
 
     /* Code blocks */
-    --mde-preview-codeblock-background-color: var(
-      --nord-preview-surface-subtle
-    );
+    --mde-preview-codeblock-background-color: var(--nord-preview-surface-subtle);
     --mde-preview-codeblock-meta-background-color: var(--nord-preview-surface);
     --mde-preview-inline-code-text-color: hsl(var(--hsl-neutral-200));
     --mde-preview-inline-code-border-width: 1px;
     --mde-preview-inline-code-border-color: hsl(var(--hsl-neutral-600) / 50%);
-    --mde-preview-inline-code-background-color: hsl(
-      var(--hsl-neutral-600) / 30%
-    );
+    --mde-preview-inline-code-background-color: hsl(var(--hsl-neutral-600) / 30%);
 
     /* Tables */
     --mde-preview-table-head-text-color: var(--color-cyan-500); /* nord8 */
     --mde-preview-table-head-background-color: var(--nord-preview-surface);
     --mde-preview-table-row-background-color: var(--nord-preview-surface);
-    --mde-preview-table-row-stripe-background-color: var(
-      --nord-preview-surface-subtle
-    );
+    --mde-preview-table-row-stripe-background-color: var(--nord-preview-surface-subtle);
 
     /* Images */
     --mde-preview-image-background-color: var(--nord-preview-surface);
 
     /* Mark — nord13 highlight */
     --mde-preview-inline-mark-text-color: hsl(var(--hsl-yellow-50));
-    --mde-preview-inline-mark-background-color: hsl(
-      var(--hsl-yellow-500) / 25%
-    );
+    --mde-preview-inline-mark-background-color: hsl(var(--hsl-yellow-500) / 25%);
     --mde-preview-inline-mark-underline-color: hsl(var(--hsl-yellow-500));
 
     --mde-preview-heading-color: var(--color-cyan-500); /* nord8 */
@@ -60,9 +50,7 @@
     --mermaid-node-border-color: hsl(var(--hsl-blue-400)); /* nord9 */
     --mermaid-cluster-background-color: var(--nord-preview-surface-subtle);
     --mermaid-cluster-border-color: hsl(var(--hsl-neutral-600) / 50%);
-    --mermaid-edge-label-background-color: hsl(
-      var(--hsl-neutral-900) / 85%
-    ); /* nord0 */
+    --mermaid-edge-label-background-color: hsl(var(--hsl-neutral-900) / 85%); /* nord0 */
 
     /* Notes (sequence / state) — nord13 */
     --mermaid-note-background-color: hsl(var(--hsl-yellow-900));
@@ -121,13 +109,9 @@
     /* Cynefin — one Nord hue per domain */
     --mermaid-cynefin-cliff-color: hsl(var(--hsl-red-400));
     --mermaid-cynefin-complex-background-color: hsl(var(--hsl-green-500) / 35%);
-    --mermaid-cynefin-complicated-background-color: hsl(
-      var(--hsl-blue-500) / 35%
-    );
+    --mermaid-cynefin-complicated-background-color: hsl(var(--hsl-blue-500) / 35%);
     --mermaid-cynefin-chaotic-background-color: hsl(var(--hsl-red-500) / 35%);
     --mermaid-cynefin-clear-background-color: hsl(var(--hsl-yellow-500) / 35%);
-    --mermaid-cynefin-confusion-background-color: hsl(
-      var(--hsl-purple-500) / 35%
-    );
+    --mermaid-cynefin-confusion-background-color: hsl(var(--hsl-purple-500) / 35%);
   }
 }

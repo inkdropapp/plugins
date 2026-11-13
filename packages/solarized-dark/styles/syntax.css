@@ -10,9 +10,7 @@
     --editor-caret-color: var(--color-neutral-300); /* base0 */
     --editor-selection-background: var(--color-neutral-700); /* base02 */
     --editor-focused-selection-background: hsl(var(--hsl-blue-500) / 30%);
-    --editor-active-line-background-color: hsl(
-      var(--hsl-neutral-800) / 50%
-    ); /* base03 */
+    --editor-active-line-background-color: hsl(var(--hsl-neutral-800) / 50%); /* base03 */
     --editor-special-char-color: var(--color-neutral-600);
     --editor-spelling-error-color: var(--negative-color);
 
@@ -20,9 +18,7 @@
     --editor-gutter-color: var(--color-neutral-600); /* base01 */
     --editor-gutter-background-color: transparent;
     --editor-gutter-background-solid-color: var(--color-neutral-800);
-    --editor-active-line-gutter-background-color: hsl(
-      var(--hsl-neutral-800) / 50%
-    );
+    --editor-active-line-gutter-background-color: hsl(var(--hsl-neutral-800) / 50%);
 
     --editor-panel-background-color: var(--color-neutral-800);
     --editor-panel-color: var(--color-neutral-300);
@@ -37,12 +33,8 @@
     --editor-tooltip-autocomplete-padding: 0.2em;
     --editor-tooltip-autocomplete-item-border-radius: 0.2em;
     --editor-tooltip-autocomplete-item-padding: 0 0.8em;
-    --editor-tooltip-autocomplete-item-selected-background-color: var(
-      --color-neutral-700
-    );
-    --editor-tooltip-autocomplete-section-border-color: var(
-      --color-neutral-600
-    );
+    --editor-tooltip-autocomplete-item-selected-background-color: var(--color-neutral-700);
+    --editor-tooltip-autocomplete-section-border-color: var(--color-neutral-600);
     --editor-tooltip-autocomplete-item-selected-color: var(--color-neutral-200);
     --editor-inline-tooltip-color: var(--color-neutral-300);
     --editor-inline-tooltip-background-color: hsl(var(--hsl-neutral-800) / 40%);
@@ -67,9 +59,7 @@
     --editor-selection-match-outline: none;
     --editor-search-match-background-color: hsl(var(--hsl-yellow-500) / 35%);
     --editor-search-match-outline: none;
-    --editor-search-match-selected-background-color: hsl(
-      var(--hsl-orange-500) / 45%
-    );
+    --editor-search-match-selected-background-color: hsl(var(--hsl-orange-500) / 45%);
     --editor-search-match-selected-outline: 1px solid var(--color-orange-500);
 
     --editor-placeholder-color: var(--color-neutral-600);
@@ -77,7 +67,7 @@
 
     --editor-highlight-space-color: var(--color-neutral-800);
     --editor-highlight-tab-background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="20"><path stroke="%23888" stroke-width="1" fill="none" d="M1 10H196L190 5M190 15L196 10M197 4L197 16"/></svg>');
-    --editor-highlight-tab-filter: "none";
+    --editor-highlight-tab-filter: 'none';
     --editor-highlight-tab-opacity: 0.3;
     --editor-trailing-space-background-color: hsl(var(--hsl-pink-500) / 40%);
 
@@ -86,9 +76,7 @@
     --editor-fold-placeholder-border: 1px solid var(--color-neutral-600);
     --editor-fold-placeholder-background-color: var(--color-neutral-600);
 
-    --editor-image-widget-backdrop-background-color: hsl(
-      var(--hsl-neutral-700) / 40%
-    );
+    --editor-image-widget-backdrop-background-color: hsl(var(--hsl-neutral-700) / 40%);
     --editor-image-widget-backdrop-border: 1px solid var(--color-neutral-700);
 
     /*── Markdown elements ────────────────────────────────────────────────────*/

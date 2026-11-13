@@ -14,9 +14,7 @@
     --editor-foreground-color: var(--color-neutral-50); /* text */
     --editor-background-color: var(--color-neutral-800); /* base */
     --editor-caret-color: var(--color-ctp-rosewater);
-    --editor-selection-background: hsl(
-      var(--hsl-neutral-200) / 25%
-    ); /* overlay2 */
+    --editor-selection-background: hsl(var(--hsl-neutral-200) / 25%); /* overlay2 */
     --editor-focused-selection-background: hsl(var(--hsl-neutral-200) / 35%);
     --editor-active-line-background-color: hsl(var(--hsl-neutral-50) / 8%);
     --editor-special-char-color: var(--color-neutral-400);
@@ -25,9 +23,7 @@
     --editor-gutter-color: var(--color-neutral-300); /* overlay1 */
     --editor-gutter-background-color: transparent;
     --editor-gutter-background-solid-color: var(--color-neutral-800);
-    --editor-active-line-gutter-background-color: hsl(
-      var(--hsl-neutral-50) / 8%
-    );
+    --editor-active-line-gutter-background-color: hsl(var(--hsl-neutral-50) / 8%);
 
     --editor-panel-background-color: var(--color-neutral-900);
     --editor-panel-color: var(--color-neutral-50);
@@ -35,12 +31,8 @@
     --editor-tooltip-border-color: var(--color-neutral-700);
     --editor-tooltip-background-color: var(--color-neutral-900);
     --editor-tooltip-box-shadow: var(--floating-shadow);
-    --editor-tooltip-autocomplete-item-selected-background-color: hsl(
-      var(--hsl-violet-500) / 25%
-    );
-    --editor-tooltip-autocomplete-section-border-color: var(
-      --color-neutral-600
-    );
+    --editor-tooltip-autocomplete-item-selected-background-color: hsl(var(--hsl-violet-500) / 25%);
+    --editor-tooltip-autocomplete-section-border-color: var(--color-neutral-600);
     --editor-tooltip-autocomplete-item-selected-color: var(--color-neutral-50);
     --editor-inline-tooltip-color: var(--color-neutral-100);
     --editor-inline-tooltip-background-color: hsl(var(--hsl-neutral-900) / 90%);
@@ -57,9 +49,7 @@
 
     --editor-selection-match-background-color: hsl(var(--hsl-teal-500) / 20%);
     --editor-search-match-background-color: hsl(var(--hsl-teal-500) / 30%);
-    --editor-search-match-selected-background-color: hsl(
-      var(--hsl-red-500) / 30%
-    );
+    --editor-search-match-selected-background-color: hsl(var(--hsl-red-500) / 30%);
     --editor-search-match-selected-outline: 1px solid var(--color-red-500);
 
     --editor-placeholder-color: var(--color-neutral-500);
@@ -73,9 +63,7 @@
     --editor-fold-placeholder-border: 1px solid var(--color-neutral-500);
     --editor-fold-placeholder-background-color: var(--color-neutral-500);
 
-    --editor-image-widget-backdrop-background-color: hsl(
-      var(--hsl-neutral-700) / 40%
-    );
+    --editor-image-widget-backdrop-background-color: hsl(var(--hsl-neutral-700) / 40%);
     --editor-image-widget-backdrop-border: 1px solid var(--color-neutral-700);
 
     /*── Markdown elements ────────────────────────────────────────────────────*/

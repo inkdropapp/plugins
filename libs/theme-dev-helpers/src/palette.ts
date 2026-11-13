@@ -68,11 +68,11 @@ export function buildPreviewHTML(
   appearance?: ThemeAppearance
 ): string {
   const baseCSSLinks = baseStyleSheetURLs
-    .map((href) => `<link rel="stylesheet" href="${href}" />`)
+    .map(href => `<link rel="stylesheet" href="${href}" />`)
     .join('\n')
 
   const themeCSSLinks = (theme.styleSheets ?? [])
-    .map((filePath) => `<link rel="stylesheet" href="styles/${filePath}" />`)
+    .map(filePath => `<link rel="stylesheet" href="styles/${filePath}" />`)
     .join('\n')
 
   const bodyClass = [theme.name, appearance && `${appearance}-mode`].filter(Boolean).join(' ')
@@ -132,7 +132,7 @@ const THEME_TYPE_CATEGORIES: Record<ThemeType, string[]> = {
  * @returns The variable names belonging to the type's categories.
  */
 export function selectVariableNames(manifest: ThemeVariableManifest, type: ThemeType): string[] {
-  return THEME_TYPE_CATEGORIES[type].flatMap((category) => manifest[category] ?? [])
+  return THEME_TYPE_CATEGORIES[type].flatMap(category => manifest[category] ?? [])
 }
 
 /**
@@ -172,7 +172,7 @@ export interface ProbeGroup {
  *   order — the merge order of the final palette.
  */
 export function buildProbeGroups(manifest: ThemeVariableManifest): ProbeGroup[] {
-  return THEME_TYPES.map((type) => ({
+  return THEME_TYPES.map(type => ({
     type,
     probeSelector: THEME_TYPE_PROBE_SELECTORS[type],
     variableNames: selectVariableNames(manifest, type)
@@ -328,10 +328,10 @@ export function formatSRGBColor(computed: string): string | undefined {
   const alpha = alphaPart === undefined ? 1 : parse(alphaPart.trim())
   if (rgb.length !== 3 || [...rgb, alpha].some(Number.isNaN)) return undefined
 
-  const [r, g, b] = rgb.map((c) => Math.round(clamp01(c) * 255))
+  const [r, g, b] = rgb.map(c => Math.round(clamp01(c) * 255))
   const a = Math.round(clamp01(alpha) * 1000) / 1000
   if (a === 1) {
-    return '#' + [r, g, b].map((c) => c.toString(16).padStart(2, '0')).join('')
+    return '#' + [r, g, b].map(c => c.toString(16).padStart(2, '0')).join('')
   }
   return `rgba(${r}, ${g}, ${b}, ${a})`
 }

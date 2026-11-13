@@ -192,35 +192,26 @@
     --------------------*/
     --sidebar-background: hsl(var(--kanagawa-dragonBlack1));
     --sidebar-border-right: 1px solid hsl(var(--kanagawa-dragonBlack4));
-    --sidebar-menu-item-inactive-background: hsl(
-      var(--kanagawa-dragonBlue2) / 20%
-    );
+    --sidebar-menu-item-inactive-background: hsl(var(--kanagawa-dragonBlue2) / 20%);
     --sidebar-menu-item-active-background: hsl(var(--kanagawa-waveBlue2) / 60%);
     --sidebar-menu-section-color: hsl(var(--kanagawa-dragonViolet) / 80%);
     --sidebar-menu-item-color: hsl(var(--kanagawa-oldWhite) / 80%);
     --sidebar-menu-active-item-color: hsl(var(--kanagawa-dragonWhite));
-    --sidebar-sync-status-view-background: hsl(
-      var(--kanagawa-dragonBlack4) / 40%
-    );
+    --sidebar-sync-status-view-background: hsl(var(--kanagawa-dragonBlack4) / 40%);
     --sidebar-sync-status-view-text-color: hsl(var(--kanagawa-oldWhite) / 70%);
-    --sidebar-sync-status-view-border-top: 1px solid
-      hsl(var(--kanagawa-dragonBlack4));
+    --sidebar-sync-status-view-border-top: 1px solid hsl(var(--kanagawa-dragonBlack4));
 
     /*-------------------
       Note List Bar
     --------------------*/
     --note-list-bar-background: hsl(var(--kanagawa-dragonBlack2));
-    --note-list-bar-border-right: 1px solid
-      hsl(var(--kanagawa-dragonBlack4) / 75%);
+    --note-list-bar-border-right: 1px solid hsl(var(--kanagawa-dragonBlack4) / 75%);
     --note-list-bar-section-header-background: hsl(var(--kanagawa-dragonBlack4));
     --note-list-view-item-header-color: hsl(var(--kanagawa-dragonWhite));
     --note-list-view-item-color: hsl(var(--kanagawa-oldWhite) / 70%);
-    --note-list-view-item-separator-border: 1px solid
-      hsl(var(--kanagawa-dragonBlack4) / 60%);
+    --note-list-view-item-separator-border: 1px solid hsl(var(--kanagawa-dragonBlack4) / 60%);
     --note-list-view-item-date-color: hsl(var(--kanagawa-dragonViolet));
-    --note-list-view-item-selected-background: hsl(
-      var(--kanagawa-waveBlue1) / 70%
-    );
+    --note-list-view-item-selected-background: hsl(var(--kanagawa-waveBlue1) / 70%);
     --note-list-view-item-active-background: hsl(var(--kanagawa-waveBlue2) / 80%);
     --note-search-bar-input-background: hsl(var(--kanagawa-dragonBlack0));
 
@@ -259,9 +250,7 @@
       Task Progress View
     --------------------*/
     --task-progress-view-border-color: hsl(var(--kanagawa-dragonBlack0) / 30%);
-    --task-progress-view-background-color: hsl(
-      var(--kanagawa-dragonBlack0) / 30%
-    );
+    --task-progress-view-background-color: hsl(var(--kanagawa-dragonBlack0) / 30%);
     --task-progress-view-foreground-color: hsl(var(--kanagawa-dragonWhite) / 60%);
     --task-progress-view-completed-color: hsl(var(--kanagawa-dragonGreen2));
 
@@ -349,11 +338,8 @@
     --input-down-background: hsl(var(--kanagawa-dragonBlack0));
     --label-basic-background: hsl(var(--kanagawa-dragonWhite) / 5%);
     --table-background: hsl(var(--kanagawa-dragonBlack3) / 20%);
-    --toggle-handle-background: hsl(var(--kanagawa-dragonWhite))
-      var(--subtle-gradient);
-    --note-list-bar-pinned-section-header-background: hsl(
-      var(--kanagawa-dragonBlack4)
-    );
+    --toggle-handle-background: hsl(var(--kanagawa-dragonWhite)) var(--subtle-gradient);
+    --note-list-bar-pinned-section-header-background: hsl(var(--kanagawa-dragonBlack4));
     --grouped-segment-group-segment-box-shadow:
       0 0 0 1px hsl(var(--kanagawa-dragonWhite) / 10%),
       0 1px 1px hsl(var(--kanagawa-dragonBlack0) / 0.1),
@@ -545,9 +531,7 @@
     --input-placeholder-error-color: hsl(var(--kanagawa-dragonRed) / 80%);
     --input-placeholder-error-focus-color: hsl(var(--kanagawa-dragonRed));
     --sidebar-notification-view-color: hsl(var(--kanagawa-dragonBlack1) / 90%);
-    --preferences-sidebar-item-active-background: hsl(
-      var(--kanagawa-dragonBlue2) / 20%
-    );
+    --preferences-sidebar-item-active-background: hsl(var(--kanagawa-dragonBlue2) / 20%);
   }
 
   /*-------------------

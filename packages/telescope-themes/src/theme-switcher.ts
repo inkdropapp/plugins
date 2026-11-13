@@ -21,7 +21,7 @@ export function getThemeAppearance(theme: Package): ThemeAppearance {
 export function getLoadedTheme(name: string): Package | undefined {
   return getEnv()
     .themes.getLoadedThemes()
-    .find((theme) => theme.name === name)
+    .find(theme => theme.name === name)
 }
 
 /**

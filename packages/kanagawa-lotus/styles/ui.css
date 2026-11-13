@@ -192,17 +192,14 @@
     --------------------*/
     --sidebar-background: hsl(var(--kanagawa-lotusWhite1));
     --sidebar-border-right: 1px solid hsl(var(--kanagawa-lotusWhite0));
-    --sidebar-menu-item-inactive-background: hsl(
-      var(--kanagawa-lotusBlue4) / 15%
-    );
+    --sidebar-menu-item-inactive-background: hsl(var(--kanagawa-lotusBlue4) / 15%);
     --sidebar-menu-item-active-background: hsl(var(--kanagawa-lotusBlue3) / 60%);
     --sidebar-menu-section-color: hsl(var(--kanagawa-lotusViolet2) / 80%);
     --sidebar-menu-item-color: hsl(var(--kanagawa-lotusInk1) / 80%);
     --sidebar-menu-active-item-color: hsl(var(--kanagawa-lotusInk2));
     --sidebar-sync-status-view-background: hsl(var(--kanagawa-lotusWhite0) / 40%);
     --sidebar-sync-status-view-text-color: hsl(var(--kanagawa-lotusGray2));
-    --sidebar-sync-status-view-border-top: 1px solid
-      hsl(var(--kanagawa-lotusWhite0));
+    --sidebar-sync-status-view-border-top: 1px solid hsl(var(--kanagawa-lotusWhite0));
 
     /*-------------------
       Note List Bar
@@ -212,15 +209,10 @@
     --note-list-bar-section-header-background: hsl(var(--kanagawa-lotusWhite1));
     --note-list-view-item-header-color: hsl(var(--kanagawa-lotusInk1));
     --note-list-view-item-color: hsl(var(--kanagawa-lotusGray2));
-    --note-list-view-item-separator-border: 1px solid
-      hsl(var(--kanagawa-lotusWhite1));
+    --note-list-view-item-separator-border: 1px solid hsl(var(--kanagawa-lotusWhite1));
     --note-list-view-item-date-color: hsl(var(--kanagawa-lotusViolet2));
-    --note-list-view-item-selected-background: hsl(
-      var(--kanagawa-lotusBlue3) / 40%
-    );
-    --note-list-view-item-active-background: hsl(
-      var(--kanagawa-lotusBlue3) / 70%
-    );
+    --note-list-view-item-selected-background: hsl(var(--kanagawa-lotusBlue3) / 40%);
+    --note-list-view-item-active-background: hsl(var(--kanagawa-lotusBlue3) / 70%);
     --note-search-bar-input-background: hsl(var(--kanagawa-lotusWhite1));
 
     /*-------------------

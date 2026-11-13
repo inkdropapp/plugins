@@ -1,4 +1,5 @@
 import { describe, expect, test } from 'vitest'
+
 import {
   buildPreviewHTML,
   buildProbeGroups,
@@ -231,23 +232,19 @@ describe('buildProbeGroups', () => {
   }
 
   test('produces one group per surface in ui, syntax, preview merge order', () => {
-    expect(buildProbeGroups(manifest).map((group) => group.type)).toEqual([
-      'ui',
-      'syntax',
-      'preview'
-    ])
+    expect(buildProbeGroups(manifest).map(group => group.type)).toEqual(['ui', 'syntax', 'preview'])
   })
 
   test('pairs each surface with the element its tokens are scoped under', () => {
     const probesByType = Object.fromEntries(
-      buildProbeGroups(manifest).map((group) => [group.type, group.probeSelector])
+      buildProbeGroups(manifest).map(group => [group.type, group.probeSelector])
     )
     expect(probesByType).toEqual({ ui: 'body', syntax: '.cm-editor', preview: '.mde-preview' })
   })
 
   test("collects each surface's variable names from its categories", () => {
     const namesByType = Object.fromEntries(
-      buildProbeGroups(manifest).map((group) => [group.type, group.variableNames])
+      buildProbeGroups(manifest).map(group => [group.type, group.variableNames])
     )
     expect(namesByType.ui).toEqual([
       '--primary-color',

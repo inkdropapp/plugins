@@ -22,35 +22,25 @@
     --mde-preview-list-marker-3-color: hsl(var(--kanagawa-springGreen));
 
     /* Code blocks */
-    --mde-preview-codeblock-background-color: var(
-      --kanagawa-preview-surface-subtle
-    );
-    --mde-preview-codeblock-meta-background-color: var(
-      --kanagawa-preview-surface
-    );
+    --mde-preview-codeblock-background-color: var(--kanagawa-preview-surface-subtle);
+    --mde-preview-codeblock-meta-background-color: var(--kanagawa-preview-surface);
     --mde-preview-inline-code-text-color: hsl(var(--kanagawa-oldWhite));
     --mde-preview-inline-code-border-width: 1px;
     --mde-preview-inline-code-border-color: hsl(var(--kanagawa-sumiInk6) / 50%);
-    --mde-preview-inline-code-background-color: hsl(
-      var(--kanagawa-sumiInk4) / 50%
-    );
+    --mde-preview-inline-code-background-color: hsl(var(--kanagawa-sumiInk4) / 50%);
 
     /* Tables */
     --mde-preview-table-head-text-color: hsl(var(--kanagawa-carpYellow));
     --mde-preview-table-head-background-color: var(--kanagawa-preview-surface);
     --mde-preview-table-row-background-color: var(--kanagawa-preview-surface);
-    --mde-preview-table-row-stripe-background-color: var(
-      --kanagawa-preview-surface-subtle
-    );
+    --mde-preview-table-row-stripe-background-color: var(--kanagawa-preview-surface-subtle);
 
     /* Images */
     --mde-preview-image-background-color: var(--kanagawa-preview-surface);
 
     /* Mark (==highlight==) */
     --mde-preview-inline-mark-text-color: hsl(var(--kanagawa-fujiWhite));
-    --mde-preview-inline-mark-background-color: hsl(
-      var(--kanagawa-carpYellow) / 22%
-    );
+    --mde-preview-inline-mark-background-color: hsl(var(--kanagawa-carpYellow) / 22%);
     --mde-preview-inline-mark-underline-color: hsl(var(--kanagawa-roninYellow));
 
     /* Prose */
@@ -89,9 +79,7 @@
     --mermaid-alt-section-background-color: hsl(var(--kanagawa-sumiInk6) / 10%);
     --mermaid-task-background-color: hsl(var(--kanagawa-waveBlue2) / 80%);
     --mermaid-task-border-color: hsl(var(--kanagawa-crystalBlue));
-    --mermaid-active-task-background-color: hsl(
-      var(--kanagawa-oniViolet) / 70%
-    );
+    --mermaid-active-task-background-color: hsl(var(--kanagawa-oniViolet) / 70%);
     --mermaid-active-task-border-color: hsl(var(--kanagawa-oniViolet));
     --mermaid-done-task-background-color: hsl(var(--kanagawa-sumiInk5));
     --mermaid-done-task-border-color: hsl(var(--kanagawa-sumiInk6));
@@ -101,11 +89,7 @@
     --mermaid-today-line-color: hsl(var(--kanagawa-peachRed));
 
     /* Seed palette — pie / git / quadrant categorical scales */
-    --mermaid-primary-color: color-mix(
-      in srgb,
-      hsl(var(--kanagawa-waveBlue2)),
-      white 20%
-    );
+    --mermaid-primary-color: color-mix(in srgb, hsl(var(--kanagawa-waveBlue2)), white 20%);
     --mermaid-secondary-color: hsl(var(--kanagawa-waveRed));
     --mermaid-tertiary-color: hsl(var(--kanagawa-boatYellow2));
 
@@ -114,17 +98,11 @@
     --mermaid-error-text-color: hsl(var(--kanagawa-waveRed));
 
     /* Event modeling — one hue per element kind */
-    --mermaid-em-processor-background-color: hsl(
-      var(--kanagawa-oniViolet) / 35%
-    );
+    --mermaid-em-processor-background-color: hsl(var(--kanagawa-oniViolet) / 35%);
     --mermaid-em-processor-border-color: hsl(var(--kanagawa-oniViolet));
-    --mermaid-em-read-model-background-color: hsl(
-      var(--kanagawa-springGreen) / 35%
-    );
+    --mermaid-em-read-model-background-color: hsl(var(--kanagawa-springGreen) / 35%);
     --mermaid-em-read-model-border-color: hsl(var(--kanagawa-springGreen));
-    --mermaid-em-command-background-color: hsl(
-      var(--kanagawa-crystalBlue) / 35%
-    );
+    --mermaid-em-command-background-color: hsl(var(--kanagawa-crystalBlue) / 35%);
     --mermaid-em-command-border-color: hsl(var(--kanagawa-crystalBlue));
     --mermaid-em-event-background-color: hsl(var(--kanagawa-carpYellow) / 35%);
     --mermaid-em-event-border-color: hsl(var(--kanagawa-carpYellow));
@@ -134,20 +112,10 @@
 
     /* Cynefin — one hue per domain */
     --mermaid-cynefin-cliff-color: hsl(var(--kanagawa-waveRed));
-    --mermaid-cynefin-complex-background-color: hsl(
-      var(--kanagawa-springGreen) / 35%
-    );
-    --mermaid-cynefin-complicated-background-color: hsl(
-      var(--kanagawa-crystalBlue) / 35%
-    );
-    --mermaid-cynefin-chaotic-background-color: hsl(
-      var(--kanagawa-autumnRed) / 35%
-    );
-    --mermaid-cynefin-clear-background-color: hsl(
-      var(--kanagawa-carpYellow) / 35%
-    );
-    --mermaid-cynefin-confusion-background-color: hsl(
-      var(--kanagawa-oniViolet) / 35%
-    );
+    --mermaid-cynefin-complex-background-color: hsl(var(--kanagawa-springGreen) / 35%);
+    --mermaid-cynefin-complicated-background-color: hsl(var(--kanagawa-crystalBlue) / 35%);
+    --mermaid-cynefin-chaotic-background-color: hsl(var(--kanagawa-autumnRed) / 35%);
+    --mermaid-cynefin-clear-background-color: hsl(var(--kanagawa-carpYellow) / 35%);
+    --mermaid-cynefin-confusion-background-color: hsl(var(--kanagawa-oniViolet) / 35%);
   }
 }

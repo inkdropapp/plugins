@@ -8,4 +8,3 @@ See [gemoji's documentation](https://github.com/wooorm/gemoji/blob/master/suppor
 
 - `:smile:` → 😄
 - `:yum:` → 😋
-

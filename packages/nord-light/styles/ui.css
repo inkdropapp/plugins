@@ -133,8 +133,7 @@
     --sidebar-border-right: 1px solid hsl(var(--hsl-neutral-300) / 50%);
     --sidebar-menu-item-color: var(--text-color);
     --sidebar-sync-status-view-background: hsl(var(--hsl-neutral-100) / 60%);
-    --sidebar-sync-status-view-border-top: 1px solid
-      hsl(var(--hsl-neutral-300) / 50%);
+    --sidebar-sync-status-view-border-top: 1px solid hsl(var(--hsl-neutral-300) / 50%);
 
     /*-------------------
       Note List Bar
@@ -143,8 +142,7 @@
     --note-list-bar-border-right: 1px solid hsl(var(--hsl-neutral-200));
     --note-list-bar-section-header-background: var(--color-neutral-200); /* nord4 */
     --note-list-view-item-header-color: var(--text-color);
-    --note-list-view-item-separator-border: 1px solid
-      hsl(var(--hsl-neutral-200));
+    --note-list-view-item-separator-border: 1px solid hsl(var(--hsl-neutral-200));
     --note-list-view-item-date-color: hsl(var(--hsl-blue-500)); /* nord10 */
     --note-list-view-item-selected-background: hsl(var(--hsl-blue-500) / 20%);
     --note-list-view-item-active-background: hsl(var(--hsl-blue-500) / 40%);
@@ -187,18 +185,14 @@
     --tag-light-orange-active-text-color: hsl(var(--hsl-orange-700));
     --tag-light-orange-background-color: hsl(var(--hsl-orange-200) / 40%);
     --tag-light-orange-border-color: hsl(var(--hsl-orange-500) / 80%);
-    --tag-light-orange-circular-background-color: hsl(
-      var(--hsl-orange-500) / 60%
-    );
+    --tag-light-orange-circular-background-color: hsl(var(--hsl-orange-500) / 60%);
     --tag-light-orange-circular-border-color: hsl(var(--hsl-orange-600));
 
     --tag-light-yellow-text-color: hsl(var(--hsl-yellow-600));
     --tag-light-yellow-active-text-color: hsl(var(--hsl-yellow-700));
     --tag-light-yellow-background-color: hsl(var(--hsl-yellow-200) / 40%);
     --tag-light-yellow-border-color: hsl(var(--hsl-yellow-500) / 80%);
-    --tag-light-yellow-circular-background-color: hsl(
-      var(--hsl-yellow-500) / 60%
-    );
+    --tag-light-yellow-circular-background-color: hsl(var(--hsl-yellow-500) / 60%);
     --tag-light-yellow-circular-border-color: hsl(var(--hsl-yellow-600));
 
     --tag-light-olive-text-color: hsl(var(--hsl-lime-600));
@@ -212,9 +206,7 @@
     --tag-light-green-active-text-color: hsl(var(--hsl-green-700));
     --tag-light-green-background-color: hsl(var(--hsl-green-200) / 40%);
     --tag-light-green-border-color: hsl(var(--hsl-green-500) / 80%);
-    --tag-light-green-circular-background-color: hsl(
-      var(--hsl-green-500) / 60%
-    );
+    --tag-light-green-circular-background-color: hsl(var(--hsl-green-500) / 60%);
     --tag-light-green-circular-border-color: hsl(var(--hsl-green-600));
 
     --tag-light-teal-text-color: hsl(var(--hsl-teal-600));
@@ -235,18 +227,14 @@
     --tag-light-violet-active-text-color: hsl(var(--hsl-violet-700));
     --tag-light-violet-background-color: hsl(var(--hsl-violet-200) / 40%);
     --tag-light-violet-border-color: hsl(var(--hsl-violet-500) / 80%);
-    --tag-light-violet-circular-background-color: hsl(
-      var(--hsl-violet-500) / 60%
-    );
+    --tag-light-violet-circular-background-color: hsl(var(--hsl-violet-500) / 60%);
     --tag-light-violet-circular-border-color: hsl(var(--hsl-violet-600));
 
     --tag-light-purple-text-color: hsl(var(--hsl-purple-600));
     --tag-light-purple-active-text-color: hsl(var(--hsl-purple-700));
     --tag-light-purple-background-color: hsl(var(--hsl-purple-200) / 40%);
     --tag-light-purple-border-color: hsl(var(--hsl-purple-500) / 80%);
-    --tag-light-purple-circular-background-color: hsl(
-      var(--hsl-purple-500) / 60%
-    );
+    --tag-light-purple-circular-background-color: hsl(var(--hsl-purple-500) / 60%);
     --tag-light-purple-circular-border-color: hsl(var(--hsl-purple-600));
 
     --tag-light-pink-text-color: hsl(var(--hsl-pink-600));
@@ -260,9 +248,7 @@
     --tag-light-brown-active-text-color: hsl(var(--hsl-amber-700));
     --tag-light-brown-background-color: hsl(var(--hsl-amber-200) / 40%);
     --tag-light-brown-border-color: hsl(var(--hsl-amber-500) / 80%);
-    --tag-light-brown-circular-background-color: hsl(
-      var(--hsl-amber-500) / 60%
-    );
+    --tag-light-brown-circular-background-color: hsl(var(--hsl-amber-500) / 60%);
     --tag-light-brown-circular-border-color: hsl(var(--hsl-amber-600));
 
     /*-------------------

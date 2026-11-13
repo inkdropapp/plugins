@@ -1,8 +1,10 @@
-import puppeteer from 'puppeteer'
 import { writeFile } from 'fs/promises'
 import path from 'path'
 import { pathToFileURL } from 'url'
+
 import { Command } from 'commander'
+import puppeteer from 'puppeteer'
+
 import packageJson from '../package.json' with { type: 'json' }
 import {
   buildPreviewHTML,
@@ -105,16 +107,16 @@ async function extractPalette(outputPath: string) {
   const page = await browser.newPage()
 
   page
-    .on('console', (message) => {
+    .on('console', message => {
       if (message.type() === 'error') {
         console.error(`${message.type().substr(0, 3).toUpperCase()} ${message.text()}`)
       }
     })
-    .on('pageerror', (error) => console.error(error instanceof Error ? error.message : error))
+    .on('pageerror', error => console.error(error instanceof Error ? error.message : error))
 
   const resolvedAppearance = appearance ?? deriveAppearance(themePackageJson)
   const baseUrl = pathToFileURL(process.cwd()).toString() + '/'
-  const baseStyleSheetURLs = baseStyleSheetSpecifiers.map((spec) => import.meta.resolve(spec))
+  const baseStyleSheetURLs = baseStyleSheetSpecifiers.map(spec => import.meta.resolve(spec))
   const content = buildPreviewHTML(
     themePackageJson,
     baseUrl,
@@ -140,7 +142,7 @@ async function extractPalette(outputPath: string) {
 
   // Inkdrop mobile can't evaluate color-mix() either, so mix in the browser.
   const colorMixCalls = [
-    ...new Set(Object.values(resolvedVariables).flatMap((value) => findColorMixCalls(value ?? '')))
+    ...new Set(Object.values(resolvedVariables).flatMap(value => findColorMixCalls(value ?? '')))
   ]
   const computedMixes = await page.evaluate(computeColorMixes, colorMixCalls)
   const mixedColors: Record<string, string> = {}
@@ -170,7 +172,7 @@ async function extractPalette(outputPath: string) {
 
 extractPalette(outputPath)
   .then(() => console.log('Palette extraction complete!'))
-  .catch((err) => {
+  .catch(err => {
     console.error('Error extracting palette:', err)
     process.exitCode = 1
   })

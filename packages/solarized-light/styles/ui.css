@@ -125,8 +125,7 @@
     --sidebar-border-right: 0px solid hsl(var(--hsl-neutral-100));
     --sidebar-menu-item-color: var(--text-color);
     --sidebar-sync-status-view-background: hsl(var(--hsl-neutral-100));
-    --sidebar-sync-status-view-border-top: 1px solid
-      hsl(var(--hsl-neutral-200) / 50%);
+    --sidebar-sync-status-view-border-top: 1px solid hsl(var(--hsl-neutral-200) / 50%);
 
     /*-------------------
       Note List Bar

@@ -1,4 +1,5 @@
 import themeVariableManifest from '@inkdropapp/css/variables.json'
+
 import { getCSSVariables } from './get-css-variables'
 
 const themeVariableNames = Object.values(themeVariableManifest).flat()
@@ -9,7 +10,7 @@ export const VariablesPage = () => {
     <>
       <h2>Variables</h2>
       <div className="variable-list">
-        {themeVariableNames.map((variableName) => {
+        {themeVariableNames.map(variableName => {
           return (
             <div key={variableName} className="variable-item">
               <div

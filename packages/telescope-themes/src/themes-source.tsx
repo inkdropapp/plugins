@@ -27,7 +27,7 @@ export class TelescopeSourceThemes extends TelescopeSource {
     const loaded = [...themes.getLoadedThemes()].sort((a, b) => a.name.localeCompare(b.name))
 
     return {
-      options: loaded.map((theme) => this.toItem(theme, theme.name === activeName))
+      options: loaded.map(theme => this.toItem(theme, theme.name === activeName))
     }
   }
 

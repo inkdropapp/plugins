@@ -8,8 +8,8 @@ export const ColorTokensPage = () => {
       <h2>Color Tokens</h2>
       <div className="variable-list">
         {Object.keys(cssVariables)
-          .filter((name) => name.startsWith('--color') || name.startsWith('--hsl'))
-          .map((variableName) => {
+          .filter(name => name.startsWith('--color') || name.startsWith('--hsl'))
+          .map(variableName => {
             return (
               <div key={variableName} className="variable-item">
                 <div

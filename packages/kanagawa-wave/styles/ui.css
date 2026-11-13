@@ -192,9 +192,7 @@
     --------------------*/
     --sidebar-background: hsl(var(--kanagawa-sumiInk1));
     --sidebar-border-right: 1px solid hsl(var(--kanagawa-sumiInk4));
-    --sidebar-menu-item-inactive-background: hsl(
-      var(--kanagawa-crystalBlue) / 20%
-    );
+    --sidebar-menu-item-inactive-background: hsl(var(--kanagawa-crystalBlue) / 20%);
     --sidebar-menu-item-active-background: hsl(var(--kanagawa-waveBlue2) / 60%);
     --sidebar-menu-section-color: hsl(var(--kanagawa-springViolet1) / 80%);
     --sidebar-menu-item-color: hsl(var(--kanagawa-oldWhite) / 80%);
@@ -211,12 +209,9 @@
     --note-list-bar-section-header-background: hsl(var(--kanagawa-sumiInk4));
     --note-list-view-item-header-color: hsl(var(--kanagawa-fujiWhite));
     --note-list-view-item-color: hsl(var(--kanagawa-oldWhite) / 70%);
-    --note-list-view-item-separator-border: 1px solid
-      hsl(var(--kanagawa-sumiInk4) / 60%);
+    --note-list-view-item-separator-border: 1px solid hsl(var(--kanagawa-sumiInk4) / 60%);
     --note-list-view-item-date-color: hsl(var(--kanagawa-springViolet1));
-    --note-list-view-item-selected-background: hsl(
-      var(--kanagawa-waveBlue1) / 70%
-    );
+    --note-list-view-item-selected-background: hsl(var(--kanagawa-waveBlue1) / 70%);
     --note-list-view-item-active-background: hsl(var(--kanagawa-waveBlue2) / 80%);
     --note-search-bar-input-background: hsl(var(--kanagawa-sumiInk0));
 
@@ -343,14 +338,10 @@
     --input-down-background: hsl(var(--kanagawa-sumiInk0));
     --label-basic-background: hsl(var(--kanagawa-fujiWhite) / 5%);
     --table-background: hsl(var(--kanagawa-sumiInk3) / 20%);
-    --toggle-handle-background: hsl(var(--kanagawa-fujiWhite))
-      var(--subtle-gradient);
-    --note-list-bar-pinned-section-header-background: hsl(
-      var(--kanagawa-sumiInk4)
-    );
+    --toggle-handle-background: hsl(var(--kanagawa-fujiWhite)) var(--subtle-gradient);
+    --note-list-bar-pinned-section-header-background: hsl(var(--kanagawa-sumiInk4));
     --grouped-segment-group-segment-box-shadow:
-      0 0 0 1px hsl(var(--kanagawa-fujiWhite) / 10%),
-      0 1px 1px hsl(var(--kanagawa-sumiInk0) / 0.1),
+      0 0 0 1px hsl(var(--kanagawa-fujiWhite) / 10%), 0 1px 1px hsl(var(--kanagawa-sumiInk0) / 0.1),
       0 1.5px 3px -2px hsl(var(--kanagawa-sumiInk0) / 0.3),
       0 4px 6px hsl(var(--kanagawa-sumiInk0) / 0.04),
       0 8px 12px -1px hsl(var(--kanagawa-sumiInk0) / 0.03);
@@ -539,9 +530,7 @@
     --input-placeholder-error-color: hsl(var(--kanagawa-waveRed) / 80%);
     --input-placeholder-error-focus-color: hsl(var(--kanagawa-waveRed));
     --sidebar-notification-view-color: hsl(var(--kanagawa-sumiInk1) / 90%);
-    --preferences-sidebar-item-active-background: hsl(
-      var(--kanagawa-crystalBlue) / 20%
-    );
+    --preferences-sidebar-item-active-background: hsl(var(--kanagawa-crystalBlue) / 20%);
   }
 
   /*-------------------

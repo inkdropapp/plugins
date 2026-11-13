@@ -140,8 +140,7 @@
     --note-list-bar-border-right: 1px solid hsl(var(--hsl-neutral-700));
     --note-list-bar-section-header-background: var(--color-neutral-700); /* nord2 */
     --note-list-view-item-header-color: var(--text-color);
-    --note-list-view-item-separator-border: 1px solid
-      hsl(var(--hsl-neutral-700));
+    --note-list-view-item-separator-border: 1px solid hsl(var(--hsl-neutral-700));
     --note-list-view-item-date-color: hsl(var(--hsl-blue-400)); /* nord9 */
     --note-list-view-item-selected-background: hsl(var(--hsl-blue-500) / 25%);
     --note-list-view-item-active-background: hsl(var(--hsl-blue-500) / 50%);

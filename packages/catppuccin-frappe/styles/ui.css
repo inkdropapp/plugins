@@ -128,10 +128,7 @@
     /*-------------------
       Accents
     --------------------*/
-    --subtle-gradient: linear-gradient(
-      transparent,
-      hsl(var(--hsl-neutral-950) / 20%)
-    );
+    --subtle-gradient: linear-gradient(transparent, hsl(var(--hsl-neutral-950) / 20%));
     --floating-shadow:
       0px 2px 4px 0px hsl(var(--hsl-neutral-950) / 30%),
       0px 2px 10px 0px hsl(var(--hsl-neutral-950) / 40%);
@@ -140,8 +137,7 @@
       0px 2px 10px 0px hsl(var(--hsl-neutral-950) / 50%);
     --raised-shadow:
       0 1.5px 3px -2px hsl(var(--hsl-neutral-950) / 50%),
-      0 4px 6px hsl(var(--hsl-neutral-950) / 30%),
-      0 8px 12px -1px hsl(var(--hsl-neutral-950) / 20%);
+      0 4px 6px hsl(var(--hsl-neutral-950) / 30%), 0 8px 12px -1px hsl(var(--hsl-neutral-950) / 20%);
 
     /*-------------------
       Emotive Colors
@@ -243,8 +239,7 @@
     --------------------*/
     --note-list-bar-background: var(--color-neutral-900); /* mantle */
     --note-list-bar-pinned-section-header-background: var(--color-neutral-800);
-    --note-list-bar-pinned-section-footer-border-bottom: 4px solid
-      var(--color-neutral-700);
+    --note-list-bar-pinned-section-footer-border-bottom: 4px solid var(--color-neutral-700);
 
     /*-------------------
       Editor
@@ -285,14 +280,10 @@
     --tag-dark-default-background-color: hsl(var(--hsl-neutral-500) / 25%);
     --tag-dark-default-border-color: hsl(var(--hsl-neutral-500) / 40%);
     --tag-dark-default-text-color: hsl(var(--hsl-neutral-300));
-    --tag-dark-default-active-background-color: hsl(
-      var(--hsl-neutral-500) / 40%
-    );
+    --tag-dark-default-active-background-color: hsl(var(--hsl-neutral-500) / 40%);
     --tag-dark-default-active-border-color: hsl(var(--hsl-neutral-400) / 50%);
     --tag-dark-default-active-text-color: hsl(var(--hsl-neutral-100));
-    --tag-dark-default-circular-background-color: hsl(
-      var(--hsl-neutral-500) / 50%
-    );
+    --tag-dark-default-circular-background-color: hsl(var(--hsl-neutral-500) / 50%);
     --tag-dark-default-circular-border-color: hsl(var(--hsl-neutral-400));
 
     --tag-dark-grey-background-color: hsl(var(--hsl-neutral-600) / 60%);
@@ -301,9 +292,7 @@
     --tag-dark-grey-active-background-color: hsl(var(--hsl-neutral-500) / 55%);
     --tag-dark-grey-active-border-color: hsl(var(--hsl-neutral-400) / 55%);
     --tag-dark-grey-active-text-color: hsl(var(--hsl-neutral-100));
-    --tag-dark-grey-circular-background-color: hsl(
-      var(--hsl-neutral-500) / 60%
-    );
+    --tag-dark-grey-circular-background-color: hsl(var(--hsl-neutral-500) / 60%);
     --tag-dark-grey-circular-border-color: hsl(var(--hsl-neutral-500));
 
     --tag-dark-black-background-color: hsl(var(--hsl-neutral-950) / 60%);
@@ -312,9 +301,7 @@
     --tag-dark-black-active-background-color: hsl(var(--hsl-neutral-900) / 70%);
     --tag-dark-black-active-border-color: hsl(var(--hsl-neutral-300) / 40%);
     --tag-dark-black-active-text-color: hsl(var(--hsl-neutral-200));
-    --tag-dark-black-circular-background-color: hsl(
-      var(--hsl-neutral-950) / 60%
-    );
+    --tag-dark-black-circular-background-color: hsl(var(--hsl-neutral-950) / 60%);
     --tag-dark-black-circular-border-color: hsl(var(--hsl-neutral-400) / 40%);
 
     --tag-dark-olive-background-color: hsl(var(--hsl-green-700) / 20%);
@@ -332,9 +319,7 @@
     --tag-dark-brown-active-background-color: hsl(var(--hsl-yellow-800) / 45%);
     --tag-dark-brown-active-border-color: hsl(var(--hsl-yellow-700) / 50%);
     --tag-dark-brown-active-text-color: hsl(var(--hsl-yellow-500));
-    --tag-dark-brown-circular-background-color: hsl(
-      var(--hsl-yellow-700) / 35%
-    );
+    --tag-dark-brown-circular-background-color: hsl(var(--hsl-yellow-700) / 35%);
     --tag-dark-brown-circular-border-color: hsl(var(--hsl-yellow-700));
   }
 

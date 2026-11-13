@@ -145,7 +145,7 @@ function extractTocItems(): TocItem[] {
   const items: TocItem[] = []
 
   tree.iterate({
-    enter: (node) => {
+    enter: node => {
       const { from, to, type } = node
       const nodeLine = state.doc.lineAt(from).number
 

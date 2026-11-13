@@ -1,15 +1,17 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
-import { Index } from './dev-server/index'
+
+import { ColorTokensPage } from './dev-server/color-tokens'
+
 import './dev-server.css'
 import '@inkdropapp/css/reset.css'
 import '@inkdropapp/css/tokens.css'
 import '@inkdropapp/base-ui-theme/styles/theme.css'
 
-import { ColorTokensPage } from './dev-server/color-tokens'
-import { VariablesPage } from './dev-server/variables'
 import { ComponentsPage } from './dev-server/components'
+import { Index } from './dev-server/index'
+import { VariablesPage } from './dev-server/variables'
 const themePackageName = import.meta.env.THEME_NAME || ''
 const themeAppearance = import.meta.env.THEME_APPEARANCE
 const baseProjectPath = import.meta.env.BASE_PROJECT_PATH || ''
@@ -17,9 +19,9 @@ const styleSheets: string[] = import.meta.env.STYLE_SHEETS || []
 
 const normalizedBase = baseProjectPath.replace(/\\/g, '/')
 const fsBase = normalizedBase.startsWith('/') ? normalizedBase : `/${normalizedBase}`
-const cssFiles = styleSheets.map((ss) => `/@fs${fsBase}/styles/${ss}`)
+const cssFiles = styleSheets.map(ss => `/@fs${fsBase}/styles/${ss}`)
 
-cssFiles.forEach((file) => {
+cssFiles.forEach(file => {
   import(/* @vite-ignore */ file)
 })
 

@@ -13,12 +13,8 @@
     --editor-background-color: var(--color-neutral-950);
     --editor-caret-color: var(--color-neutral-100);
     --editor-selection-background: var(--color-neutral-800);
-    --editor-focused-selection-background: var(
-      --color-neutral-700
-    ); /* Visual */
-    --editor-active-line-background-color: hsl(
-      var(--hsl-neutral-900) / 60%
-    ); /* CursorLine */
+    --editor-focused-selection-background: var(--color-neutral-700); /* Visual */
+    --editor-active-line-background-color: hsl(var(--hsl-neutral-900) / 60%); /* CursorLine */
     --editor-special-char-color: var(--color-neutral-800); /* NonText */
     --editor-spelling-error-color: var(--color-red-500);
 
@@ -26,9 +22,7 @@
     --editor-gutter-color: var(--color-neutral-600); /* LineNr */
     --editor-gutter-background-color: transparent;
     --editor-gutter-background-solid-color: var(--color-neutral-950);
-    --editor-active-line-gutter-background-color: hsl(
-      var(--hsl-neutral-900) / 60%
-    );
+    --editor-active-line-gutter-background-color: hsl(var(--hsl-neutral-900) / 60%);
 
     --editor-panel-background-color: var(--color-neutral-900);
     --editor-panel-color: var(--color-neutral-300);
@@ -40,9 +34,7 @@
       --color-blue-600
     ); /* PmenuSel */
     --editor-tooltip-autocomplete-item-selected-color: var(--color-neutral-950);
-    --editor-tooltip-autocomplete-section-border-color: var(
-      --color-neutral-700
-    );
+    --editor-tooltip-autocomplete-section-border-color: var(--color-neutral-700);
     --editor-inline-tooltip-color: var(--color-neutral-300);
     --editor-inline-tooltip-background-color: hsl(var(--hsl-neutral-900) / 60%);
     --editor-inline-tooltip-outline: 1px solid var(--color-neutral-700);
@@ -55,12 +47,8 @@
     --editor-matching-bracket-background-color: var(--color-neutral-700);
     --editor-nonmatching-bracket-outline: 1px solid var(--color-red-500);
 
-    --editor-selection-match-background-color: hsl(
-      var(--hsl-neutral-700) / 70%
-    );
-    --editor-search-match-background-color: hsl(
-      var(--hsl-yellow-500) / 35%
-    ); /* Search */
+    --editor-selection-match-background-color: hsl(var(--hsl-neutral-700) / 70%);
+    --editor-search-match-background-color: hsl(var(--hsl-yellow-500) / 35%); /* Search */
     --editor-search-match-selected-background-color: hsl(
       var(--hsl-orange-500) / 50%
     ); /* IncSearch */
@@ -76,11 +64,8 @@
     --editor-fold-placeholder-background-color: var(--color-neutral-900);
     --editor-fold-placeholder-border: 1px solid var(--color-neutral-700);
 
-    --editor-image-widget-backdrop-background-color: hsl(
-      var(--hsl-neutral-800) / 40%
-    );
-    --editor-image-widget-backdrop-border: 1px solid
-      hsl(var(--hsl-neutral-700) / 60%);
+    --editor-image-widget-backdrop-background-color: hsl(var(--hsl-neutral-800) / 40%);
+    --editor-image-widget-backdrop-border: 1px solid hsl(var(--hsl-neutral-700) / 60%);
 
     /*── Markdown elements ────────────────────────────────────────────────────*/
     --md-inline-code-border-color: hsl(var(--hsl-neutral-700) / 60%);
@@ -153,9 +138,7 @@
      * so they're spelled out.
      */
     --syntax-keyword-color: var(--color-red-500); /* Statement */
-    --syntax-control-keyword-color: var(
-      --color-red-500
-    ); /* Conditional, Repeat */
+    --syntax-control-keyword-color: var(--color-red-500); /* Conditional, Repeat */
     --syntax-operator-keyword-color: var(--color-red-500); /* luaIn */
     --syntax-definition-keyword-color: var(--color-teal-500); /* jsFunction */
     --syntax-module-keyword-color: var(--color-teal-500); /* Include */
@@ -185,9 +168,7 @@
     --syntax-heading-5-font-weight: normal;
     --syntax-heading-6-color: var(--color-yellow-500);
     --syntax-heading-6-font-weight: normal;
-    --syntax-content-separator-color: var(
-      --color-neutral-500
-    ); /* markdownRule */
+    --syntax-content-separator-color: var(--color-neutral-500); /* markdownRule */
     --syntax-list-color: var(--color-neutral-500);
     --syntax-quote-color: var(--color-neutral-500); /* markdownBlockquote */
     --syntax-emphasis-color: var(--color-violet-500); /* markdownItalic */

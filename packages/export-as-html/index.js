@@ -17,13 +17,14 @@ module.exports = {
   },
 
   async exportAsHtmlCommand(e) {
-    const {
-      exportMultipleNotesAsHtml,
-      exportNoteAsHtml
-    } = require('./exporter')
+    const { exportMultipleNotesAsHtml, exportNoteAsHtml } = require('./exporter')
     const { noteListBar, editingNote } = this.env.store.getState()
     const { actionTargetNoteIds } = noteListBar
-    const noteIds = e.detail?.noteId ? [e.detail.noteId] : (actionTargetNoteIds.length > 0 ? actionTargetNoteIds : [editingNote?._id])
+    const noteIds = e.detail?.noteId
+      ? [e.detail.noteId]
+      : actionTargetNoteIds.length > 0
+        ? actionTargetNoteIds
+        : [editingNote?._id]
     if (noteIds && noteIds.length > 1) {
       this.env.notifications.addInfo('Exporting notes started', {
         detail: 'It may take a while..',

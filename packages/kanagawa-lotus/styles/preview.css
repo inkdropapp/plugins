@@ -23,40 +23,26 @@
 
     /* Code blocks */
     --mde-preview-codeblock-border-color: hsl(var(--kanagawa-lotusWhite0));
-    --mde-preview-codeblock-background-color: var(
-      --kanagawa-preview-surface-subtle
-    );
-    --mde-preview-codeblock-meta-background-color: var(
-      --kanagawa-preview-surface
-    );
+    --mde-preview-codeblock-background-color: var(--kanagawa-preview-surface-subtle);
+    --mde-preview-codeblock-meta-background-color: var(--kanagawa-preview-surface);
     --mde-preview-inline-code-text-color: hsl(var(--kanagawa-lotusInk1));
     --mde-preview-inline-code-border-width: 1px;
-    --mde-preview-inline-code-border-color: hsl(
-      var(--kanagawa-lotusGray3) / 40%
-    );
-    --mde-preview-inline-code-background-color: hsl(
-      var(--kanagawa-lotusWhite1) / 60%
-    );
+    --mde-preview-inline-code-border-color: hsl(var(--kanagawa-lotusGray3) / 40%);
+    --mde-preview-inline-code-background-color: hsl(var(--kanagawa-lotusWhite1) / 60%);
 
     /* Tables */
     --mde-preview-table-head-text-color: hsl(var(--kanagawa-lotusYellow3));
     --mde-preview-table-head-background-color: var(--kanagawa-preview-surface);
     --mde-preview-table-row-background-color: var(--kanagawa-preview-surface);
-    --mde-preview-table-row-stripe-background-color: var(
-      --kanagawa-preview-surface-subtle
-    );
+    --mde-preview-table-row-stripe-background-color: var(--kanagawa-preview-surface-subtle);
 
     /* Images */
     --mde-preview-image-background-color: var(--kanagawa-preview-surface);
 
     /* Mark (==highlight==) */
     --mde-preview-inline-mark-text-color: hsl(var(--kanagawa-lotusInk2));
-    --mde-preview-inline-mark-background-color: hsl(
-      var(--kanagawa-lotusYellow4) / 45%
-    );
-    --mde-preview-inline-mark-underline-color: hsl(
-      var(--kanagawa-lotusYellow3)
-    );
+    --mde-preview-inline-mark-background-color: hsl(var(--kanagawa-lotusYellow4) / 45%);
+    --mde-preview-inline-mark-underline-color: hsl(var(--kanagawa-lotusYellow3));
 
     /* Prose */
     --mde-preview-heading-color: hsl(var(--kanagawa-lotusYellow3));
@@ -93,9 +79,7 @@
     --mermaid-alt-section-background-color: hsl(var(--kanagawa-lotusInk1) / 4%);
     --mermaid-task-background-color: hsl(var(--kanagawa-lotusBlue3));
     --mermaid-task-border-color: hsl(var(--kanagawa-lotusBlue4));
-    --mermaid-active-task-background-color: hsl(
-      var(--kanagawa-lotusViolet4) / 45%
-    );
+    --mermaid-active-task-background-color: hsl(var(--kanagawa-lotusViolet4) / 45%);
     --mermaid-active-task-border-color: hsl(var(--kanagawa-lotusViolet4));
     --mermaid-done-task-background-color: hsl(var(--kanagawa-lotusGray));
     --mermaid-done-task-border-color: hsl(var(--kanagawa-lotusGray2));
@@ -113,42 +97,22 @@
      * accent hue toward white to lift it there while keeping the theme's hue.
      * Fully opaque so the resulting pastels stay distinct against the cream.
      */
-    --mermaid-primary-color: color-mix(
-      in srgb,
-      hsl(var(--kanagawa-lotusBlue4)) 18%,
-      white
-    );
-    --mermaid-secondary-color: color-mix(
-      in srgb,
-      hsl(var(--kanagawa-lotusRed)) 18%,
-      white
-    );
-    --mermaid-tertiary-color: color-mix(
-      in srgb,
-      hsl(var(--kanagawa-lotusGreen2)) 18%,
-      white
-    );
+    --mermaid-primary-color: color-mix(in srgb, hsl(var(--kanagawa-lotusBlue4)) 18%, white);
+    --mermaid-secondary-color: color-mix(in srgb, hsl(var(--kanagawa-lotusRed)) 18%, white);
+    --mermaid-tertiary-color: color-mix(in srgb, hsl(var(--kanagawa-lotusGreen2)) 18%, white);
 
     /* Error */
     --mermaid-error-background-color: hsl(var(--kanagawa-lotusRed) / 18%);
     --mermaid-error-text-color: hsl(var(--kanagawa-lotusRed3));
 
     /* Event modeling — one hue per element kind */
-    --mermaid-em-processor-background-color: hsl(
-      var(--kanagawa-lotusViolet4) / 35%
-    );
+    --mermaid-em-processor-background-color: hsl(var(--kanagawa-lotusViolet4) / 35%);
     --mermaid-em-processor-border-color: hsl(var(--kanagawa-lotusViolet4));
-    --mermaid-em-read-model-background-color: hsl(
-      var(--kanagawa-lotusGreen2) / 35%
-    );
+    --mermaid-em-read-model-background-color: hsl(var(--kanagawa-lotusGreen2) / 35%);
     --mermaid-em-read-model-border-color: hsl(var(--kanagawa-lotusGreen2));
-    --mermaid-em-command-background-color: hsl(
-      var(--kanagawa-lotusBlue4) / 35%
-    );
+    --mermaid-em-command-background-color: hsl(var(--kanagawa-lotusBlue4) / 35%);
     --mermaid-em-command-border-color: hsl(var(--kanagawa-lotusBlue4));
-    --mermaid-em-event-background-color: hsl(
-      var(--kanagawa-lotusYellow3) / 35%
-    );
+    --mermaid-em-event-background-color: hsl(var(--kanagawa-lotusYellow3) / 35%);
     --mermaid-em-event-border-color: hsl(var(--kanagawa-lotusYellow3));
 
     /* Wardley map */
@@ -156,20 +120,10 @@
 
     /* Cynefin — one hue per domain */
     --mermaid-cynefin-cliff-color: hsl(var(--kanagawa-lotusRed));
-    --mermaid-cynefin-complex-background-color: hsl(
-      var(--kanagawa-lotusGreen2) / 35%
-    );
-    --mermaid-cynefin-complicated-background-color: hsl(
-      var(--kanagawa-lotusBlue4) / 35%
-    );
-    --mermaid-cynefin-chaotic-background-color: hsl(
-      var(--kanagawa-lotusRed) / 35%
-    );
-    --mermaid-cynefin-clear-background-color: hsl(
-      var(--kanagawa-lotusYellow3) / 35%
-    );
-    --mermaid-cynefin-confusion-background-color: hsl(
-      var(--kanagawa-lotusViolet4) / 35%
-    );
+    --mermaid-cynefin-complex-background-color: hsl(var(--kanagawa-lotusGreen2) / 35%);
+    --mermaid-cynefin-complicated-background-color: hsl(var(--kanagawa-lotusBlue4) / 35%);
+    --mermaid-cynefin-chaotic-background-color: hsl(var(--kanagawa-lotusRed) / 35%);
+    --mermaid-cynefin-clear-background-color: hsl(var(--kanagawa-lotusYellow3) / 35%);
+    --mermaid-cynefin-confusion-background-color: hsl(var(--kanagawa-lotusViolet4) / 35%);
   }
 }
