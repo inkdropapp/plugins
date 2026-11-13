@@ -1,0 +1,24 @@
+{
+  "menu": [
+    {
+      "label": "File",
+      "submenu": [
+        {
+          "label": "Export",
+          "submenu": [
+            { "label": "As PDF..", "command": "export-print:export-as-pdf" },
+            { "label": "Print..", "command": "export-print:print" }
+          ]
+        }
+      ]
+    }
+  ],
+  "context-menu": {
+    ".note-list-bar .note-list-item-view, .editor-header-more .menu": [
+      { "label": "Export As PDF..", "command": "export-print:export-as-pdf" }
+    ],
+    ".note-list-bar:not(.multiple-selection) .note-list-item-view, .editor-header-more .menu": [
+      { "label": "Print..", "command": "export-print:print" }
+    ]
+  }
+}
