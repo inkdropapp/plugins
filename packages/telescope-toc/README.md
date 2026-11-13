@@ -37,4 +37,4 @@ No default keybinding is set. You can add one in your `keymap.cson`:
 
 ## Changelog
 
-See [Releases](https://github.com/inkdropapp/telescope-toc/releases).
+See [Releases](https://github.com/inkdropapp/plugins/releases?q=telescope-toc%40).

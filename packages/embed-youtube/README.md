@@ -24,4 +24,4 @@ ipm install embed-youtube
 
 ## Changelog
 
-See [Releases](https://github.com/inkdropapp/embed-youtube/releases).
+See [Releases](https://github.com/inkdropapp/plugins/releases?q=embed-youtube%40).

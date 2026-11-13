@@ -3,7 +3,7 @@
 A React component that renders LaTeX with [KaTeX](https://katex.org/), plus the stylesheet
 it needs — KaTeX's own CSS, scoped so it cannot leak into the rest of your page.
 
-Extracted from the [Inkdrop Math plugin](https://github.com/inkdropapp/inkdrop-math) so the
+Extracted from the [Inkdrop Math plugin](https://github.com/inkdropapp/plugins/tree/main/packages/math) so the
 plugin and the website demo share one implementation instead of each carrying a port of it.
 
 The guiding principle: **this package is host-agnostic.** It imports no Inkdrop API.
@@ -44,8 +44,8 @@ export function Equation() {
 As a Markdown code component, with the host's own error styling:
 
 ```tsx
-import { MathEquation } from '@inkdropapp/math'
 import type { CodeComponentProps } from '@inkdropapp/markdown'
+import { MathEquation } from '@inkdropapp/math'
 
 export default function Math({ className, children }: CodeComponentProps) {
   return (

@@ -16,9 +16,10 @@ This plugin is not published to the plugin registry — it's meant to be cloned,
 run locally:
 
 ```sh
-git clone https://github.com/inkdropapp/layout-example-plugin.git
-cd layout-example-plugin
+git clone https://github.com/inkdropapp/plugins.git
+cd plugins
 pnpm install
+cd packages/layout-example
 pnpm build
 ipm link --dev
 ```

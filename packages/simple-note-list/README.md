@@ -20,4 +20,4 @@ Then, reload the app.
 
 ## Changelog
 
-See the [GitHub releases](https://github.com/inkdropapp/inkdrop-simple-note-list/releases) for an overview of what changed in each update.
+See the [GitHub releases](https://github.com/inkdropapp/plugins/releases?q=simple-note-list%40) for an overview of what changed in each update.

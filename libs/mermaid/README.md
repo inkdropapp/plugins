@@ -3,7 +3,7 @@
 React components for rendering [Mermaid](https://mermaid.js.org/) diagrams with
 [Pele](https://pele.run/), themed by the host's CSS, with zoom, math and a hover toolbar.
 
-Extracted from the [Inkdrop Mermaid plugin](https://github.com/inkdropapp/mermaid) so
+Extracted from the [Inkdrop Mermaid plugin](https://github.com/inkdropapp/plugins/tree/main/packages/mermaid) so
 the plugin, the website demo, and the mobile web editor can share one implementation
 instead of each carrying a port of it.
 

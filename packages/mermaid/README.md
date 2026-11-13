@@ -108,4 +108,4 @@ Configure the plugin in Preferences → Plugins → mermaid:
 
 ## Changelog
 
-See the [Releases](https://github.com/inkdropapp/mermaid/releases) page for the changelog.
+See the [Releases](https://github.com/inkdropapp/plugins/releases?q=mermaid%40) page for the changelog.

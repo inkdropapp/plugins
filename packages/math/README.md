@@ -65,4 +65,4 @@ It will produce:
 
 ## Changelog
 
-See the [Releases](https://github.com/inkdropapp/inkdrop-math/releases) page for the changelog.
+See the [Releases](https://github.com/inkdropapp/plugins/releases?q=math%40) page for the changelog.

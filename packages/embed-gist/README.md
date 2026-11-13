@@ -24,4 +24,4 @@ ipm install embed-gist
 
 ## Changelog
 
-See [Releases](https://github.com/inkdropapp/embed-gist/releases).
+See [Releases](https://github.com/inkdropapp/plugins/releases?q=embed-gist%40).
