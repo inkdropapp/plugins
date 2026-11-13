@@ -283,20 +283,22 @@ ipm install my-plugin
 ### Prerequisites
 
 - Node.js 24.x or higher
-- npm
+- pnpm
 
 ### Setup
 
+`ipm-cli` lives in the [inkdropapp/plugins](https://github.com/inkdropapp/plugins) monorepo:
+
 ```bash
-git clone https://github.com/inkdropapp/ipm-cli.git
-cd ipm-cli
-npm install
+git clone https://github.com/inkdropapp/plugins.git
+cd plugins
+pnpm install
 ```
 
 ### Build
 
 ```bash
-npm run build
+pnpm --filter @inkdropapp/ipm-cli run build
 ```
 
 ### Development Mode
@@ -357,4 +359,4 @@ Takuya Matsuyama ([@craftzdog](https://github.com/craftzdog))
 - [Inkdrop - Markdown note-taking app](https://www.inkdrop.app/)
 - [Inkdrop Plugin Registry](https://my.inkdrop.app/plugins)
 - [Plugin Development Guide](https://developers.inkdrop.app/guides/plugin-word-count)
-- [Report Issues](https://github.com/inkdropapp/ipm-cli/issues)
+- [Report Issues](https://github.com/inkdropapp/plugins/issues)

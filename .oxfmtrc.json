@@ -14,6 +14,7 @@
     "!packages/export-as-markdown/lib/**",
     "**/dist/**",
     "**/palette.json",
-    "pnpm-lock.yaml"
+    "pnpm-lock.yaml",
+    "libs/ipm-cli/templates/**"
   ]
 }

@@ -5,8 +5,9 @@ One public pnpm workspace holding the official Inkdrop plugins and themes.
 ## Layout
 
 - `packages/<name>`: a plugin or theme. The folder is its name in the Inkdrop plugin registry.
-- `libs/<name>`: npm libraries (`@inkdropapp/math`, `@inkdropapp/mermaid`,
-  `@inkdropapp/theme-dev-helpers`). The folder is the npm name without `@inkdropapp/`.
+- `libs/<name>`: npm packages (`@inkdropapp/math`, `@inkdropapp/mermaid`,
+  `@inkdropapp/theme-dev-helpers`, and `@inkdropapp/ipm-cli`, the `ipm` command). The folder is the
+  npm name without `@inkdropapp/`.
 - `.github/workflows/`: CI and the npm publish workflow for `libs/`.
 
 The desktop app (`inkdropapp/inkdrop`, private) bundles seven of these plugins through a git
