@@ -21,7 +21,7 @@
     "format": "oxfmt",
     "lint": "oxlint",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "pnpm run build"
   },
   "devDependencies": {
     "@inkdropapp/types": "catalog:",
@@ -29,7 +29,7 @@
     "@types/react": "catalog:",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
-    "tsdown": "^0.22.14",
+    "tsdown": "catalog:",
     "typescript": "catalog:"
   },
   "engines": {

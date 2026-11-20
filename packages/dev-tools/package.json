@@ -16,7 +16,7 @@
     "format": "oxfmt",
     "lint": "oxlint",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "pnpm run build"
   },
   "dependencies": {
     "chokidar": "^5.0.0"

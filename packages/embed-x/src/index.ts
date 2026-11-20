@@ -50,8 +50,7 @@ class InkdropPlugin {
         case 'embed:open-external': {
           const { uri } = data
           if (!uri || !isSafeUri(uri)) break
-          // eslint-disable-next-line @typescript-eslint/no-require-imports
-          const electron = globalThis.require('electron')
+          const electron = (globalThis as any).require('electron')
           if (electron && electron.shell) {
             electron.shell.openExternal(uri)
           } else if ((window as any).inkdrop.sendMessageToNative) {

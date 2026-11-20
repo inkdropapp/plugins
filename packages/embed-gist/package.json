@@ -15,17 +15,20 @@
   },
   "main": "./lib/index.js",
   "scripts": {
-    "lint": "oxlint",
-    "build": "tsc",
+    "dev": "tsdown --watch",
+    "build": "tsdown",
     "format": "oxfmt",
-    "prepublishOnly": "npm run lint && npm run build"
+    "lint": "oxlint",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run lint && pnpm run build"
   },
   "devDependencies": {
     "@inkdropapp/types": "catalog:",
     "@types/react": "catalog:",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
-    "typescript": "^6.0.3"
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
   },
   "engines": {
     "inkdrop": "^6.x"

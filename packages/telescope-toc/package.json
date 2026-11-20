@@ -15,11 +15,12 @@
   },
   "main": "./lib/index.js",
   "scripts": {
-    "lint": "oxlint",
+    "dev": "tsdown --watch",
+    "build": "tsdown",
     "format": "oxfmt",
-    "build": "tsc",
+    "lint": "oxlint",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run lint && npm run build"
+    "prepublishOnly": "pnpm run lint && pnpm run build"
   },
   "devDependencies": {
     "@codemirror/language": "^6.12.4",
@@ -27,6 +28,7 @@
     "@types/react": "catalog:",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
+    "tsdown": "catalog:",
     "typescript": "catalog:"
   },
   "engines": {

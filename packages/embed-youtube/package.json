@@ -15,11 +15,12 @@
   },
   "main": "./lib/index.js",
   "scripts": {
+    "dev": "tsdown --watch",
+    "build": "tsdown",
+    "format": "oxfmt",
     "lint": "oxlint",
-    "build": "tsc",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run lint && npm run build",
-    "format": "oxfmt"
+    "prepublishOnly": "pnpm run lint && pnpm run build"
   },
   "devDependencies": {
     "@codemirror/state": "catalog:",
@@ -27,7 +28,8 @@
     "@types/react": "catalog:",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
-    "typescript": "^6.0.3"
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
   },
   "engines": {
     "inkdrop": "^6.x"

@@ -31,7 +31,7 @@ export class TelescopeSourceToc extends TelescopeSource {
     return true
   }
 
-  getItems({ query }: TelescopeContext): TelescopeResult {
+  getItems(_context: TelescopeContext): TelescopeResult {
     const { editingNote } = getEnv().store.getState()
     if (!editingNote) return { options: [] }
 
