@@ -35,6 +35,8 @@ function getContextMenuBookId(e: CommandEvent): string | null {
   return e.detail?.bookId ?? getEnv().store.getState().bookList.bookForContextMenu?._id ?? null
 }
 
+const COMPONENT_NAME = 'ImportMarkdownPlugin'
+
 const ImportMarkdownPlugin = () => {
   const [step, setStep] = useState<WizardStep>('scanning')
   const [filePaths, setFilePaths] = useState<string[]>([])
@@ -156,13 +158,13 @@ const ImportMarkdownPlugin = () => {
 class InkdropPlugin implements IInkdropPlugin {
   activate(env: Environment) {
     setEnv(env)
-    env.components.registerClass(ImportMarkdownPlugin)
-    env.layouts.addComponentToLayout('modal', 'ImportMarkdownPlugin')
+    env.components.registerClass(ImportMarkdownPlugin, COMPONENT_NAME)
+    env.layouts.addComponentToLayout('modal', COMPONENT_NAME)
   }
 
   deactivate(env: Environment) {
-    env.layouts.removeComponentFromLayout('modal', 'ImportMarkdownPlugin')
-    env.components.deleteClass(ImportMarkdownPlugin)
+    env.layouts.removeComponentFromLayout('modal', COMPONENT_NAME)
+    env.components.deleteClass(ImportMarkdownPlugin, COMPONENT_NAME)
     setEnv(undefined)
   }
 }
