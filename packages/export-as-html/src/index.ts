@@ -8,6 +8,7 @@ import {
   exportNoteAsHtml,
   exportNotesInBook
 } from './exporter.js'
+import { notifyFailure } from './notify-failure.js'
 
 class ExportAsHtmlPlugin implements IInkdropPlugin {
   private env: Environment | undefined
@@ -16,10 +17,14 @@ class ExportAsHtmlPlugin implements IInkdropPlugin {
   activate(env: Environment) {
     this.env = env
     this.subscription = env.commands.add(document.body, {
-      'export-as-html:selections': e => this.exportAsHtmlCommand(e),
-      'export-as-html:copy': e => this.copyAsHtmlCommand(e),
-      'export-as-html:copy-simple': e => this.copyAsSimpleHtmlCommand(e),
-      'export-as-html:notebook': e => this.exportNotebook(e)
+      'export-as-html:selections': e =>
+        this.exportAsHtmlCommand(e).catch(notifyFailure(env, 'Failed to export as HTML')),
+      'export-as-html:copy': e =>
+        this.copyAsHtmlCommand(e).catch(notifyFailure(env, 'Failed to copy as HTML')),
+      'export-as-html:copy-simple': e =>
+        this.copyAsSimpleHtmlCommand(e).catch(notifyFailure(env, 'Failed to copy as simple HTML')),
+      'export-as-html:notebook': e =>
+        this.exportNotebook(e).catch(notifyFailure(env, 'Failed to export the notebook'))
     })
   }
 
@@ -43,8 +48,10 @@ class ExportAsHtmlPlugin implements IInkdropPlugin {
       ? [e.detail.noteId]
       : actionTargetNoteIds.length > 0
         ? actionTargetNoteIds
-        : [editingNote?._id]
-    if (noteIds && noteIds.length > 1) {
+        : editingNote
+          ? [editingNote._id]
+          : []
+    if (noteIds.length > 1) {
       env.notifications.addInfo('Exporting notes started', {
         detail: 'It may take a while..',
         dismissable: true
@@ -56,7 +63,7 @@ class ExportAsHtmlPlugin implements IInkdropPlugin {
       })
     } else if (noteIds.length === 1) {
       const note = (await models.Note.loadWithId(noteIds[0])).toObject()
-      exportNoteAsHtml(env, note)
+      await exportNoteAsHtml(env, note)
     } else {
       env.notifications.addError('No note opened', {
         detail: 'Please open a note to export as HTML',
@@ -72,7 +79,7 @@ class ExportAsHtmlPlugin implements IInkdropPlugin {
     const noteId = e.detail?.noteId || actionTargetNoteIds?.[0]
     if (noteId) {
       const note = (await models.Note.loadWithId(noteId)).toObject()
-      copyNoteAsHtml(env, note)
+      await copyNoteAsHtml(env, note)
     }
   }
 
@@ -83,18 +90,18 @@ class ExportAsHtmlPlugin implements IInkdropPlugin {
     const noteId = e.detail?.noteId || actionTargetNoteIds?.[0]
     if (noteId) {
       const note = (await models.Note.loadWithId(noteId)).toObject()
-      copyNoteAsSimpleHtml(env, note)
+      await copyNoteAsSimpleHtml(env, note)
     }
   }
 
-  exportNotebook(e: CommandEvent) {
+  async exportNotebook(e: CommandEvent) {
     const env = this.getEnv()
     const {
       bookList: { bookForContextMenu }
     } = env.store.getState()
     const bookId = e.detail?.bookId || bookForContextMenu?._id
     if (bookId) {
-      exportNotesInBook(env, bookId)
+      await exportNotesInBook(env, bookId)
     } else {
       env.notifications.addError('No notebook specified', {
         detail: 'Please select a notebook to export on sidebar',

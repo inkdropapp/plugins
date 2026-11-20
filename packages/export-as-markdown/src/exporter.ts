@@ -4,16 +4,14 @@ import path from 'path'
 import type { Environment, ModelNote } from '@inkdropapp/types'
 import { exportUtils, logger, models } from 'inkdrop'
 
+import { errorMessage } from './notify-failure.js'
+
 type Note = ReturnType<ModelNote['toObject']>
 
 type BookTreeNode = {
   _id: string
   name: string
   children?: BookTreeNode[]
-}
-
-function errorMessage(error: unknown) {
-  return error instanceof Error ? error.message : String(error)
 }
 
 export async function exportAll(env: Environment) {

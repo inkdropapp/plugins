@@ -14,8 +14,10 @@ export async function exportAsPDFCommand(env: Environment, e: CommandEvent) {
     ? [e.detail.noteId]
     : actionTargetNoteIds.length > 0
       ? actionTargetNoteIds
-      : [editingNote?._id]
-  if (noteIds && noteIds.length > 1) {
+      : editingNote
+        ? [editingNote._id]
+        : []
+  if (noteIds.length > 1) {
     await exportMultipleNotesAsPDF(env, noteIds)
     env.notifications.addInfo('Exporting notes completed', {
       detail: '',
@@ -23,7 +25,7 @@ export async function exportAsPDFCommand(env: Environment, e: CommandEvent) {
     })
   } else if (noteIds.length === 1) {
     const note = (await models.Note.loadWithId(noteIds[0])).toObject()
-    exportAsPDF(env, note)
+    await exportAsPDF(env, note)
   } else {
     env.notifications.addError('No note opened', {
       detail: 'Please open a note to export as PDF',
@@ -55,7 +57,8 @@ async function exportMultipleNotesAsPDF(env: Environment, noteIds: string[]) {
     for (const noteId of noteIds) {
       const note = (await models.Note.loadWithId(noteId)).toObject()
       if (note) {
-        const pathToSave = path.join(destDir, `${note.title}.pdf`)
+        const fileName = exportUtils.sanitizeFileName(note.title, { extension: '.pdf' })
+        const pathToSave = path.join(destDir, fileName)
         await exportAsPDF(env, note, pathToSave)
       }
     }
