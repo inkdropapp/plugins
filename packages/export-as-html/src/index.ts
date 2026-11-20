@@ -56,11 +56,13 @@ class ExportAsHtmlPlugin implements IInkdropPlugin {
         detail: 'It may take a while..',
         dismissable: true
       })
-      await exportMultipleNotesAsHtml(env, noteIds)
-      env.notifications.addInfo('Exporting notes completed', {
-        detail: '',
-        dismissable: true
-      })
+      const exported = await exportMultipleNotesAsHtml(env, noteIds)
+      if (exported) {
+        env.notifications.addInfo('Exporting notes completed', {
+          detail: '',
+          dismissable: true
+        })
+      }
     } else if (noteIds.length === 1) {
       const note = (await models.Note.loadWithId(noteIds[0])).toObject()
       await exportNoteAsHtml(env, note)

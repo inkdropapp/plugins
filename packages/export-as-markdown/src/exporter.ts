@@ -71,7 +71,7 @@ export async function exportNotesInBook(env: Environment, bookId: string) {
 export async function exportSingleNote(env: Environment, note: Note) {
   const { filePath: pathToSave } = await env.dialog.showSaveDialog({
     title: 'Save Markdown File',
-    defaultPath: `${note.title}.md`,
+    defaultPath: exportUtils.sanitizeFileName(note.title, { extension: '.md' }),
     filters: [{ name: 'Markdown Files', extensions: ['md'] }]
   })
   if (pathToSave) {
@@ -89,32 +89,26 @@ export async function exportSingleNote(env: Environment, note: Note) {
   }
 }
 
-export async function exportMultipleNotes(env: Environment, noteIds: string[]) {
-  const { filePaths: res } = await env.dialog.showOpenDialog({
+/**
+ * Asks for a folder and exports the notes into it.
+ *
+ * @returns Whether the notes were exported; `false` when the folder dialog was cancelled.
+ * @throws When a note fails to load or export.
+ */
+export async function exportMultipleNotes(env: Environment, noteIds: string[]): Promise<boolean> {
+  const { filePaths } = await env.dialog.showOpenDialog({
     title: 'Select Destination Directory',
     properties: ['openDirectory']
   })
-  if (res instanceof Array && res.length > 0) {
-    const destDir = res[0]
+  const [destDir] = filePaths
+  if (!destDir) return false
 
-    try {
-      for (const noteId of noteIds) {
-        const note = (await models.Note.loadWithId(noteId)).toObject()
-        if (note) {
-          const fileName = exportUtils.sanitizeFileName(note.title, {
-            extension: '.md'
-          })
-          await exportUtils.exportNoteAsMarkdown(note, destDir, fileName)
-        }
-      }
-    } catch (e) {
-      logger.error('Failed to export notes:', e)
-      env.notifications.addError('Failed to export notes', {
-        detail: errorMessage(e),
-        dismissable: true
-      })
-    }
+  for (const noteId of noteIds) {
+    const note = (await models.Note.loadWithId(noteId)).toObject()
+    const fileName = exportUtils.sanitizeFileName(note.title, { extension: '.md' })
+    await exportUtils.exportNoteAsMarkdown(note, destDir, fileName)
   }
+  return true
 }
 
 async function exportBook(

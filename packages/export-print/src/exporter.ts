@@ -1,3 +1,4 @@
+import fs from 'fs'
 import path from 'path'
 
 import type { CommandEvent, Environment, ModelNote } from '@inkdropapp/types'
@@ -18,11 +19,13 @@ export async function exportAsPDFCommand(env: Environment, e: CommandEvent) {
         ? [editingNote._id]
         : []
   if (noteIds.length > 1) {
-    await exportMultipleNotesAsPDF(env, noteIds)
-    env.notifications.addInfo('Exporting notes completed', {
-      detail: '',
-      dismissable: true
-    })
+    const exported = await exportMultipleNotesAsPDF(env, noteIds)
+    if (exported) {
+      env.notifications.addInfo('Exporting notes completed', {
+        detail: '',
+        dismissable: true
+      })
+    }
   } else if (noteIds.length === 1) {
     const note = (await models.Note.loadWithId(noteIds[0])).toObject()
     await exportAsPDF(env, note)
@@ -46,55 +49,57 @@ export async function printCommand(env: Environment) {
   }
 }
 
-async function exportMultipleNotesAsPDF(env: Environment, noteIds: string[]) {
-  const { filePaths: res } = await env.dialog.showOpenDialog({
+/**
+ * Asks for a folder and exports each note into it as a PDF, numbering file names that are taken.
+ *
+ * @returns Whether the notes were exported; `false` when the folder dialog was cancelled.
+ * @throws When a note fails to load or export.
+ */
+async function exportMultipleNotesAsPDF(env: Environment, noteIds: string[]): Promise<boolean> {
+  const { filePaths } = await env.dialog.showOpenDialog({
     title: 'Select Destination Directory',
     properties: ['openDirectory']
   })
-  if (res instanceof Array && res.length > 0) {
-    const destDir = res[0]
+  const [destDir] = filePaths
+  if (!destDir) return false
 
-    for (const noteId of noteIds) {
-      const note = (await models.Note.loadWithId(noteId)).toObject()
-      if (note) {
-        const fileName = exportUtils.sanitizeFileName(note.title, { extension: '.pdf' })
-        const pathToSave = path.join(destDir, fileName)
-        await exportAsPDF(env, note, pathToSave)
-      }
-    }
+  for (const noteId of noteIds) {
+    const note = (await models.Note.loadWithId(noteId)).toObject()
+    await writePDF(note, unusedPDFPath(destDir, note.title))
+  }
+  return true
+}
+
+function unusedPDFPath(destDir: string, title: string): string {
+  for (let copyNumber = 1; ; copyNumber++) {
+    const name = copyNumber === 1 ? title : `${title} (${copyNumber})`
+    const pathToSave = path.join(destDir, exportUtils.sanitizeFileName(name, { extension: '.pdf' }))
+    if (!fs.existsSync(pathToSave)) return pathToSave
   }
 }
 
-export async function exportAsPDF(env: Environment, note: Note, pathToSave?: string) {
-  if (typeof pathToSave === 'undefined') {
-    const { filePath } = await env.dialog.showSaveDialog({
-      title: 'Save PDF file',
-      defaultPath: `${note.title}.pdf`,
-      filters: [
-        { name: 'PDF Files', extensions: ['pdf'] },
-        { name: 'All Files', extensions: ['*'] }
-      ]
-    })
-    if (typeof filePath === 'string' && filePath.length > 0) {
-      pathToSave = filePath
-    } else {
-      return
-    }
-  }
+/**
+ * Asks where to save the note and exports it there as a PDF.
+ *
+ * @throws When the PDF fails to export.
+ */
+export async function exportAsPDF(env: Environment, note: Note) {
+  const { filePath } = await env.dialog.showSaveDialog({
+    title: 'Save PDF file',
+    defaultPath: exportUtils.sanitizeFileName(note.title, { extension: '.pdf' }),
+    filters: [
+      { name: 'PDF Files', extensions: ['pdf'] },
+      { name: 'All Files', extensions: ['*'] }
+    ]
+  })
+  if (filePath) await writePDF(note, filePath)
+}
 
-  if (typeof pathToSave === 'string' && pathToSave.length > 0) {
-    try {
-      await exportUtils.exportNoteAsPDF(note, pathToSave, {
-        pageSize: 'A4',
-        printBackground: true
-      })
-    } catch (e) {
-      env.notifications.addError('Failed to save PDF', {
-        detail: e instanceof Error ? e.stack : String(e),
-        dismissable: true
-      })
-    }
-  }
+function writePDF(note: Note, pathToSave: string) {
+  return exportUtils.exportNoteAsPDF(note, pathToSave, {
+    pageSize: 'A4',
+    printBackground: true
+  })
 }
 
 export async function print(env: Environment, note: Note) {

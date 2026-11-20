@@ -48,11 +48,13 @@ class ExportAsMarkdownPlugin implements IInkdropPlugin {
           ? [editingNote._id]
           : []
     if (noteIds.length > 1) {
-      await exportMultipleNotes(env, noteIds)
-      env.notifications.addInfo('Exporting notes completed', {
-        detail: '',
-        dismissable: true
-      })
+      const exported = await exportMultipleNotes(env, noteIds)
+      if (exported) {
+        env.notifications.addInfo('Exporting notes completed', {
+          detail: '',
+          dismissable: true
+        })
+      }
     } else if (noteIds.length === 1) {
       const note = (await models.Note.loadWithId(noteIds[0])).toObject()
       await exportSingleNote(env, note)

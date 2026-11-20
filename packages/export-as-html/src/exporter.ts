@@ -14,39 +14,36 @@ type BookTreeNode = {
   children?: BookTreeNode[]
 }
 
-export async function exportMultipleNotesAsHtml(env: Environment, noteIds: string[]) {
-  const { filePaths: res } = await env.dialog.showOpenDialog({
+/**
+ * Asks for a folder and exports the notes into it.
+ *
+ * @returns Whether the notes were exported; `false` when the folder dialog was cancelled.
+ * @throws When a note fails to load or export.
+ */
+export async function exportMultipleNotesAsHtml(
+  env: Environment,
+  noteIds: string[]
+): Promise<boolean> {
+  const { filePaths } = await env.dialog.showOpenDialog({
     title: 'Select Destination Directory',
     properties: ['openDirectory']
   })
-  if (res instanceof Array && res.length > 0) {
-    const destDir = res[0]
+  const [destDir] = filePaths
+  if (!destDir) return false
 
-    try {
-      for (const noteId of noteIds) {
-        const note = (await models.Note.loadWithId(noteId)).toObject()
-        if (note) {
-          const fileName = exportUtils.sanitizeFileName(note.title, {
-            extension: '.html'
-          })
-          await exportUtils.exportNoteAsHtml(note, destDir, fileName)
-        }
-      }
-    } catch (e) {
-      logger.error('Failed to export notes:', e)
-      env.notifications.addError('Failed to export notes', {
-        detail: errorMessage(e),
-        dismissable: true
-      })
-    }
+  for (const noteId of noteIds) {
+    const note = (await models.Note.loadWithId(noteId)).toObject()
+    const fileName = exportUtils.sanitizeFileName(note.title, { extension: '.html' })
+    await exportUtils.exportNoteAsHtml(note, destDir, fileName)
   }
+  return true
 }
 
 export async function exportNoteAsHtml(env: Environment, note: Note, pathToSave?: string) {
   if (typeof pathToSave !== 'string') {
     const res = await env.dialog.showSaveDialog({
       title: 'Save HTML file',
-      defaultPath: `${note.title}.html`,
+      defaultPath: exportUtils.sanitizeFileName(note.title, { extension: '.html' }),
       filters: [
         { name: 'HTML Files', extensions: ['html'] },
         { name: 'All Files', extensions: ['*'] }
