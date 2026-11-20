@@ -136,7 +136,7 @@ async function exportBook(
     },
     { includeDocs: true }
   )
-  const notes = rows.map(row => row.doc)
+  const notes = rows.flatMap(row => ('doc' in row ? [row.doc] : []))
 
   if (!fs.existsSync(pathToSave)) fs.mkdirSync(pathToSave)
   for (const note of notes) {

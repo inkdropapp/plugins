@@ -1,21 +1,29 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
-    "lib": ["ESNext", "DOM"],
-    "declaration": false,
-    "strict": true,
-    "noImplicitAny": false,
+    "target": "ES2024",
+    "useDefineForClassFields": true,
+    "lib": ["ES2024", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
     "skipLibCheck": true,
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "outDir": "./lib",
-    "rootDir": "./src",
+    "types": ["node"],
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
     "paths": {
       "inkdrop": ["./node_modules/@inkdropapp/types/src/inkdrop-module/index.d.ts"]
     },
-    "types": ["@inkdropapp/types", "node"]
+    "allowImportingTsExtensions": true,
+    "isolatedModules": true,
+    "moduleDetection": "force",
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUncheckedSideEffectImports": true
   },
-  "exclude": ["node_modules", "lib"]
+  "include": ["src"]
 }

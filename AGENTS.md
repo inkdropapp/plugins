@@ -12,7 +12,8 @@ One public pnpm workspace holding the official Inkdrop plugins and themes.
 - `.github/workflows/`: CI and the npm publish workflow for `libs/` and `tools/`.
 
 The desktop app (`inkdropapp/inkdrop`, private) bundles seven of these plugins through a git
-submodule at `apps/desktop/plugins`.
+submodule at `apps/desktop/plugins`. `lib/` is never committed, so desktop has to build the five
+that have a build script (`export-*`, `import-*`) itself.
 
 ## Commands
 
@@ -39,8 +40,6 @@ Not every project has every script. Themes have only `prepublishOnly`, which gen
 - `oxfmt` and `oxlint`, configured once in the root `.oxfmtrc.json` and `.oxlintrc.json`. A project
   has its own `.oxlintrc.json` only when it differs (React plugin, the `inkdrop` global), and that
   file extends the root one.
-- The five plugins desktop bundles (`export-*`, `import-*`) build with `tsc` and commit `lib/`,
-  because desktop loads it as is. Rebuild and commit `lib/` with every change to their `src/`.
 - Format only the files you touched: `pnpm exec oxfmt <files>`.
 - Plugins look up app components with `inkdrop.components.getComponentClass(...)` during render, so
   other plugins can replace them. oxlint's `react(static-components)` flags that; suppress it in

@@ -11,10 +11,10 @@
   },
   "main": "./lib/index.js",
   "scripts": {
-    "dev": "tsc --watch",
-    "lint": "oxlint",
-    "build": "tsc",
+    "dev": "tsdown --watch",
+    "build": "tsdown",
     "format": "oxfmt",
+    "lint": "oxlint",
     "typecheck": "tsc --noEmit",
     "prepublishOnly": "pnpm run lint && pnpm run build"
   },
@@ -24,6 +24,7 @@
     "@types/react": "catalog:",
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
+    "tsdown": "catalog:",
     "typescript": "catalog:"
   },
   "engines": {

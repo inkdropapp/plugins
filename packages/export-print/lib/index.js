@@ -1,16 +1,2 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-const exporter_js_1 = require("./exporter.js");
-class ExportPrintPlugin {
-    subscription;
-    activate(env) {
-        this.subscription = env.commands.add(document.body, {
-            'export-print:export-as-pdf': e => (0, exporter_js_1.exportAsPDFCommand)(env, e),
-            'export-print:print': () => (0, exporter_js_1.printCommand)(env)
-        });
-    }
-    deactivate() {
-        this.subscription?.dispose();
-    }
-}
-exports.default = new ExportPrintPlugin();
+var e=Object.create,t=Object.defineProperty,n=Object.getOwnPropertyDescriptor,r=Object.getOwnPropertyNames,i=Object.getPrototypeOf,a=Object.prototype.hasOwnProperty,o=(e,i,o,s)=>{if(i&&typeof i==`object`||typeof i==`function`)for(var c=r(i),l=0,u=c.length,d;l<u;l++)d=c[l],!a.call(e,d)&&d!==o&&t(e,d,{get:(e=>i[e]).bind(null,d),enumerable:!(s=n(i,d))||s.enumerable});return e},s=(n,r,s)=>(s=n==null?{}:e(i(n)),o(r||!n||!n.__esModule||!a.call(n,`default`)?t(s,`default`,{value:n,enumerable:!0}):s,n));let c=require("path");c=s(c);let l=require("inkdrop");async function u(e,t){let{noteListBar:n,editingNote:r}=e.store.getState(),{actionTargetNoteIds:i}=n,a=t.detail?.noteId?[t.detail.noteId]:i.length>0?i:r?[r._id]:[];a.length>1?(await f(e,a),e.notifications.addInfo(`Exporting notes completed`,{detail:``,dismissable:!0})):a.length===1?await p(e,(await l.models.Note.loadWithId(a[0])).toObject()):e.notifications.addError(`No note opened`,{detail:`Please open a note to export as PDF`,dismissable:!0})}async function d(e){let{editingNote:t}=e.store.getState();t?await m(e,t):e.notifications.addError(`No note opened`,{detail:`Please open a note to export`,dismissable:!0})}async function f(e,t){let{filePaths:n}=await e.dialog.showOpenDialog({title:`Select Destination Directory`,properties:[`openDirectory`]});if(n instanceof Array&&n.length>0){let r=n[0];for(let n of t){let t=(await l.models.Note.loadWithId(n)).toObject();if(t){let n=l.exportUtils.sanitizeFileName(t.title,{extension:`.pdf`});await p(e,t,c.default.join(r,n))}}}}async function p(e,t,n){if(n===void 0){let{filePath:r}=await e.dialog.showSaveDialog({title:`Save PDF file`,defaultPath:`${t.title}.pdf`,filters:[{name:`PDF Files`,extensions:[`pdf`]},{name:`All Files`,extensions:[`*`]}]});if(typeof r==`string`&&r.length>0)n=r;else return}if(typeof n==`string`&&n.length>0)try{await l.exportUtils.exportNoteAsPDF(t,n,{pageSize:`A4`,printBackground:!0})}catch(t){e.notifications.addError(`Failed to save PDF`,{detail:t instanceof Error?t.stack:String(t),dismissable:!0})}}async function m(e,t){let{success:n,failureReason:r}=await l.exportUtils.printNote(t,{printBackground:!0});!n&&r!==`Print job canceled`&&e.notifications.addError(`Failed to print`,{detail:r,dismissable:!0})}function h(e){return e instanceof Error?e.message:String(e)}function g(e,t){return n=>{l.logger.error(t,n),e.notifications.addError(t,{detail:h(n),dismissable:!0})}}var _=new class{subscription;activate(e){this.subscription=e.commands.add(document.body,{"export-print:export-as-pdf":t=>u(e,t).catch(g(e,`Failed to export as PDF`)),"export-print:print":()=>d(e).catch(g(e,`Failed to print`))})}deactivate(){this.subscription?.dispose()}};module.exports=_;
+//# sourceMappingURL=index.js.map

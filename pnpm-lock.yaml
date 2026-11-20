@@ -532,6 +532,9 @@ importers:
       oxlint:
         specifier: 'catalog:'
         version: 1.93.0
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.23.7(typescript@7.0.2)
       typescript:
         specifier: 'catalog:'
         version: 7.0.2
@@ -550,6 +553,9 @@ importers:
       oxlint:
         specifier: 'catalog:'
         version: 1.93.0
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.23.7(typescript@7.0.2)
       typescript:
         specifier: 'catalog:'
         version: 7.0.2
@@ -568,6 +574,9 @@ importers:
       oxlint:
         specifier: 'catalog:'
         version: 1.93.0
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.23.7(typescript@7.0.2)
       typescript:
         specifier: 'catalog:'
         version: 7.0.2
@@ -595,6 +604,9 @@ importers:
       oxlint:
         specifier: 'catalog:'
         version: 1.93.0
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.23.7(typescript@7.0.2)
       typescript:
         specifier: 'catalog:'
         version: 7.0.2
@@ -619,6 +631,9 @@ importers:
       oxlint:
         specifier: 'catalog:'
         version: 1.93.0
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.23.7(typescript@7.0.2)
       typescript:
         specifier: 'catalog:'
         version: 7.0.2
