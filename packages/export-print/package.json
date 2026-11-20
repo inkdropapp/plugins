@@ -7,8 +7,23 @@
     "url": "https://github.com/inkdropapp/plugins.git",
     "directory": "packages/export-print"
   },
-  "main": "index",
+  "main": "./lib/index.js",
+  "scripts": {
+    "dev": "tsc --watch",
+    "lint": "oxlint",
+    "build": "tsc",
+    "format": "oxfmt",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "pnpm run lint && pnpm run build"
+  },
   "dependencies": {},
+  "devDependencies": {
+    "@inkdropapp/types": "catalog:",
+    "@types/node": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
+    "typescript": "catalog:"
+  },
   "engines": {
     "inkdrop": "^6.x"
   },

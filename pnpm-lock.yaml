@@ -403,9 +403,24 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0
     devDependencies:
+      '@inkdropapp/types':
+        specifier: 'catalog:'
+        version: 0.1.2
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.6.6
       oxfmt:
         specifier: 'catalog:'
         version: 0.78.0
+      oxlint:
+        specifier: 'catalog:'
+        version: 1.93.0
+      tsdown:
+        specifier: 'catalog:'
+        version: 0.23.7(typescript@7.0.2)
+      typescript:
+        specifier: 'catalog:'
+        version: 7.0.2
 
   packages/embed-gist:
     devDependencies:
@@ -488,18 +503,59 @@ importers:
         specifier: ^6.0.3
         version: 6.0.3
 
-  packages/export-as-html: {}
-
-  packages/export-as-markdown:
+  packages/export-as-html:
     devDependencies:
+      '@inkdropapp/types':
+        specifier: 'catalog:'
+        version: 0.1.2
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.6.6
       oxfmt:
         specifier: 'catalog:'
         version: 0.78.0
       oxlint:
         specifier: 'catalog:'
         version: 1.93.0
+      typescript:
+        specifier: 'catalog:'
+        version: 7.0.2
 
-  packages/export-print: {}
+  packages/export-as-markdown:
+    devDependencies:
+      '@inkdropapp/types':
+        specifier: 'catalog:'
+        version: 0.1.2
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.6.6
+      oxfmt:
+        specifier: 'catalog:'
+        version: 0.78.0
+      oxlint:
+        specifier: 'catalog:'
+        version: 1.93.0
+      typescript:
+        specifier: 'catalog:'
+        version: 7.0.2
+
+  packages/export-print:
+    devDependencies:
+      '@inkdropapp/types':
+        specifier: 'catalog:'
+        version: 0.1.2
+      '@types/node':
+        specifier: 'catalog:'
+        version: 26.6.6
+      oxfmt:
+        specifier: 'catalog:'
+        version: 0.78.0
+      oxlint:
+        specifier: 'catalog:'
+        version: 1.93.0
+      typescript:
+        specifier: 'catalog:'
+        version: 7.0.2
 
   packages/gruvbox:
     devDependencies:

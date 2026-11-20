@@ -1,18 +1,16 @@
-const path = require('path')
-const { exportUtils } = require('inkdrop')
-const { Note } = require('inkdrop').models
+import path from 'path'
 
-module.exports = {
-  exportAsPDFCommand,
-  printCommand,
-  exportAsPDF,
-  print
-}
+import type { CommandEvent, Environment, ModelNote } from '@inkdropapp/types'
+import { exportUtils, models } from 'inkdrop'
 
-async function exportAsPDFCommand(env, e) {
+type Note = ReturnType<ModelNote['toObject']>
+
+const PRINT_CANCELED_REASON = 'Print job canceled'
+
+export async function exportAsPDFCommand(env: Environment, e: CommandEvent) {
   const { noteListBar, editingNote } = env.store.getState()
   const { actionTargetNoteIds } = noteListBar
-  const noteIds = e.detail?.noteId
+  const noteIds: string[] = e.detail?.noteId
     ? [e.detail.noteId]
     : actionTargetNoteIds.length > 0
       ? actionTargetNoteIds
@@ -24,7 +22,7 @@ async function exportAsPDFCommand(env, e) {
       dismissable: true
     })
   } else if (noteIds.length === 1) {
-    const note = await Note.loadWithId(noteIds[0])
+    const note = (await models.Note.loadWithId(noteIds[0])).toObject()
     exportAsPDF(env, note)
   } else {
     env.notifications.addError('No note opened', {
@@ -34,10 +32,10 @@ async function exportAsPDFCommand(env, e) {
   }
 }
 
-async function printCommand(env) {
+export async function printCommand(env: Environment) {
   const { editingNote } = env.store.getState()
   if (editingNote) {
-    await print(editingNote)
+    await print(env, editingNote)
   } else {
     env.notifications.addError('No note opened', {
       detail: 'Please open a note to export',
@@ -46,7 +44,7 @@ async function printCommand(env) {
   }
 }
 
-async function exportMultipleNotesAsPDF(env, noteIds) {
+async function exportMultipleNotesAsPDF(env: Environment, noteIds: string[]) {
   const { filePaths: res } = await env.dialog.showOpenDialog({
     title: 'Select Destination Directory',
     properties: ['openDirectory']
@@ -55,7 +53,7 @@ async function exportMultipleNotesAsPDF(env, noteIds) {
     const destDir = res[0]
 
     for (const noteId of noteIds) {
-      const note = await Note.loadWithId(noteId)
+      const note = (await models.Note.loadWithId(noteId)).toObject()
       if (note) {
         const pathToSave = path.join(destDir, `${note.title}.pdf`)
         await exportAsPDF(env, note, pathToSave)
@@ -64,9 +62,9 @@ async function exportMultipleNotesAsPDF(env, noteIds) {
   }
 }
 
-async function exportAsPDF(env, note, pathToSave) {
+export async function exportAsPDF(env: Environment, note: Note, pathToSave?: string) {
   if (typeof pathToSave === 'undefined') {
-    const { filePath, canceled } = await env.dialog.showSaveDialog({
+    const { filePath } = await env.dialog.showSaveDialog({
       title: 'Save PDF file',
       defaultPath: `${note.title}.pdf`,
       filters: [
@@ -89,21 +87,19 @@ async function exportAsPDF(env, note, pathToSave) {
       })
     } catch (e) {
       env.notifications.addError('Failed to save PDF', {
-        detail: e.stack,
+        detail: e instanceof Error ? e.stack : String(e),
         dismissable: true
       })
     }
   }
 }
 
-const PRINT_CANCELED_REASON = 'Print job canceled'
-
-async function print(note) {
+export async function print(env: Environment, note: Note) {
   const { success, failureReason } = await exportUtils.printNote(note, {
     printBackground: true
   })
   if (!success && failureReason !== PRINT_CANCELED_REASON) {
-    inkdrop.notifications.addError('Failed to print', {
+    env.notifications.addError('Failed to print', {
       detail: failureReason,
       dismissable: true
     })

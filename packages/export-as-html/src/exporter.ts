@@ -1,17 +1,22 @@
-const { logger, exportUtils } = require('inkdrop')
-const path = require('path')
-const fs = require('fs')
-const { Note } = require('inkdrop').models
+import fs from 'fs'
+import path from 'path'
 
-module.exports = {
-  exportMultipleNotesAsHtml,
-  exportNoteAsHtml,
-  copyNoteAsHtml,
-  copyNoteAsSimpleHtml,
-  exportNotesInBook
+import type { Environment, ModelNote } from '@inkdropapp/types'
+import { exportUtils, logger, models } from 'inkdrop'
+
+type Note = ReturnType<ModelNote['toObject']>
+
+type BookTreeNode = {
+  _id: string
+  name: string
+  children?: BookTreeNode[]
 }
 
-async function exportMultipleNotesAsHtml(env, noteIds) {
+function errorMessage(error: unknown) {
+  return error instanceof Error ? error.message : String(error)
+}
+
+export async function exportMultipleNotesAsHtml(env: Environment, noteIds: string[]) {
   const { filePaths: res } = await env.dialog.showOpenDialog({
     title: 'Select Destination Directory',
     properties: ['openDirectory']
@@ -21,7 +26,7 @@ async function exportMultipleNotesAsHtml(env, noteIds) {
 
     try {
       for (const noteId of noteIds) {
-        const note = await Note.loadWithId(noteId)
+        const note = (await models.Note.loadWithId(noteId)).toObject()
         if (note) {
           const fileName = exportUtils.sanitizeFileName(note.title, {
             extension: '.html'
@@ -32,14 +37,14 @@ async function exportMultipleNotesAsHtml(env, noteIds) {
     } catch (e) {
       logger.error('Failed to export notes:', e)
       env.notifications.addError('Failed to export notes', {
-        detail: e.message,
+        detail: errorMessage(e),
         dismissable: true
       })
     }
   }
 }
 
-async function exportNoteAsHtml(env, note, pathToSave) {
+export async function exportNoteAsHtml(env: Environment, note: Note, pathToSave?: string) {
   if (typeof pathToSave !== 'string') {
     const res = await env.dialog.showSaveDialog({
       title: 'Save HTML file',
@@ -60,14 +65,14 @@ async function exportNoteAsHtml(env, note, pathToSave) {
     } catch (e) {
       logger.error('Failed to save HTML:', e)
       env.notifications.addError('Failed to save as HTML', {
-        detail: e.message,
+        detail: errorMessage(e),
         dismissable: true
       })
     }
   }
 }
 
-async function copyNoteAsHtml(env, note) {
+export async function copyNoteAsHtml(env: Environment, note: Note) {
   try {
     const processor = await exportUtils.getProcessorForNote(note)
     if (!processor) return false
@@ -78,13 +83,13 @@ async function copyNoteAsHtml(env, note) {
   } catch (e) {
     logger.error('Failed to copy as html:', e)
     env.notifications.addError('Failed to copy as html', {
-      detail: e.message,
+      detail: errorMessage(e),
       dismissable: true
     })
   }
 }
 
-async function copyNoteAsSimpleHtml(env, note) {
+export async function copyNoteAsSimpleHtml(env: Environment, note: Note) {
   try {
     const processor = await exportUtils.getProcessorForNote(note)
     if (!processor) return false
@@ -95,14 +100,14 @@ async function copyNoteAsSimpleHtml(env, note) {
   } catch (e) {
     logger.error('Failed to copy as simple html:', e)
     env.notifications.addError('Failed to copy as simple html', {
-      detail: e.message,
+      detail: errorMessage(e),
       dismissable: true
     })
   }
 }
 
-async function exportNotesInBook(env, bookId) {
-  const book = findNoteFromTree(bookId, env.store.getState().books.tree)
+export async function exportNotesInBook(env: Environment, bookId: string) {
+  const book = findBookFromTree(bookId, env.store.getState().books.tree)
   if (!book) {
     throw new Error('Notebook not found: ' + bookId)
   }
@@ -121,14 +126,19 @@ async function exportNotesInBook(env, bookId) {
     } catch (e) {
       logger.error('Failed to export:', e)
       env.notifications.addError('Failed to export', {
-        detail: e.message,
+        detail: errorMessage(e),
         dismissable: true
       })
     }
   }
 }
 
-async function exportBook(env, parentDir, book, opts = {}) {
+async function exportBook(
+  env: Environment,
+  parentDir: string,
+  book: BookTreeNode,
+  opts: { createBookDir?: boolean } = {}
+) {
   const { createBookDir = true } = opts
   const db = env.localDB
   const dirName = exportUtils.sanitizeFileName(book.name, { replacement: '-' })
@@ -145,24 +155,21 @@ async function exportBook(env, parentDir, book, opts = {}) {
   const notes = rows.map(row => row.doc)
 
   if (!fs.existsSync(pathToSave)) fs.mkdirSync(pathToSave)
-  for (let i = 0; i < notes.length; ++i) {
-    await exportUtils.exportNoteAsHtml(notes[i], pathToSave)
+  for (const note of notes) {
+    await exportUtils.exportNoteAsHtml(note, pathToSave)
   }
 
-  if (book.children) {
-    await book.children.reduce((promise, childBook) => {
-      return promise.then(() => exportBook(env, pathToSave, childBook))
-    }, Promise.resolve())
+  for (const childBook of book.children ?? []) {
+    await exportBook(env, pathToSave, childBook)
   }
 }
 
-function findNoteFromTree(bookId, tree) {
-  for (let i = 0; i < tree.length; ++i) {
-    const item = tree[i]
+function findBookFromTree(bookId: string, tree: BookTreeNode[]): BookTreeNode | undefined {
+  for (const item of tree) {
     if (item._id === bookId) {
       return item
     } else if (item.children) {
-      const book = findNoteFromTree(bookId, item.children)
+      const book = findBookFromTree(bookId, item.children)
       if (book) {
         return book
       }

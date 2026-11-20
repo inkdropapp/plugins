@@ -9,12 +9,25 @@
     "url": "https://github.com/inkdropapp/plugins.git",
     "directory": "packages/dev-tools"
   },
-  "main": "./lib/dev-tools",
+  "main": "./lib/index.js",
+  "scripts": {
+    "dev": "tsdown --watch",
+    "build": "tsdown",
+    "format": "oxfmt",
+    "lint": "oxlint",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
   "dependencies": {
     "chokidar": "^5.0.0"
   },
   "devDependencies": {
-    "oxfmt": "catalog:"
+    "@inkdropapp/types": "catalog:",
+    "@types/node": "catalog:",
+    "oxfmt": "catalog:",
+    "oxlint": "catalog:",
+    "tsdown": "catalog:",
+    "typescript": "catalog:"
   },
   "engines": {
     "inkdrop": "6.x"
