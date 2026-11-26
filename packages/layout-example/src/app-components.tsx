@@ -1,4 +1,5 @@
 import type { ButtonProps, CommandButtonProps } from '@inkdropapp/types'
+import type { Note } from 'inkdrop-model'
 import type React from 'react'
 import { createElement } from 'react'
 
@@ -47,3 +48,18 @@ export const AppHeaderButton = fromRegistry<CommandButtonProps>('AppHeaderButton
 
 /** The app's sidebar row, so a custom item matches the built-in ones. */
 export const SideBarMenuItem = fromRegistry<SideBarMenuItemProps>('SideBarMenuItem')
+
+export interface NoteListItemNotebookLabelProps {
+  note: Note
+}
+
+/**
+ * The notebook path of a note list row, which the app shows in lists that mix
+ * notebooks. It renders nothing on an app version that does not register it.
+ */
+export const NoteListItemNotebookLabel: React.FC<NoteListItemNotebookLabelProps> = props => {
+  const registered = getEnv().components.getComponentClass<NoteListItemNotebookLabelProps>(
+    'NoteListItemNotebookLabel'
+  )
+  return registered ? createElement(registered, props) : null
+}

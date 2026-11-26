@@ -1,6 +1,7 @@
 import type { Note } from 'inkdrop-model'
 import type React from 'react'
 
+import { NoteListItemNotebookLabel } from './app-components'
 import { getEnv } from './env'
 
 interface NoteListItemViewProps {
@@ -50,7 +51,10 @@ export function LayoutExampleNoteListItemView(props: NoteListItemViewProps) {
       onContextMenu={handleContextMenu}
       onDoubleClick={handleDblClick}
     >
-      {title}
+      <div className="content">
+        <NoteListItemNotebookLabel note={note} />
+        {title}
+      </div>
     </div>
   )
 }

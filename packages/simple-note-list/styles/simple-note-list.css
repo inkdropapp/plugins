@@ -2,6 +2,10 @@
   padding: 2px 0px 6px 8px;
 
   .content {
+    .notebook {
+      margin: 4px 6px -2px 0;
+      font-size: x-small;
+    }
     .header {
       display: block;
       text-overflow: ellipsis;

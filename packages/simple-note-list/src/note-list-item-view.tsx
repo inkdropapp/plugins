@@ -37,6 +37,9 @@ export default function SimpleNoteListItemView(props: SimpleNoteListItemViewProp
   )!
   const TaskProgressView = inkdrop.components.getComponentClass('TaskProgressView')!
   const TagList = inkdrop.components.getComponentClass('TagList')!
+  const NoteListItemNotebookLabel = inkdrop.components.getComponentClass(
+    'NoteListItemNotebookLabel'
+  )
 
   const {
     listSortKey,
@@ -129,6 +132,7 @@ export default function SimpleNoteListItemView(props: SimpleNoteListItemViewProp
       onMouseDown={handleMouseDown}
     >
       <div className="content">
+        {NoteListItemNotebookLabel && <NoteListItemNotebookLabel note={note} />}
         <div className="header">
           {_conflicts && (
             <StreamlineIcon name="warning-bold" className="note-conflicted-icon inline" />
