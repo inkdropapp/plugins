@@ -279,8 +279,8 @@ importers:
         specifier: ^0.7.8
         version: 0.7.8
       '@inkdropapp/css':
-        specifier: ^0.9.14
-        version: 0.9.17
+        specifier: ^0.11.1
+        version: 0.11.1
       '@vitejs/plugin-react':
         specifier: ^6.1.2
         version: 6.3.0(vite@8.3.8(@types/node@26.6.6))
@@ -1106,8 +1106,8 @@ packages:
   '@inkdropapp/css@0.10.4':
     resolution: {integrity: sha512-mGBHBqJFMi+7PdICMYUVNHJsfMTFM1dBc3sU885sPmJuWhKjX8BRLaUtoDnKDlntJGUteJ+3S0cDtXQ+bp1TAg==}
 
-  '@inkdropapp/css@0.9.17':
-    resolution: {integrity: sha512-jNgcAPwm8BFDBBmPCJheUI3QL/EA10Z+fl9cVStcsK886tR76fern/T7QMIb5IG3mgg4BL8V/uhRIDcqzXxu1g==}
+  '@inkdropapp/css@0.11.1':
+    resolution: {integrity: sha512-lgqgtVFVCk56zF2wnwNA7b3nEbvVajp2paZyD8x+7Ge4wJFcs6SQtmglj9lYyLzSnkQvzFO8D7ZKPKVAaktSOQ==}
 
   '@inkdropapp/ipm@1.1.3':
     resolution: {integrity: sha512-PwTrWe6izsTALPmlV8ac/ZJ+Mf1EVUw58H/t6pyQeP+SVYNeh1M65+ftlr7y5naskG6cxss37VQbXCo8ubpNcg==}
@@ -3106,7 +3106,7 @@ snapshots:
     transitivePeerDependencies:
       - ajv
 
-  '@inkdropapp/css@0.9.17':
+  '@inkdropapp/css@0.11.1':
     optionalDependencies:
       inkdrop-model: 3.0.1
     transitivePeerDependencies:
