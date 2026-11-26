@@ -11,7 +11,7 @@
     /*-------------------
       Brand Colors
     --------------------*/
-    --primary-color: hsl(var(--hsl-blue-500) / 90%); /* nord10 */
+    --primary-color: hsl(var(--hsl-blue-500)); /* nord10 */
 
     /*-------------------
       Form Input
