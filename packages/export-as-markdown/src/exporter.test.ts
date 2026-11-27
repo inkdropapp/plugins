@@ -9,7 +9,8 @@ const inkdropModule = vi.hoisted(() => ({
   exportNoteAsMarkdown: vi.fn<(note: { _id: string }, destDir: string) => Promise<void>>()
 }))
 
-vi.mock('inkdrop', () => ({
+vi.mock('inkdrop', async () => ({
+  path: (await import('node:path')).default,
   exportUtils: {
     sanitizeFileName: (name: string) => name.replaceAll('/', '-'),
     exportNoteAsMarkdown: inkdropModule.exportNoteAsMarkdown

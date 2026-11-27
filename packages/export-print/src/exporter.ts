@@ -1,7 +1,5 @@
-import path from 'path'
-
 import type { CommandEvent, Environment, ModelNote } from '@inkdropapp/types'
-import { exportUtils, models } from 'inkdrop'
+import { exportUtils, models, path } from 'inkdrop'
 
 type Note = ReturnType<ModelNote['toObject']>
 

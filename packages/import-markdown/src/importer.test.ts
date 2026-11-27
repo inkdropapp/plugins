@@ -15,7 +15,7 @@ const inkdropModule = vi.hoisted(() => ({
   importMarkdownFile: vi.fn<(filePath: string, destBookId: string) => Promise<void>>()
 }))
 
-vi.mock('inkdrop', () => {
+vi.mock('inkdrop', async () => {
   class Book {
     _id = ''
     name: string
@@ -36,6 +36,7 @@ vi.mock('inkdrop', () => {
     }
   }
   return {
+    path: (await import('node:path')).default,
     logger: { debug: () => {} },
     models: { Book },
     importUtils: { importMarkdownFile: inkdropModule.importMarkdownFile }

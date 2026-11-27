@@ -1,7 +1,5 @@
-import path from 'path'
-
 import type { IPCDirEntry } from '@inkdropapp/types'
-import { logger, models, importUtils } from 'inkdrop'
+import { logger, models, importUtils, path } from 'inkdrop'
 import { maxAttachmentFileSize } from 'inkdrop-model'
 
 import { getEnv } from './env.js'

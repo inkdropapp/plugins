@@ -10,7 +10,8 @@ const inkdropModule = vi.hoisted(() => ({
   exportNoteAsPDF: vi.fn<(note: { title: string }, pathToSave: string) => Promise<void>>()
 }))
 
-vi.mock('inkdrop', () => ({
+vi.mock('inkdrop', async () => ({
+  path: (await import('node:path')).default,
   exportUtils: {
     sanitizeFileName: (name: string, { extension }: { extension: string }) => name + extension,
     exportNoteAsPDF: inkdropModule.exportNoteAsPDF

@@ -1,7 +1,5 @@
-import path from 'path'
-
 import type { Environment, ModelNote } from '@inkdropapp/types'
-import { exportUtils, logger, models } from 'inkdrop'
+import { exportUtils, logger, models, path } from 'inkdrop'
 
 import { errorMessage } from './notify-failure.js'
 

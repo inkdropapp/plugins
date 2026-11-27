@@ -1,7 +1,5 @@
-import path from 'path'
-
 import type { CommandEvent, Environment, IInkdropPlugin } from '@inkdropapp/types'
-import { useModal, logger } from 'inkdrop'
+import { useModal, logger, path } from 'inkdrop'
 import { useEffect, useCallback, useState } from 'react'
 
 import { getEnv, setEnv } from './env.js'
