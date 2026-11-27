@@ -130,8 +130,6 @@
     --sidebar-background: var(--color-neutral-700); /* nord2 */
     --sidebar-border-right: 1px solid hsl(var(--hsl-neutral-800));
     --sidebar-menu-item-color: var(--text-color);
-    --sidebar-sync-status-view-background: hsl(var(--hsl-neutral-800) / 30%);
-    --sidebar-sync-status-view-border-top: 1px solid hsl(var(--hsl-neutral-700));
 
     /*-------------------
       Note List Bar
@@ -145,6 +143,12 @@
     --note-list-view-item-selected-background: hsl(var(--hsl-blue-500) / 25%);
     --note-list-view-item-active-background: hsl(var(--hsl-blue-500) / 50%);
     --note-search-bar-input-background: var(--color-neutral-900);
+
+    /*-------------------
+      Status View
+    --------------------*/
+    --status-view-background: hsl(var(--hsl-neutral-800) / 30%);
+    --status-view-border-top: 1px solid hsl(var(--hsl-neutral-700));
 
     /*-------------------
       Editor
