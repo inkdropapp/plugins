@@ -197,9 +197,6 @@
     --sidebar-menu-section-color: hsl(var(--kanagawa-springViolet1) / 80%);
     --sidebar-menu-item-color: hsl(var(--kanagawa-oldWhite) / 80%);
     --sidebar-menu-active-item-color: hsl(var(--kanagawa-fujiWhite));
-    --sidebar-sync-status-view-background: hsl(var(--kanagawa-sumiInk4) / 40%);
-    --sidebar-sync-status-view-text-color: hsl(var(--kanagawa-oldWhite) / 70%);
-    --sidebar-sync-status-view-border-top: 1px solid hsl(var(--kanagawa-sumiInk4));
 
     /*-------------------
       Note List Bar
@@ -214,6 +211,13 @@
     --note-list-view-item-selected-background: hsl(var(--kanagawa-waveBlue1) / 70%);
     --note-list-view-item-active-background: hsl(var(--kanagawa-waveBlue2) / 80%);
     --note-search-bar-input-background: hsl(var(--kanagawa-sumiInk0));
+
+    /*-------------------
+      Status View
+    --------------------*/
+    --status-view-background: hsl(var(--kanagawa-sumiInk4) / 40%);
+    --status-view-text-color: hsl(var(--kanagawa-oldWhite) / 70%);
+    --status-view-border-top: 1px solid hsl(var(--kanagawa-sumiInk4));
 
     /*-------------------
       Editor

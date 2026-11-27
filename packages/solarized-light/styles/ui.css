@@ -124,8 +124,6 @@
     --sidebar-background: var(--color-neutral-100);
     --sidebar-border-right: 0px solid hsl(var(--hsl-neutral-100));
     --sidebar-menu-item-color: var(--text-color);
-    --sidebar-sync-status-view-background: hsl(var(--hsl-neutral-100));
-    --sidebar-sync-status-view-border-top: 1px solid hsl(var(--hsl-neutral-200) / 50%);
 
     /*-------------------
       Note List Bar
@@ -139,6 +137,12 @@
     --note-list-view-item-selected-background: hsl(var(--hsl-blue-500) / 20%);
     --note-list-view-item-active-background: hsl(var(--hsl-blue-500) / 40%);
     --note-search-bar-input-background: var(--color-neutral-100);
+
+    /*-------------------
+      Status View
+    --------------------*/
+    --status-view-background: hsl(var(--hsl-neutral-100));
+    --status-view-border-top: 1px solid hsl(var(--hsl-neutral-200) / 50%);
 
     /*-------------------
       Editor
@@ -174,7 +178,7 @@
   :root:has(body.acrylic-window) {
     --page-background: transparent;
     --sidebar-background: hsl(var(--hsl-neutral-200) / 30%);
-    --sidebar-sync-status-view-background: hsl(var(--hsl-neutral-100) / 30%);
+    --status-view-background: hsl(var(--hsl-neutral-100) / 30%);
     --note-list-bar-background: hsl(var(--hsl-neutral-50) / 70%);
     --editor-background: hsl(var(--hsl-neutral-50) / 90%);
     --inline-dropdown-menu-background: hsl(var(--hsl-neutral-50));

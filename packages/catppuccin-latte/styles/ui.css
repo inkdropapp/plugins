@@ -250,7 +250,6 @@
     --sidebar-background: var(--color-neutral-200); /* crust */
     --sidebar-scrollbar-track-background: hsl(var(--hsl-neutral-950) / 4%);
     --sidebar-scrollbar-thumb-background: hsl(var(--hsl-neutral-500) / 80%);
-    --sidebar-sync-status-view-background: hsl(var(--hsl-neutral-950) / 4%);
 
     /*-------------------
       Scroll Bar
@@ -263,6 +262,11 @@
     --------------------*/
     --note-list-bar-background: var(--color-neutral-100); /* mantle */
     --note-list-bar-pinned-section-footer-border-bottom: 4px solid var(--color-neutral-300);
+
+    /*-------------------
+      Status View
+    --------------------*/
+    --status-view-background: hsl(var(--hsl-neutral-950) / 4%);
 
     /*-------------------
       Editor
