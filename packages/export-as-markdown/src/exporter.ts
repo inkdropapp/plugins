@@ -1,4 +1,3 @@
-import fs from 'fs'
 import path from 'path'
 
 import type { Environment, ModelNote } from '@inkdropapp/types'
@@ -132,7 +131,7 @@ async function exportBook(
   )
   const notes = rows.flatMap(row => ('doc' in row ? [row.doc] : []))
 
-  if (!fs.existsSync(pathToSave)) fs.mkdirSync(pathToSave)
+  await env.fs.mkdir(pathToSave, { recursive: true })
   for (const note of notes) {
     await exportUtils.exportNoteAsMarkdown(note, pathToSave)
   }

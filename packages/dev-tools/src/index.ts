@@ -11,13 +11,12 @@ class DevToolsPlugin implements IInkdropPlugin {
     this.commandsSubscription = env.commands.add(document.body, {
       'dev-tools:watch-themes': () =>
         this.watchThemes(env).catch(notifyFailure(env, 'Failed to watch themes')),
-      'dev-tools:unwatch-themes': () =>
-        this.unwatchThemes(env).catch(notifyFailure(env, 'Failed to stop watching themes'))
+      'dev-tools:unwatch-themes': () => this.unwatchThemes(env)
     })
   }
 
   private async watchThemes(env: Environment) {
-    this.hotReloader ??= new ThemeHotReloader(env.packages)
+    this.hotReloader ??= new ThemeHotReloader(env.packages, env.fs)
     await this.hotReloader.watchThemes()
     env.notifications.addInfo('Watching themes...', {
       dismissable: true,
@@ -25,17 +24,17 @@ class DevToolsPlugin implements IInkdropPlugin {
     })
   }
 
-  private async unwatchThemes(env: Environment) {
-    await this.hotReloader?.unwatchThemes()
+  private unwatchThemes(env: Environment) {
+    this.hotReloader?.unwatchThemes()
     env.notifications.addInfo('Stopped watching themes', {
       dismissable: true
     })
   }
 
-  async deactivate() {
+  deactivate() {
     this.commandsSubscription?.dispose()
     this.commandsSubscription = null
-    await this.hotReloader?.unwatchThemes()
+    this.hotReloader?.unwatchThemes()
   }
 }
 

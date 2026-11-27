@@ -1,19 +1,11 @@
-import type { Stats } from 'node:fs'
-
-import type { Package, PackageManager } from '@inkdropapp/types'
-import type { FSWatcher } from 'chokidar'
+import type { IPCFs, Package, PackageManager } from '@inkdropapp/types'
 
 type ThemePackage = Package & { reloadStylesheets(): void }
 
-let chokidarPromise: Promise<typeof import('chokidar')> | null = null
-function loadChokidar() {
-  chokidarPromise ??= import('chokidar')
-  return chokidarPromise
-}
+type ThemeWatch = { dispose(): void }
 
-function shouldIgnore(path: string, stats?: Stats) {
-  if (/[/\\](node_modules|\.git)([/\\]|$)/.test(path)) return true
-  return stats?.isFile() === true && !path.endsWith('.css')
+function isWatchedStylesheet(path: string) {
+  return path.endsWith('.css') && !/[/\\](node_modules|\.git)[/\\]/.test(path)
 }
 
 /**
@@ -21,9 +13,12 @@ function shouldIgnore(path: string, stats?: Stats) {
  * one of its CSS files changes.
  */
 export class ThemeHotReloader {
-  private watchers: FSWatcher[] | null = null
+  private watches: ThemeWatch[] | null = null
 
-  constructor(private readonly packages: PackageManager) {}
+  constructor(
+    private readonly packages: PackageManager,
+    private readonly fs: IPCFs
+  ) {}
 
   getThemePackages() {
     return this.packages
@@ -31,13 +26,9 @@ export class ThemeHotReloader {
       .filter((pack): pack is ThemePackage => pack.getType() === 'theme')
   }
 
-  async watchThemePackage(pack: ThemePackage) {
-    const { watch } = await loadChokidar()
-    return watch(pack.path, {
-      ignoreInitial: true,
-      ignored: shouldIgnore
-    }).on('all', (_event, path) => {
-      if (path.endsWith('.css')) {
+  watchThemePackage(pack: ThemePackage): Promise<ThemeWatch> {
+    return this.fs.watch(pack.path, ({ path }) => {
+      if (isWatchedStylesheet(path)) {
         console.log('Reloading stylesheets:', pack.name)
         pack.reloadStylesheets()
       }
@@ -46,21 +37,25 @@ export class ThemeHotReloader {
 
   async watchThemes() {
     console.log('Start watching themes...')
-    await this.unwatchThemes()
-    const watchers: FSWatcher[] = []
-    this.watchers = watchers
+    this.unwatchThemes()
+    const watches: ThemeWatch[] = []
+    this.watches = watches
 
     for (const pack of this.getThemePackages()) {
-      // Bail out if unwatchThemes() ran while we were awaiting chokidar.
-      if (this.watchers !== watchers) break
-      watchers.push(await this.watchThemePackage(pack))
+      const watch = await this.watchThemePackage(pack)
+      // unwatchThemes() may have run while the watch was starting.
+      if (this.watches !== watches) {
+        watch.dispose()
+        break
+      }
+      watches.push(watch)
     }
   }
 
-  async unwatchThemes() {
-    const watchers = this.watchers
-    this.watchers = null
-    if (watchers) await Promise.all(watchers.map(watcher => watcher.close()))
+  unwatchThemes() {
+    const watches = this.watches
+    this.watches = null
+    for (const watch of watches ?? []) watch.dispose()
     console.log('Stopped watching themes')
   }
 }

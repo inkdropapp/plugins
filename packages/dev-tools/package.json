@@ -16,10 +16,8 @@
     "format": "oxfmt",
     "lint": "oxlint",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "pnpm run build"
-  },
-  "dependencies": {
-    "chokidar": "^5.0.0"
+    "prepublishOnly": "pnpm run build",
+    "test": "vitest run"
   },
   "devDependencies": {
     "@inkdropapp/types": "catalog:",
@@ -27,7 +25,8 @@
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
     "tsdown": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "engines": {
     "inkdrop": "6.x"

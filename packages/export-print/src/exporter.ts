@@ -1,4 +1,3 @@
-import fs from 'fs'
 import path from 'path'
 
 import type { CommandEvent, Environment, ModelNote } from '@inkdropapp/types'
@@ -65,16 +64,16 @@ async function exportMultipleNotesAsPDF(env: Environment, noteIds: string[]): Pr
 
   for (const noteId of noteIds) {
     const note = (await models.Note.loadWithId(noteId)).toObject()
-    await writePDF(note, unusedPDFPath(destDir, note.title))
+    await writePDF(note, await unusedPDFPath(env, destDir, note.title))
   }
   return true
 }
 
-function unusedPDFPath(destDir: string, title: string): string {
+async function unusedPDFPath(env: Environment, destDir: string, title: string): Promise<string> {
   for (let copyNumber = 1; ; copyNumber++) {
     const name = copyNumber === 1 ? title : `${title} (${copyNumber})`
     const pathToSave = path.join(destDir, exportUtils.sanitizeFileName(name, { extension: '.pdf' }))
-    if (!fs.existsSync(pathToSave)) return pathToSave
+    if (!(await env.fs.exists(pathToSave))) return pathToSave
   }
 }
 

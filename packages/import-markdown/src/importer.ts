@@ -1,7 +1,6 @@
-import fs from 'fs'
-import { promises as fsp, type Dirent } from 'fs'
 import path from 'path'
 
+import type { IPCDirEntry } from '@inkdropapp/types'
 import { logger, models, importUtils } from 'inkdrop'
 import { maxAttachmentFileSize } from 'inkdrop-model'
 
@@ -64,14 +63,14 @@ function classifyFile(filePath: string): 'md' | 'image' | null {
  * whose name contains glob magic (`[`, `{`, `(`, `!`) fails the same way on every platform.
  */
 async function readMarkdownFilesAndSubdirectories(dirPath: string) {
-  const entries = await fsp.readdir(dirPath, { withFileTypes: true })
-  const toPath = (entry: Dirent) => path.join(dirPath, entry.name)
+  const entries = await getEnv().fs.readdir(dirPath)
+  const toPath = (entry: IPCDirEntry) => path.join(dirPath, entry.name)
 
   return {
     markdownFiles: entries
-      .filter(entry => entry.isFile() && classifyFile(entry.name) === 'md')
+      .filter(entry => entry.isFile && classifyFile(entry.name) === 'md')
       .map(toPath),
-    subdirectories: entries.filter(entry => entry.isDirectory()).map(toPath)
+    subdirectories: entries.filter(entry => entry.isDirectory).map(toPath)
   }
 }
 
@@ -141,6 +140,11 @@ function totalsForFile(filePath: string, size: number): ScanTotals {
   return emptyTotals()
 }
 
+async function totalsForFileOnDisk(filePath: string): Promise<ScanTotals> {
+  const { size } = await getEnv().fs.stat(filePath)
+  return totalsForFile(filePath, size)
+}
+
 /**
  * Recursively scans a directory, building both its notebook-preview node and the aggregate
  * md/image counts and sizes for everything under it, in a single filesystem pass per directory.
@@ -150,18 +154,18 @@ function totalsForFile(filePath: string, size: number): ScanTotals {
 async function scanDirectory(
   dirPath: string
 ): Promise<{ node: NotebookImportPreviewNode; totals: ScanTotals }> {
-  const entries = await fsp.readdir(dirPath, { withFileTypes: true })
+  const entries = await getEnv().fs.readdir(dirPath)
 
-  const directTotals = entries
-    .filter(entry => entry.isFile())
-    .reduce((totals, entry) => {
-      const entryPath = path.join(dirPath, entry.name)
-      return mergeTotals(totals, totalsForFile(entryPath, fs.statSync(entryPath).size))
-    }, emptyTotals())
+  const totalsOfDirectFiles = await Promise.all(
+    entries
+      .filter(entry => entry.isFile)
+      .map(entry => totalsForFileOnDisk(path.join(dirPath, entry.name)))
+  )
+  const directTotals = totalsOfDirectFiles.reduce(mergeTotals, emptyTotals())
 
   const children: NotebookImportPreviewNode[] = []
   let totals = directTotals
-  for (const entry of entries.filter(e => e.isDirectory())) {
+  for (const entry of entries.filter(e => e.isDirectory)) {
     const child = await scanDirectory(path.join(dirPath, entry.name))
     children.push(child.node)
     totals = mergeTotals(totals, child.totals)
@@ -195,20 +199,21 @@ export async function previewImport(filePaths: string[]): Promise<ImportPreview>
   const notebooks: NotebookImportPreviewNode[] = []
   let directFileCount = 0
   let totals = emptyTotals()
-  const isSingleFolderPick = filePaths.length === 1 && fs.statSync(filePaths[0]).isDirectory()
+  const fs = getEnv().fs
+  const isSingleFolderPick = filePaths.length === 1 && (await fs.stat(filePaths[0])).isDirectory
 
   for (const fp of filePaths) {
-    const stats = fs.statSync(fp)
-    if (stats.isDirectory()) {
+    const stats = await fs.stat(fp)
+    if (stats.isDirectory) {
       if (isSingleFolderPick) {
-        const entries = await fsp.readdir(fp, { withFileTypes: true })
+        const entries = await fs.readdir(fp)
         for (const entry of entries) {
           const entryPath = path.join(fp, entry.name)
-          if (entry.isFile()) {
-            const fileTotals = totalsForFile(entryPath, fs.statSync(entryPath).size)
+          if (entry.isFile) {
+            const fileTotals = await totalsForFileOnDisk(entryPath)
             directFileCount += fileTotals.mdFileCount
             totals = mergeTotals(totals, fileTotals)
-          } else if (entry.isDirectory()) {
+          } else if (entry.isDirectory) {
             const child = await scanDirectory(entryPath)
             notebooks.push(child.node)
             totals = mergeTotals(totals, child.totals)
@@ -219,7 +224,7 @@ export async function previewImport(filePaths: string[]): Promise<ImportPreview>
         notebooks.push(child.node)
         totals = mergeTotals(totals, child.totals)
       }
-    } else if (stats.isFile()) {
+    } else if (stats.isFile) {
       // A loose top-level file pick always gets imported directly regardless of extension
       // (matches importMarkdownFromMultipleFilesAndDirectories's unconditional file branch).
       directFileCount += 1
@@ -254,8 +259,8 @@ export async function importMarkdownFromMultipleFilesAndDirectories(
   logger.debug('Importing markdown files:', filePaths, { destBookId, root })
 
   for (const fp of filePaths) {
-    const stats = fs.statSync(fp)
-    const isDirectory = stats.isDirectory()
+    const stats = await getEnv().fs.stat(fp)
+    const isDirectory = stats.isDirectory
     if (!root || !isDirectory) progressCallback(fp, { isDirectory })
 
     if (isDirectory && !(await containsMarkdownFiles(fp))) {
@@ -286,7 +291,7 @@ export async function importMarkdownFromMultipleFilesAndDirectories(
           root: false
         }
       )
-    } else if (stats.isFile() && destBookId !== null) {
+    } else if (stats.isFile && destBookId !== null) {
       await importMarkdownFromMultipleFiles([fp], destBookId)
     } else {
       logger.debug('Skipping:', fp, { destBookId, root })

@@ -14,7 +14,8 @@
     "format": "oxfmt",
     "lint": "oxlint",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "pnpm run lint && pnpm run build"
+    "prepublishOnly": "pnpm run lint && pnpm run build",
+    "test": "vitest run"
   },
   "dependencies": {},
   "devDependencies": {
@@ -23,7 +24,8 @@
     "oxfmt": "catalog:",
     "oxlint": "catalog:",
     "tsdown": "catalog:",
-    "typescript": "catalog:"
+    "typescript": "catalog:",
+    "vitest": "catalog:"
   },
   "engines": {
     "inkdrop": "^6.x"
